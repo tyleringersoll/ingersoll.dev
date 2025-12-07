@@ -1,21 +1,21 @@
 <template>
-  <article>
+  <article class="article">
     <component
       v-if="props.article.heading"
       :is="headingLevel"
       :class="{ 'first-heading': props.index === 0 }"
       v-html="props.article.heading"
     />
-    <p v-if="inlineStyle" class="inline-theme">
+    <p v-if="inlineStyle" class="article__inline-theme">
       <span
         v-for="(para, paraIndex) in props.article.content"
         :key="paraIndex"
-        class="inline-item"
+        class="article__inline-item"
       >
-        <span class="inline" v-html="para" />
+        <span class="article__inline" v-html="para" />
         <span
           v-if="props.article.content.length - 1 !== paraIndex"
-          class="bullet"
+          class="article__bullet"
           >&bull;</span
         >
       </span>
@@ -53,27 +53,29 @@ const inlineStyle = computed(() => {
 });
 </script>
 
-<style scoped lang="scss">
-.inline {
-  transition: all 0.2s ease-in-out;
+<style lang="scss" scoped>
+.article {
+  &__inline {
+    @include transition-fast(all);
 
-  &:hover {
-    color: $highlight1;
-    cursor: default;
+    &:hover {
+      color: $color-highlight-1;
+      cursor: default;
+    }
+
+    &-theme {
+      line-height: $line-height-body;
+      text-transform: lowercase;
+    }
+
+    &-item {
+      display: inline-block;
+      white-space: nowrap;
+    }
   }
 
-  &-theme {
-    line-height: 1.5;
-    text-transform: lowercase;
+  &__bullet {
+    margin: 0 0.4rem;
   }
-
-  &-item {
-    display: inline-block;
-    white-space: nowrap;
-  }
-}
-
-.bullet {
-  margin: 0 0.4rem;
 }
 </style>

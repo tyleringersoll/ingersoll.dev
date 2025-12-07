@@ -1,20 +1,20 @@
 <template>
-  <div v-if="untappdData" class="beers">
+  <div v-if="untappdData" class="untappd__beers">
     <template v-if="icons">
       <div
         v-for="(beerItem, index) in filteredBeerData"
         :key="`beer-${beerItem.beer.bid || index}`"
-        class="beer"
+        class="untappd__beer"
       >
         <img
-          class="icon"
+          class="untappd__icon"
           :src="beerItem.beer.beer_label"
           :alt="beerItem.beer.beer_name"
           loading="lazy"
         />
-        <div class="info">
+        <div class="untappd__info">
           <img
-            class="icon"
+            class="untappd__icon"
             :src="beerItem.beer.beer_label"
             :alt="beerItem.beer.beer_name"
             loading="lazy"
@@ -25,7 +25,7 @@
       </div>
     </template>
 
-    <ul v-else-if="list">
+    <ul v-else-if="list" class="untappd__list">
       <li v-for="(beerItem, index) in beerData" :key="`beer-list-${index}`">
         ({{ beerItem.count }}) <strong v-html="beerItem.beer.beer_name" /> by
         <em v-html="beerItem.brewery.brewery_name" /> <br />
@@ -118,50 +118,52 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.beers {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-content: center;
-  margin: 2rem -0.5rem 0;
-}
-
-.beer {
-  flex: 1 0 33.333%;
-  padding: 0.5rem;
-
-  @media screen and (min-width: 480px) {
-    flex: 1 0 20%;
+.untappd {
+  &__beers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+    margin: $spacing-lg -0.5rem 0;
   }
-}
 
-.icon {
-  width: 100%;
-  height: auto;
-  box-shadow: 0;
-  transition: all 0.25s;
-  border: 2px solid #ff6f69;
+  &__beer {
+    flex: 1 0 33.333%;
+    padding: $spacing-xs;
 
-  &:hover {
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
-      rgba(0, 0, 0, 0.05) 0px 5px 10px;
-    border: 2px solid #000;
+    @include respond-to(xs) {
+      flex: 1 0 20%;
+    }
   }
-}
 
-.info {
-  display: none;
-}
+  &__icon {
+    width: 100%;
+    height: auto;
+    box-shadow: 0;
+    @include transition(all);
+    border: 2px solid #ff6f69;
 
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
+        rgba(0, 0, 0, 0.05) 0px 5px 10px;
+      border: 2px solid #000;
+    }
+  }
 
-li {
-  list-style: none;
-  display: block;
-  margin-bottom: 0.5rem;
+  &__info {
+    display: none;
+  }
+
+  &__list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      list-style: none;
+      display: block;
+      margin-bottom: $spacing-xs;
+    }
+  }
 }
 </style>

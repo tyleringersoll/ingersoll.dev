@@ -2,11 +2,11 @@
   <transition name="fade" mode="out-in">
     <div
       v-show="props.modalOpen"
-      class="modal-background"
+      class="modal__background"
       @click.self="onModalClose"
     >
       <div
-        class="modal-window"
+        class="modal__window"
         tabindex="0"
         :style="`max-width: ${props.maxWidth}`"
         ref="modal"
@@ -16,7 +16,7 @@
         :aria-describedby="props.modalContentId"
       >
         <button
-          class="close-button"
+          class="modal__close"
           tabindex="0"
           @click="onModalClose"
           v-html="icons.close"
@@ -151,7 +151,7 @@ onUnmounted(() => {
 });
 </script>
 
-<style>
+<style lang="scss">
 body.modal-open {
   overflow: hidden;
 }
@@ -159,10 +159,8 @@ body.modal-open {
 
 <style lang="scss" scoped>
 .modal {
-  &-background {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  &__background {
+    @include flex-center;
     position: fixed;
     top: 0;
     right: 0;
@@ -170,20 +168,20 @@ body.modal-open {
     left: 0;
     overflow-x: hidden;
     overflow-y: auto;
-    background-color: rgba($gray7, 0.95);
-    z-index: 200;
+    background-color: rgba($color-gray-7, 0.95);
+    z-index: $z-index-modal;
   }
 
-  &-window {
+  &__window {
     position: relative;
-    max-width: calc(100% - 2rem);
+    max-width: calc(100% - $spacing-lg);
     width: 100%;
-    padding: 4rem 2rem 2rem;
-    background-color: $gray8;
-    border-radius: 1rem;
+    padding: 4rem $spacing-lg $spacing-lg;
+    background-color: $color-gray-8;
+    border-radius: $spacing-sm;
     border: 0.15rem solid black;
 
-    @media screen and (min-width: $md) {
+    @include respond-to(sm) {
       max-width: calc(100% - 4rem);
       padding: 4rem;
     }
@@ -196,57 +194,46 @@ body.modal-open {
       font-size: 1.5rem;
     }
   }
-}
 
-button.close-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  padding: 0;
-  width: 2rem;
-  height: 2rem;
-  border: 0;
-  outline: 0;
-  background: transparent;
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:focus-visible {
-    outline-offset: 0.3rem;
-    outline-color: $highlight5;
-    outline-width: 0.2rem;
-    outline-style: solid;
-    border-radius: 50%;
-  }
-}
-</style>
-
-<style lang="scss">
-.close-button {
-  svg {
+  &__close {
+    @include flex-center;
+    position: absolute;
+    top: $spacing-sm;
+    right: $spacing-sm;
+    padding: 0;
     width: 2rem;
     height: 2rem;
-  }
+    border: 0;
+    outline: 0;
+    background: transparent;
 
-  .svg-bg {
-    stroke: none;
-    fill: transparent;
-  }
-  .svg-x {
-    stroke: white;
-    height: 2rem;
-    width: 2rem;
-    transition: all 0.3s;
-  }
+    &:hover {
+      cursor: pointer;
+    }
 
-  &:hover {
+    @include focus-visible-circle(0.3rem);
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    .svg-bg {
+      stroke: none;
+      fill: transparent;
+    }
+
     .svg-x {
-      stroke: $highlight1;
+      stroke: white;
+      height: 2rem;
+      width: 2rem;
+      @include transition(all);
+    }
+
+    &:hover {
+      .svg-x {
+        stroke: $color-highlight-1;
+      }
     }
   }
 }

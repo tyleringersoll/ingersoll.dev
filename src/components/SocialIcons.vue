@@ -1,5 +1,5 @@
 <template>
-  <div class="svg-footer-icon">
+  <div class="social-icon">
     <a
       :href="props.url"
       :title="computedTitle"
@@ -37,33 +37,31 @@ const computedTitle = computed(() => {
 });
 </script>
 
-<style lang="scss">
-.svg-footer-icon {
-  padding: 0.5rem 0;
+<style lang="scss" scoped>
+.social-icon {
+  padding: $spacing-xs 0;
 
-  @media screen and (min-width: $md) {
-    padding: 0.5rem 1rem;
+  @include respond-to(sm) {
+    padding: $spacing-xs $spacing-sm;
   }
 
   a {
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex-center;
     width: 2.75rem;
     height: 2.75rem;
-    border: 2px solid $highlight1;
+    border: 2px solid $color-highlight-1;
     border-radius: 50%;
-    transition: all 0.3s;
+    @include transition(all);
 
     svg {
-      fill: $highlight1;
+      fill: $color-highlight-1;
       max-height: 1rem;
       max-width: 1rem;
       width: 100%;
       height: 100%;
-      transition: all 0.3s;
+      @include transition(all);
 
       &.github {
         max-height: 2rem;
@@ -82,16 +80,14 @@ const computedTitle = computed(() => {
     }
 
     &:hover {
-      border: 2px solid $highlight3;
+      border: 2px solid $color-highlight-3;
 
       svg {
-        fill: $highlight2;
+        fill: $color-highlight-2;
       }
     }
 
-    &:focus-visible {
-      outline-offset: 0.5rem;
-    }
+    @include focus-visible-circle(0.5rem);
   }
 }
 </style>

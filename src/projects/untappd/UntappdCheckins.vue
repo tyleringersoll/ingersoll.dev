@@ -1,11 +1,11 @@
 <template>
-  <article class="untapped-data">
+  <article class="untappd__checkins">
     <h2>The last few beers I've sipped (according to Untappd)</h2>
-    <div v-if="untappdData" class="beers">
+    <div v-if="untappdData" class="untappd__checkins-beers">
       <img
         v-for="(beerItem, index) in recentBeer"
         :key="`beer-${beerItem.beer.bid}-${index}`"
-        class="icon"
+        class="untappd__checkins-icon"
         :src="beerItem.beer.beer_label"
         :alt="beerItem.beer.beer_name"
         loading="lazy"
@@ -80,27 +80,29 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.untapped-data {
-  margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
-}
+.untappd {
+  &__checkins {
+    margin-top: $spacing-xl;
+    margin-bottom: $spacing-xl;
+  }
 
-.beers {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  margin: 1rem 0 0;
-}
+  &__checkins-beers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: $spacing-sm 0 0;
+  }
 
-.icon {
-  display: inline-block;
-  width: 100%;
-  height: auto;
-  max-width: 50px;
-  margin: 0.5rem 0.5rem 0 0;
+  &__checkins-icon {
+    display: inline-block;
+    width: 100%;
+    height: auto;
+    max-width: 50px;
+    margin: $spacing-xs $spacing-xs 0 0;
 
-  @media screen and (min-width: 768px) {
-    max-width: 100px;
+    @include respond-to(sm) {
+      max-width: 100px;
+    }
   }
 }
 </style>

@@ -4,6 +4,7 @@ import router from "./router";
 import { createPinia } from "pinia";
 import mediaQueryPlugin from "./plugins/mediaQuery";
 import { Header, MobileNav, Navigation, Footer, Article } from "@/components";
+import "@/styles/main.scss";
 
 createApp(App)
   .use(createPinia())

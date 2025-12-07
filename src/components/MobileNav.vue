@@ -1,15 +1,27 @@
 <template>
-  <nav class="navigation-menu menu--spin" :class="{ active: nav.isOpen }">
-    <button class="menu" type="button" tabindex="0" @click="onClick">
-      <span class="menu-box">
-        <span class="menu-inner" />
+  <nav class="mobile-nav mobile-nav--spin">
+    <button
+      class="mobile-nav__button"
+      :class="{ 'mobile-nav__button--active': nav.isOpen }"
+      type="button"
+      tabindex="0"
+      @click="onClick"
+      aria-label="Toggle mobile navigation"
+      :aria-expanded="nav.isOpen"
+    >
+      <span class="mobile-nav__box">
+        <span class="mobile-nav__inner" />
       </span>
     </button>
-    <div class="mobile-navigation" :class="{ active: nav.isOpen }">
-      <ul v-if="nav.isOpen" :class="['navigation-items', { open: nav.isOpen }]">
+    <div
+      class="mobile-nav__overlay"
+      :class="{ 'mobile-nav__overlay--active': nav.isOpen }"
+      @click.self="onClick"
+    >
+      <ul v-if="nav.isOpen" class="mobile-nav__items">
         <li
           v-for="(item, index) in content"
-          class="navigation-item"
+          class="mobile-nav__item"
           :key="index"
           @keydown.enter="() => onKeydown(item.url)"
           @click="onClick"
@@ -65,134 +77,132 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss" scoped>
-$menu-padding-x: 2rem !default;
-$menu-padding-y: 2rem !default;
-$menu-layer-width: 40px !default;
-$menu-layer-height: 4px !default;
-$menu-layer-spacing: 6px !default;
-$menu-layer-color: $highlight1 !default;
-$menu-layer-border-radius: 4px !default;
-$menu-hover-opacity: 1 !default;
-$menu-active-layer-color: $menu-layer-color !default;
-$menu-active-hover-opacity: $menu-hover-opacity !default;
+$menu-padding-x: 2rem;
+$menu-padding-y: 2rem;
+$menu-layer-width: 40px;
+$menu-layer-height: 4px;
+$menu-layer-spacing: 6px;
+$menu-layer-color: $color-highlight-1;
+$menu-layer-border-radius: 4px;
+$menu-hover-opacity: 1;
+$menu-active-layer-color: $menu-layer-color;
+$menu-active-hover-opacity: $menu-hover-opacity;
+$menu-hover-use-filter: true;
+$menu-hover-filter: opacity(100%);
+$menu-active-hover-filter: $menu-hover-filter;
 
-$menu-hover-use-filter: true !default;
-$menu-hover-filter: opacity(100%) !default;
-$menu-active-hover-filter: $menu-hover-filter !default;
+.mobile-nav {
+  &__button {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: $menu-padding-y $menu-padding-x;
+    display: inline-block;
+    cursor: pointer;
+    transition-property: opacity, filter;
+    transition-duration: $transition-fast;
+    transition-timing-function: linear;
+    font: inherit;
+    color: inherit;
+    text-transform: none;
+    background-color: transparent;
+    border: 0;
+    margin: 0;
+    overflow: visible;
+    z-index: $z-index-overlay;
 
-.navigation-menu {
-  display: block;
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 1;
-}
-
-.menu {
-  padding: $menu-padding-y $menu-padding-x;
-  display: inline-block;
-  cursor: pointer;
-
-  transition-property: opacity, filter;
-  transition-duration: 0.15s;
-  transition-timing-function: linear;
-
-  font: inherit;
-  color: inherit;
-  text-transform: none;
-  background-color: transparent;
-  border: 0;
-  margin: 0;
-  overflow: visible;
-
-  z-index: 3;
-
-  &:focus {
-    outline: 0;
-  }
-
-  &:hover {
-    @if $menu-hover-use-filter == true {
-      filter: $menu-hover-filter;
-    } @else {
-      opacity: $menu-hover-opacity;
+    &:focus {
+      outline: 0;
     }
-  }
 
-  &.active {
     &:hover {
       @if $menu-hover-use-filter == true {
-        filter: $menu-active-hover-filter;
+        filter: $menu-hover-filter;
       } @else {
-        opacity: $menu-active-hover-opacity;
+        opacity: $menu-hover-opacity;
       }
     }
 
-    .menu-inner,
-    .menu-inner::before,
-    .menu-inner::after {
-      background-color: $menu-active-layer-color;
+    &--active {
+      &:hover {
+        @if $menu-hover-use-filter == true {
+          filter: $menu-active-hover-filter;
+        } @else {
+          opacity: $menu-active-hover-opacity;
+        }
+      }
+
+      .mobile-nav__inner,
+      .mobile-nav__inner::before,
+      .mobile-nav__inner::after {
+        background-color: $menu-active-layer-color;
+      }
+    }
+
+    &:focus-visible {
+      .mobile-nav__box {
+        outline: 2px solid $color-highlight-5 !important;
+        outline-offset: 0.5rem;
+        border-radius: 2px;
+        @include transition(all);
+      }
     }
   }
-}
 
-.menu-box {
-  width: $menu-layer-width;
-  height: $menu-layer-height * 3 + $menu-layer-spacing * 2;
-  display: inline-block;
-  position: relative;
-}
-
-.menu-inner {
-  display: block;
-  top: 50%;
-  margin-top: $menu-layer-height / -2;
-
-  &,
-  &::before,
-  &::after {
+  &__box {
     width: $menu-layer-width;
-    height: $menu-layer-height;
-    background-color: $menu-layer-color;
-    border-radius: $menu-layer-border-radius;
-    position: absolute;
-    transition-property: transform;
-    transition-duration: 0.15s;
-    transition-timing-function: ease;
+    height: $menu-layer-height * 3 + $menu-layer-spacing * 2;
+    display: inline-block;
+    position: relative;
   }
 
-  &::before,
-  &::after {
-    content: "";
+  &__inner {
     display: block;
-  }
+    top: 50%;
+    margin-top: $menu-layer-height / -2;
 
-  &::before {
-    top: ($menu-layer-spacing + $menu-layer-height) * -1;
-  }
+    &,
+    &::before,
+    &::after {
+      width: $menu-layer-width;
+      height: $menu-layer-height;
+      background-color: $menu-layer-color;
+      border-radius: $menu-layer-border-radius;
+      position: absolute;
+      @include transition-fast(transform);
+    }
 
-  &::after {
-    bottom: ($menu-layer-spacing + $menu-layer-height) * -1;
-  }
-}
-
-.menu--spin {
-  .menu-inner {
-    transition-duration: 0.22s;
-    transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+    }
 
     &::before {
-      transition: top 0.1s 0.25s ease-in, opacity 0.1s ease-in;
+      top: ($menu-layer-spacing + $menu-layer-height) * -1;
     }
 
     &::after {
-      transition: bottom 0.1s 0.25s ease-in,
-        transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+      bottom: ($menu-layer-spacing + $menu-layer-height) * -1;
     }
   }
 
-  &.active {
-    .menu-inner {
+  &--spin {
+    .mobile-nav__inner {
+      transition-duration: 0.22s;
+      transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+
+      &::before {
+        transition: top 0.1s 0.25s ease-in, opacity 0.1s ease-in;
+      }
+
+      &::after {
+        transition: bottom 0.1s 0.25s ease-in,
+          transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+      }
+    }
+
+    .mobile-nav__button--active .mobile-nav__inner {
       transform: rotate(225deg);
       transition-delay: 0.12s;
       transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -211,103 +221,94 @@ $menu-active-hover-filter: $menu-hover-filter !default;
       }
     }
   }
-}
 
-.mobile-navigation {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100vw;
-  background-color: $gray8;
-  transform: translateX(120vw);
-  transition: all 0.5s 0.3s ease-in-out;
-  z-index: -1;
-
-  &:after {
-    content: "";
-    background-image: url("../assets/drum_bg.png");
-    background-size: cover;
-    position: absolute;
-    top: 1rem;
+  &__overlay {
+    position: fixed;
+    top: 0;
     right: 0;
     bottom: 0;
-    left: -3rem;
-    opacity: 0;
-    transition: opacity 0.5s 0.75s ease-in;
-    z-index: -1;
-  }
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: $color-gray-8;
+    transform: translateX(120vw);
+    @include transition-slow(all);
+    transition-delay: 0.3s;
+    z-index: $z-index-modal;
+    pointer-events: none;
 
-  &.active {
-    transform: translateX(0);
-
-    &:after {
-      opacity: 0.04;
+    &::after {
+      content: "";
+      background-image: url("../assets/drum_bg.png");
+      background-size: cover;
+      position: absolute;
+      top: $spacing-sm;
+      right: 0;
+      bottom: 0;
+      left: -3rem;
+      opacity: 0;
+      transition: opacity 0.5s 0.75s ease-in;
+      z-index: -1;
     }
-  }
 
-  .navigation {
-    &-items {
-      list-style-type: none;
-      margin-top: 6rem;
-      padding: 1.5rem 2.5rem;
-      overflow: hidden;
-    }
+    &--active {
+      transform: translateX(0);
+      pointer-events: auto;
 
-    &-item {
-      margin: 0 0 2rem;
-      color: white;
-      font-size: 1rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      text-decoration: none;
-      letter-spacing: 0.2rem;
-      transition: all 0.3s;
-      cursor: pointer;
-
-      @media screen and (min-width: $md) {
-        display: inline-block;
-        margin: 0 2rem 1rem 0;
+      &::after {
+        opacity: 0.04;
       }
+    }
+  }
+
+  &__items {
+    list-style-type: none;
+    margin-top: 6rem;
+    padding: $spacing-md $spacing-xl;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__item {
+    margin: 0 0 $spacing-lg;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    @include text-uppercase;
+    text-decoration: none;
+    @include transition(all);
+    cursor: pointer;
+
+    @include respond-to(sm) {
+      display: inline-block;
+      margin: 0 $spacing-lg $spacing-sm 0;
     }
   }
 
   a {
     color: white;
     font-weight: 600;
-    text-transform: uppercase;
+    @include text-uppercase;
     text-decoration: none;
-    letter-spacing: 0.2rem;
     cursor: pointer;
-    text-decoration: none;
 
     &:hover {
-      color: $highlight1;
+      color: $color-highlight-1;
     }
 
     &:focus-visible {
-      color: $highlight1;
+      color: $color-highlight-1;
       outline-offset: 3px;
-      transition: all 0.3s;
+      @include transition(all);
     }
   }
 
-  .router-link-exact-active {
-    color: $highlight2;
+  :deep(.router-link-exact-active) {
+    color: $color-highlight-2;
+
     &:focus-visible {
-      color: $highlight2;
-    }
-  }
-}
-
-button {
-  &:focus-visible {
-    .menu-box {
-      outline: 2px solid $highlight5 !important;
-      outline-offset: 0.5rem;
-      border-radius: 2px;
-      transition: all 0.3s;
+      color: $color-highlight-2;
     }
   }
 }

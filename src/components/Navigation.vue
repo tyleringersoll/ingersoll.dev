@@ -1,11 +1,11 @@
 <template>
   <nav class="navigation">
     <div class="container">
-      <ul class="navigation-items">
+      <ul class="navigation__items">
         <li
           v-for="(item, index) in content"
           :key="index"
-          class="navigation-item"
+          class="navigation__item"
         >
           <router-link :to="item.url" :innerHTML="item.name" />
         </li>
@@ -25,43 +25,43 @@ defineProps({
 
 <style lang="scss" scoped>
 .navigation {
-  padding-bottom: 1rem;
+  padding-bottom: $spacing-sm;
 
-  @media screen and (min-width: $md) {
+  @include respond-to(sm) {
     position: sticky;
     top: 0;
-    background-color: $gray6;
+    background-color: $color-gray-6;
   }
 
-  &-items {
+  &__items {
     display: flex;
     justify-content: space-between;
-    gap: 1rem;
+    gap: $spacing-sm;
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    border-bottom: 2px solid $highlight3;
+    border-bottom: 2px solid $color-highlight-3;
   }
 
-  &-item {
+  &__item {
     display: none;
-    margin: 0 0 1rem 0;
-    transition: all 0.3s;
+    margin: 0 0 $spacing-sm 0;
+    @include transition(all);
 
-    @media screen and (min-width: $md) {
+    @include respond-to(sm) {
       display: inline-block;
-      margin: 0 1rem 1rem;
+      margin: 0 $spacing-sm $spacing-sm;
     }
 
     &::before {
       display: block;
       content: "";
-      padding-bottom: 1rem;
-      border-top: 2px solid $highlight3;
+      padding-bottom: $spacing-sm;
+      border-top: 2px solid $color-highlight-3;
       transform: scaleX(0);
       transform-origin: 0% 50%;
-      transition: transform 250ms ease-in-out;
+      @include transition(transform, 250ms, ease-in-out);
     }
 
     &:hover {
@@ -70,35 +70,30 @@ defineProps({
       }
     }
   }
-}
 
-a {
-  color: white;
-  font-size: 1.1rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  text-decoration: none;
-  letter-spacing: 0.2rem;
-  cursor: pointer;
-  text-decoration: none;
+  a {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    @include text-uppercase;
+    text-decoration: none;
+    cursor: pointer;
 
-  &:hover {
-    color: $highlight1;
+    &:hover {
+      color: $color-highlight-1;
+    }
+
+    @include focus-visible(3px);
   }
 
-  &:focus-visible {
-    outline-offset: 3px;
-    transition: all 0.3s;
-  }
-}
+  :deep(.router-link-exact-active) {
+    display: inline-block;
+    color: $color-highlight-2;
 
-.router-link-exact-active {
-  display: inline-block;
-  color: $highlight2;
-
-  @media screen and (max-width: 767px) {
-    pointer-events: none;
-    cursor: default;
+    @include respond-below(sm) {
+      pointer-events: none;
+      cursor: default;
+    }
   }
 }
 </style>

@@ -1,10 +1,9 @@
 <template>
-  <footer v-if="content" class="footer-container">
-    <section class="container footer-social">
+  <footer v-if="content" class="footer">
+    <section class="container">
       <h2 v-html="content.socialHeading" />
-      <div class="social">
+      <div class="footer__social">
         <SocialIcons
-          class="social-icon"
           v-for="(link, index) in content.socialIcons"
           :key="index"
           :svg="link.svg"
@@ -14,9 +13,9 @@
         />
       </div>
     </section>
-    <section class="container footer-legal">
+    <section class="container footer__legal">
       <p
-        class="legal"
+        class="footer__legal-text"
         v-for="(para, index) in processedLegal"
         :key="index"
         v-html="para"
@@ -51,30 +50,30 @@ const processedLegal = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-.footer-container {
+.footer {
   margin: auto 0 0;
-  padding: 2rem 0;
-  background-color: $gray7;
-}
+  padding: $spacing-lg 0;
+  background-color: $color-gray-7;
 
-.social {
-  margin: 1rem 0 0;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-wrap: wrap;
+  &__social {
+    margin: $spacing-sm 0 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
 
-  @media screen and (max-width: $md) {
-    justify-content: space-between;
+    @include respond-below(sm) {
+      justify-content: space-between;
+    }
   }
-}
 
-.footer-legal {
-  margin-top: 2rem;
-}
+  &__legal {
+    margin-top: $spacing-lg;
+  }
 
-.legal {
-  margin: 0;
-  font-size: 0.8rem;
+  &__legal-text {
+    margin: 0;
+    font-size: 0.8rem;
+  }
 }
 </style>

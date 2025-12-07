@@ -348,3 +348,10 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Vue.js / Node.js
+dist/
+.DS_Store
+*.local
+.env.local
+.env.*.local

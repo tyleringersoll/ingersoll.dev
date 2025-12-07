@@ -1,0 +1,83 @@
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:wght@300;400;700&display=swap');
+
+* {
+  font-family: $font-family-base;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: $color-gray-6;
+  color: $color-gray-0;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+
+  &.menu-open {
+    overflow-y: hidden;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+  @include transition(all);
+  @include focus-visible(0.2rem);
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: $color-gray-0;
+}
+
+h2 {
+  margin-bottom: $spacing-lg;
+  font-size: 1.75rem;
+  color: $color-highlight-3;
+
+  &.first-heading {
+    @include respond-below(sm) {
+      padding-top: $spacing-lg;
+      border-top: 2px solid $color-highlight-3;
+    }
+  }
+}
+
+h3 {
+  margin-bottom: $spacing-xl;
+  font-size: 1.25rem;
+  color: $color-highlight-3;
+}
+
+h4 {
+  margin-bottom: $spacing-sm;
+  font-size: 1.125rem;
+}
+
+h5 {
+  font-size: 1rem;
+}
+
+p {
+  line-height: $line-height-body;
+}
+
+a {
+  @include text-link;
+}
+
+article {
+  margin-top: $spacing-xl;
+  margin-bottom: $spacing-xl;
+}
+
+:focus-visible {
+  outline: $color-highlight-5 solid 2px;
+  border-radius: 2px;
+}
+

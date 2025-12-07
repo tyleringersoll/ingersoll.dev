@@ -1,0 +1,16 @@
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.app {
+  &-upper {
+    flex: 1 0 auto;
+  }
+
+  &-sticky-bottom {
+    flex-shrink: 0;
+  }
+}
+
