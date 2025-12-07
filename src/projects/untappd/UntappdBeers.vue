@@ -1,48 +1,50 @@
 <template>
-  <div v-if="data.untappdData" class="beers">
+  <div v-if="untappdData" class="beers">
     <template v-if="icons">
-      <template v-for="(beerItem, index) in beerData">
-        <div v-if="index + 1 <= maxItems" class="beer" :key="index">
+      <div
+        v-for="(beerItem, index) in filteredBeerData"
+        :key="`beer-${beerItem.beer.bid || index}`"
+        class="beer"
+      >
+        <img
+          class="icon"
+          :src="beerItem.beer.beer_label"
+          :alt="beerItem.beer.beer_name"
+          loading="lazy"
+        />
+        <div class="info">
           <img
             class="icon"
             :src="beerItem.beer.beer_label"
             :alt="beerItem.beer.beer_name"
-            @click="onIconClick"
+            loading="lazy"
           />
-          <div class="info">
-            <img
-              class="icon"
-              :src="beerItem.beer.beer_label"
-              :alt="beerItem.beer.beer_name"
-            />
-            <h3 v-html="beerItem.beer.beer_name" />
-            <p v-html="beerItem.beer.beer_description" />
-          </div>
+          <h3 v-html="beerItem.beer.beer_name" />
+          <p v-html="beerItem.beer.beer_description" />
         </div>
-      </template>
+      </div>
     </template>
 
     <ul v-else-if="list">
-      <li v-for="(beerItem, index) in beerData" :key="index">
+      <li v-for="(beerItem, index) in beerData" :key="`beer-list-${index}`">
         ({{ beerItem.count }}) <strong v-html="beerItem.beer.beer_name" /> by
-        <em v-html="beerItem.brewery.brewery_name" /> <br />{{
-          beerItem.beer.beer_style
-        }}
-        / {{ beerItem.beer.beer_abv }}% ABV
+        <em v-html="beerItem.brewery.brewery_name" /> <br />
+        {{ beerItem.beer.beer_style }} / {{ beerItem.beer.beer_abv }}% ABV
       </li>
     </ul>
   </div>
 </template>
 
 <script setup>
-import { defineProps, reactive, inject, computed, onMounted } from "vue";
+import { ref, inject, computed, onMounted } from "vue";
 import { getApiData } from "@/services/api.service";
 
 const mediaQuery = inject("mediaQuery");
 
-const untappd = defineProps({
+const props = defineProps({
   heading: {
     type: String,
+    default: null,
   },
   content: {
     type: Array,
@@ -50,14 +52,15 @@ const untappd = defineProps({
   },
   sort: {
     type: String,
+    default: "highest_rated_you",
   },
   user: {
     type: String,
     default: "drinkingisawesome",
   },
   limit: {
-    type: String,
-    default: "10",
+    type: [String, Number],
+    default: 10,
   },
   icons: {
     type: Boolean,
@@ -69,16 +72,20 @@ const untappd = defineProps({
   },
 });
 
-const data = reactive({
-  untappdData: undefined,
-});
+const untappdData = ref(null);
 
 const beerData = computed(() => {
-  return data.untappdData ? data.untappdData.response.beers.items : null;
+  return untappdData.value?.response?.beers?.items || null;
 });
 
 const maxItems = computed(() => {
-  return mediaQuery.isSmall ? 9 : untappd.limit;
+  const limit = Number(props.limit);
+  return mediaQuery?.isSmall ? Math.min(9, limit) : limit;
+});
+
+const filteredBeerData = computed(() => {
+  if (!beerData.value) return [];
+  return beerData.value.slice(0, maxItems.value);
 });
 
 const getUntappdData = async () => {
@@ -87,14 +94,22 @@ const getUntappdData = async () => {
   const method = "user/beers";
   const clientId = process.env.VUE_APP_UNTAPPD_CLIENT_ID;
   const clientSecret = process.env.VUE_APP_UNTAPPD_CLIENT_SECRET;
-  const apiUrl = `${domain}/${api}/${method}/${untappd.user}?client_id=${clientId}&client_secret=${clientSecret}&limit=${untappd.limit}&sort=${untappd.sort}`;
 
-  const apiData = await getApiData(apiUrl);
-  data.untappdData = apiData;
-};
+  if (!clientId || !clientSecret) {
+    console.warn(
+      "Untappd API credentials not configured. Check environment variables."
+    );
+    return;
+  }
 
-const onIconClick = () => {
-  // console.log('click', e);
+  const apiUrl = `${domain}/${api}/${method}/${props.user}?client_id=${clientId}&client_secret=${clientSecret}&limit=${props.limit}&sort=${props.sort}`;
+
+  try {
+    const apiData = await getApiData(apiUrl);
+    untappdData.value = apiData;
+  } catch (error) {
+    console.error("Failed to fetch Untappd beers:", error);
+  }
 };
 
 onMounted(() => {

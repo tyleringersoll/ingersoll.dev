@@ -1,89 +1,90 @@
 <template>
-  <article class="untappedData">
+  <article class="untapped-data">
     <h2>The last few beers I've sipped (according to Untappd)</h2>
     <div v-if="untappdData" class="beers">
       <img
         v-for="(beerItem, index) in recentBeer"
+        :key="`beer-${beerItem.beer.bid}-${index}`"
         class="icon"
-        :key="index"
         :src="beerItem.beer.beer_label"
         :alt="beerItem.beer.beer_name"
+        loading="lazy"
       />
     </div>
   </article>
 </template>
 
-<script>
-import { getApiData } from '@/services/api.service';
+<script setup>
+import { ref, computed, onMounted } from "vue";
+import { getApiData } from "@/services/api.service";
 
-export default {
-  name: "UntappdCheckins",
-
-  props: {
-    user: {
-      type: String,
-      default: "drinkingisawesome",
-    },
-
-    numberOfBeers: {
-      type: Number,
-      default: 10,
-    },
+const props = defineProps({
+  user: {
+    type: String,
+    default: "drinkingisawesome",
   },
-
-  data() {
-    return {
-      untappdData: undefined,
-    };
+  numberOfBeers: {
+    type: Number,
+    default: 10,
   },
+});
 
-  computed: {
-    beerData() {
-      return this.untappdData
-        ? this.untappdData.response.checkins.items
-        : null;
-    },
+const untappdData = ref(null);
 
-    recentBeer() {
-      const lastBeers = [];
-      if (this.beerData) {
-        const beerIds = this.beerData.map((item) => item.beer.bid);
-        const uniqueBeerIds = [...new Set(beerIds)];
-        const recentBeerIds = uniqueBeerIds.slice(0, this.numberOfBeers);
+const beerData = computed(() => {
+  return untappdData.value?.response?.checkins?.items || null;
+});
 
-        recentBeerIds.forEach((item) => {
-          lastBeers.push(
-            this.beerData.find((beerData) => beerData.beer.bid === item)
-          );
-        });
-      }
+const recentBeer = computed(() => {
+  if (!beerData.value) {
+    return [];
+  }
 
-      return lastBeers;
-    },
-  },
+  const beerIds = beerData.value.map((item) => item.beer.bid);
+  const uniqueBeerIds = [...new Set(beerIds)];
+  const recentBeerIds = uniqueBeerIds.slice(0, props.numberOfBeers);
 
-  methods: {
-    async getUntappdData() {
-      const domain = "https://api.untappd.com";
-      const api = "v4";
-      const method = "user/checkins";
-      const clientId = "01424C2929B46EF03F1E12DD01A85B9EFDDC2D48";
-      const clientSecret = "2A127A13659130B32D920E6E2E371ECF318526B9";
-      const apiUrl = `${domain}/${api}/${method}/${
-        this.user
-      }?client_id=${clientId}&client_secret=${clientSecret}`;
+  return recentBeerIds
+    .map((beerId) => beerData.value.find((item) => item.beer.bid === beerId))
+    .filter(Boolean);
+});
 
-     const apiData = await getApiData(apiUrl);
-      this.untappdData = apiData;
-    },
-  },
-  mounted() {
-    // this.getUntappdData();
-  },
+// eslint-disable-next-line no-unused-vars
+const getUntappdData = async () => {
+  const domain = "https://api.untappd.com";
+  const api = "v4";
+  const method = "user/checkins";
+  const clientId = process.env.VUE_APP_UNTAPPD_CLIENT_ID;
+  const clientSecret = process.env.VUE_APP_UNTAPPD_CLIENT_SECRET;
+
+  if (!clientId || !clientSecret) {
+    console.warn(
+      "Untappd API credentials not configured. Check environment variables."
+    );
+    return;
+  }
+
+  const apiUrl = `${domain}/${api}/${method}/${props.user}?client_id=${clientId}&client_secret=${clientSecret}`;
+
+  try {
+    const apiData = await getApiData(apiUrl);
+    untappdData.value = apiData;
+  } catch (error) {
+    console.error("Failed to fetch Untappd checkins:", error);
+  }
 };
+
+onMounted(() => {
+  // getUntappdData();
+});
 </script>
 
 <style lang="scss" scoped>
+.untapped-data {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
 .beers {
   display: flex;
   flex-wrap: wrap;
@@ -101,15 +102,5 @@ export default {
   @media screen and (min-width: 768px) {
     max-width: 100px;
   }
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-li {
-  list-style: none;
 }
 </style>

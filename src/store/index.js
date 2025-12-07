@@ -1,48 +1,59 @@
 import { defineStore } from "pinia";
-import { createClient } from "contentful";
 
 export const useContentStore = defineStore("content", {
-  state: () => ({ content: [] }),
+  state: () => ({
+    content: null,
+    isLoading: false,
+    error: null,
+  }),
 
   actions: {
     async loadContent() {
-      if (process.env.NODE_ENV === "production") {
-        try {
-          const client = this.createContentfulClient();
-          const entry = await client.getEntry(
-            process.env.VUE_APP_CONTENTFUL_ENTRY
-          );
-          this.content = entry.fields.siteContent.content;
-        } catch (error) {
-          console.error("Failed to fetch content from Contentful:", error);
-          await this.useLocalJson();
+      this.isLoading = true;
+      this.error = null;
+
+      try {
+        const jsonData = await import("@/data/content.json");
+        const content = jsonData.content || jsonData.default?.content || null;
+
+        if (!content) {
+          throw new Error("Content file is empty or malformed");
         }
-      } else {
-        await this.useLocalJson();
+
+        this.validateContent(content);
+        this.content = content;
+      } catch (error) {
+        console.error("Failed to load content:", error);
+        this.error = error;
+        this.content = null;
+      } finally {
+        this.isLoading = false;
       }
     },
 
-    createContentfulClient() {
-      if (
-        !process.env.VUE_APP_CONTENTFUL_SPACE ||
-        !process.env.VUE_APP_CONTENTFUL_ENVIRONMENT ||
-        !process.env.VUE_APP_CONTENTFUL_ACCESS_TOKEN
-      ) {
-        throw new Error(
-          "Missing Contentful configuration in environment variables"
-        );
+    validateContent(content) {
+      if (!content || typeof content !== "object") {
+        throw new Error("Content must be an object");
       }
 
-      return createClient({
-        space: process.env.VUE_APP_CONTENTFUL_SPACE,
-        environment: process.env.VUE_APP_CONTENTFUL_ENVIRONMENT,
-        accessToken: process.env.VUE_APP_CONTENTFUL_ACCESS_TOKEN,
-      });
-    },
+      const requiredFields = ["meta", "navigation", "footer"];
+      for (const field of requiredFields) {
+        if (!content[field]) {
+          throw new Error(`Missing required content field: ${field}`);
+        }
+      }
 
-    async useLocalJson() {
-      const jsonData = await import("@/data/content.json");
-      this.content = jsonData.content;
+      if (!content.meta.name) {
+        throw new Error("Content meta must have a name field");
+      }
+
+      if (!Array.isArray(content.navigation)) {
+        throw new Error("Content navigation must be an array");
+      }
+
+      if (!content.footer.socialHeading || !Array.isArray(content.footer.socialIcons)) {
+        throw new Error("Content footer must have socialHeading and socialIcons array");
+      }
     },
   },
 });

@@ -1,29 +1,19 @@
 import { shallowMount } from "@vue/test-utils";
 import App from "@/App.vue";
-import { computed, nextTick } from "vue";
+import { nextTick } from "vue";
 import { useContentStore } from "@/store";
-
-jest.mock("contentful", () => ({
-  createClient: jest.fn().mockReturnValue({
-    getEntry: jest.fn().mockResolvedValue({
-      fields: {
-        siteContent: {
-          content: "mocked content from contentful",
-        },
-      },
-    }),
-  }),
-}));
-
-jest.mock("@/data/content.json", () => ({
-  content: "mocked content from local json",
-}));
 
 const mockStore = {
   content: {
-    meta: {},
-    navigation: {},
-    footer: {},
+    meta: {
+      name: "Test Name",
+    },
+    navigation: [],
+    footer: {
+      socialHeading: "Connect",
+      socialIcons: [],
+      legal: [],
+    },
   },
   loadContent: jest.fn(),
 };
@@ -89,11 +79,21 @@ describe("App.vue", () => {
   });
 
   it("computes content from store", () => {
-    const contentValue = { footer: {}, meta: {}, navigation: {} };
+    const contentValue = {
+      meta: { name: "Test" },
+      navigation: [],
+      footer: {
+        socialHeading: "Connect",
+        socialIcons: [],
+        legal: [],
+      },
+    };
     useContentStore.mockReturnValue({
-      content: computed(() => contentValue),
+      content: contentValue,
+      loadContent: jest.fn(),
     });
-    expect(wrapper.vm.content).toEqual(contentValue);
+    const newWrapper = mountAppWithOption();
+    expect(newWrapper.vm.content).toEqual(contentValue);
   });
 
   it("handles mobile nav click", async () => {
@@ -107,7 +107,7 @@ describe("App.vue", () => {
     });
 
     const mobileNavComponent = wrapper.findComponent({ name: "MobileNav" });
-    mobileNavComponent.vm.$emit("MobileNavClicked", true);
+    mobileNavComponent.vm.$emit("nav:clicked", true);
     await nextTick();
     expect(wrapper.vm.mobileNav.isOpen).toBe(true);
   });

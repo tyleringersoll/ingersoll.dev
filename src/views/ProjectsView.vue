@@ -19,15 +19,12 @@
 </template>
 
 <script setup>
-import { defineProps } from "vue";
-
-// eslint-disable-next-line no-unused-vars
 import { UntappdBeers } from "@/projects";
 
 defineProps({
   content: {
     type: Object,
-    default: () => {},
+    default: () => ({}),
   },
 });
 </script>

@@ -42,12 +42,11 @@
 import {
   ref,
   computed,
-  defineEmits,
-  defineProps,
   watch,
   onBeforeMount,
   onMounted,
   onBeforeUnmount,
+  onUnmounted,
   nextTick,
 } from "vue";
 import { useContentStore } from "@/store";
@@ -55,38 +54,33 @@ import { useContentStore } from "@/store";
 const store = useContentStore();
 const emit = defineEmits(["modal-close"]);
 const modal = ref(null);
+const bodyElement = ref(null);
 
 const props = defineProps({
   modalOpen: {
     type: Boolean,
     default: false,
   },
-
   modalTitle: {
     type: String,
     default: "",
   },
-
   modalContentId: {
     type: String,
     default: "",
   },
-
   modalContent: {
     type: String,
     default: "",
   },
-
   modalComponent: {
     type: Object,
-    default: () => {},
+    default: null,
   },
-
   modalComponentData: {
     type: Object,
-    default: () => {},
+    default: () => ({}),
   },
-
   maxWidth: {
     type: String,
     default: "",
@@ -94,45 +88,66 @@ const props = defineProps({
 });
 
 const icons = computed(() => {
-  return store.content.icons;
+  return store.content?.icons || {};
 });
+
+const toggleBodyClass = (isOpen) => {
+  if (typeof document !== "undefined") {
+    bodyElement.value = document.body;
+    if (isOpen) {
+      bodyElement.value.classList.add("modal-open");
+    } else {
+      bodyElement.value.classList.remove("modal-open");
+    }
+  }
+};
 
 const onModalClose = () => {
   if (props.modalOpen) {
     emit("modal-close");
-    document.querySelector("body").classList.remove("modal-open");
+    toggleBodyClass(false);
   }
 };
 
 const onKeydown = (e) => {
-  if (e.key === "Escape") onModalClose();
+  if (e.key === "Escape" && props.modalOpen) {
+    onModalClose();
+  }
 };
 
 watch(
   () => props.modalOpen,
-  () => {
-    if (props.modalOpen) {
+  (isOpen) => {
+    toggleBodyClass(isOpen);
+    if (isOpen && modal.value) {
       nextTick(() => {
-        modal.value.focus();
+        modal.value?.focus();
       });
-      document.querySelector("body").classList.add("modal-open");
-    } else {
-      document.querySelector("body").classList.remove("modal-open");
     }
-  }
+  },
+  { immediate: true }
 );
 
 onBeforeMount(() => {
-  window.addEventListener("keydown", onKeydown);
+  if (typeof window !== "undefined") {
+    window.addEventListener("keydown", onKeydown);
+  }
 });
 
 onMounted(() => {
-  if (props.modalOpen === true)
-    document.querySelector("body").classList.add("modal-open");
+  if (props.modalOpen) {
+    toggleBodyClass(true);
+  }
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener("keydown", onKeydown);
+  if (typeof window !== "undefined") {
+    window.removeEventListener("keydown", onKeydown);
+  }
+});
+
+onUnmounted(() => {
+  toggleBodyClass(false);
 });
 </script>
 

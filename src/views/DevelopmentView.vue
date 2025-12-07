@@ -12,12 +12,10 @@
 </template>
 
 <script setup>
-import { defineProps } from "vue";
-
 defineProps({
   content: {
     type: Object,
-    default: () => {},
+    default: () => ({}),
   },
 });
 </script>

@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { defineEmits, defineProps, reactive } from "vue";
+import { reactive, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
@@ -35,17 +35,20 @@ defineProps({
 });
 
 const emit = defineEmits(["nav:clicked"]);
+
 const nav = reactive({ isOpen: false });
 
-const onClick = () => {
-  nav.isOpen = !nav.isOpen;
-
+const toggleMenuState = () => {
   if (nav.isOpen) {
     document.body.classList.add("menu-open");
   } else {
     document.body.classList.remove("menu-open");
   }
+};
 
+const onClick = () => {
+  nav.isOpen = !nav.isOpen;
+  toggleMenuState();
   emit("nav:clicked", nav.isOpen);
 };
 
@@ -53,6 +56,12 @@ const onKeydown = (url) => {
   router.push(url);
   onClick();
 };
+
+onUnmounted(() => {
+  if (nav.isOpen) {
+    document.body.classList.remove("menu-open");
+  }
+});
 </script>
 
 <style lang="scss" scoped>
@@ -266,7 +275,6 @@ $menu-active-hover-filter: $menu-hover-filter !default;
 
   a {
     color: white;
-    /* font-size: 1.1rem; */
     font-weight: 600;
     text-transform: uppercase;
     text-decoration: none;

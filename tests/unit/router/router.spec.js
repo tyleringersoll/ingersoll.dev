@@ -1,7 +1,6 @@
 import HomeView from "@/views/HomeView.vue";
 import router from "@/router";
 
-// Mocking dynamic imports
 jest.mock("@/views/DevelopmentView.vue", () => jest.fn());
 jest.mock("@/views/ProjectsView.vue", () => jest.fn());
 jest.mock("@/views/MusicView.vue", () => jest.fn());

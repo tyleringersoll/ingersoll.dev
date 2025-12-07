@@ -1,53 +1,54 @@
 import { reactive } from "vue";
 
+const BREAKPOINTS = {
+  SMALL: "(max-width: 767px)",
+  MEDIUM: "(min-width: 768px) and (max-width: 1023px)",
+  LARGE: "(min-width: 1024px)",
+};
+
 export default {
   install: (app) => {
-    // Reactive mediaQuery state
     const mediaQuery = reactive({
       isSmall: false,
       isMedium: false,
       isLarge: false,
     });
 
-    // Check for window & MediaQueryList for safety (e.g. in SSR contexts)
     if (typeof window === "undefined" || !window.matchMedia) {
       console.warn("window or window.matchMedia is not available");
+      app.provide("mediaQuery", mediaQuery);
       return;
     }
 
-    const small = window.matchMedia("(max-width: 767px)");
-    const medium = window.matchMedia(
-      "(min-width: 768px) and (max-width: 1023px)"
-    );
-    const large = window.matchMedia("(min-width: 1024px)");
-
-    const updateMediaQueryState = () => {
-      mediaQuery.isSmall = small.matches;
-      mediaQuery.isMedium = medium.matches;
-      mediaQuery.isLarge = large.matches;
+    const mediaQueries = {
+      small: window.matchMedia(BREAKPOINTS.SMALL),
+      medium: window.matchMedia(BREAKPOINTS.MEDIUM),
+      large: window.matchMedia(BREAKPOINTS.LARGE),
     };
 
-    // Event listener for media query changes
+    const updateMediaQueryState = () => {
+      mediaQuery.isSmall = mediaQueries.small.matches;
+      mediaQuery.isMedium = mediaQueries.medium.matches;
+      mediaQuery.isLarge = mediaQueries.large.matches;
+    };
+
     const onMediaQueryChange = () => {
       updateMediaQueryState();
     };
 
-    // Attach event listeners
-    small.addEventListener("change", onMediaQueryChange);
-    medium.addEventListener("change", onMediaQueryChange);
-    large.addEventListener("change", onMediaQueryChange);
+    mediaQueries.small.addEventListener("change", onMediaQueryChange);
+    mediaQueries.medium.addEventListener("change", onMediaQueryChange);
+    mediaQueries.large.addEventListener("change", onMediaQueryChange);
 
-    // Initial state setup
     updateMediaQueryState();
-
-    // Provide reactive mediaQuery state to the app
     app.provide("mediaQuery", mediaQuery);
 
-    // Expose cleanup function for the event listeners
-    app.config.globalProperties.$cleanupMediaQueryListeners = () => {
-      small.removeEventListener("change", onMediaQueryChange);
-      medium.removeEventListener("change", onMediaQueryChange);
-      large.removeEventListener("change", onMediaQueryChange);
+    const cleanup = () => {
+      mediaQueries.small.removeEventListener("change", onMediaQueryChange);
+      mediaQueries.medium.removeEventListener("change", onMediaQueryChange);
+      mediaQueries.large.removeEventListener("change", onMediaQueryChange);
     };
+
+    app.config.globalProperties.$cleanupMediaQueryListeners = cleanup;
   },
 };

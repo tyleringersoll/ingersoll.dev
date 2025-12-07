@@ -31,14 +31,13 @@
 </template>
 
 <script setup>
-import { computed, defineProps } from "vue";
+import { computed } from "vue";
 
 const props = defineProps({
   article: {
     type: Object,
-    default: () => {},
+    default: () => ({}),
   },
-
   index: {
     type: Number,
     default: -1,

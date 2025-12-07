@@ -17,7 +17,7 @@
     <section class="container footer-legal">
       <p
         class="legal"
-        v-for="(para, index) in content.legal"
+        v-for="(para, index) in processedLegal"
         :key="index"
         v-html="para"
       />
@@ -26,14 +26,27 @@
 </template>
 
 <script setup>
-import { defineProps } from "vue";
+import { computed } from "vue";
 import SocialIcons from "./SocialIcons.vue";
 
-defineProps({
+const props = defineProps({
   content: {
     type: Object,
-    default: () => {},
+    default: () => ({}),
   },
+});
+
+const currentYear = computed(() => {
+  return new Date().getFullYear();
+});
+
+const processedLegal = computed(() => {
+  if (!props.content.legal || !Array.isArray(props.content.legal)) {
+    return [];
+  }
+  return props.content.legal.map((text) => {
+    return text.replace(/{YEAR}/g, currentYear.value.toString());
+  });
 });
 </script>
 

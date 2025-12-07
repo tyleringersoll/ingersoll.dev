@@ -1,17 +1,44 @@
 import { createPinia } from "pinia";
 import { useContentStore } from "@/store";
 
-// Define the mock function
-const mockGetEntry = jest.fn();
+const mockContent = {
+  meta: {
+    name: "Test Name",
+    tag: "<span>Test Tag</span>",
+  },
+  navigation: [
+    { name: "Home", url: "/" },
+    { name: "About", url: "/about" },
+  ],
+  home: [
+    {
+      heading: "Welcome",
+      headingLevel: 2,
+      content: ["Welcome content"],
+    },
+  ],
+  development: [],
+  projects: [],
+  music: [],
+  icons: {
+    close: "<svg></svg>",
+  },
+  footer: {
+    socialHeading: "Connect",
+    socialIcons: [
+      {
+        svg: "<svg></svg>",
+        alt: "Test",
+        url: "https://test.com",
+      },
+    ],
+    legal: ["Copyright 2022"],
+  },
+};
 
-// Mock the contentful client and methods
-jest.mock("contentful", () => ({
-  createClient: jest.fn(() => ({ getEntry: mockGetEntry })),
-}));
-
-// Mock the local JSON content
 jest.mock("@/data/content.json", () => ({
-  content: [{ id: 1, name: "Mocked Content" }],
+  content: mockContent,
+  default: { content: mockContent },
 }));
 
 const mockConsoleError = jest
@@ -20,72 +47,152 @@ const mockConsoleError = jest
 
 describe("content store", () => {
   let pinia;
-  let originalNodeEnv;
 
   beforeEach(() => {
     jest.clearAllMocks();
     pinia = createPinia();
-    originalNodeEnv = process.env.NODE_ENV;
   });
 
   afterEach(() => {
     jest.resetAllMocks();
-    process.env.NODE_ENV = originalNodeEnv;
   });
 
-  it("loads content from Contentful in production mode and handles success", async () => {
-    process.env.NODE_ENV = "production";
+  it("loads content from local JSON file successfully", async () => {
+    const store = useContentStore(pinia);
+    await store.loadContent();
 
-    const mockedData = {
-      fields: {
-        siteContent: {
-          content: [{ id: 1, name: "Mocked Content from Contentful" }],
+    expect(store.content).toEqual(mockContent);
+    expect(store.isLoading).toBe(false);
+    expect(store.error).toBe(null);
+  });
+
+  it("sets loading state correctly during content load", async () => {
+    const store = useContentStore(pinia);
+    const loadPromise = store.loadContent();
+
+    expect(store.isLoading).toBe(true);
+
+    await loadPromise;
+
+    expect(store.isLoading).toBe(false);
+  });
+
+  it("handles missing content file gracefully", async () => {
+    jest.resetModules();
+    jest.doMock("@/data/content.json", () => {
+      throw new Error("Module not found");
+    });
+
+    const store = useContentStore(pinia);
+    await store.loadContent();
+
+    expect(store.content).toBe(null);
+    expect(store.error).toBeTruthy();
+    expect(store.isLoading).toBe(false);
+    expect(mockConsoleError).toHaveBeenCalled();
+  });
+
+  it("handles empty content file", async () => {
+    jest.resetModules();
+    jest.doMock("@/data/content.json", () => ({
+      content: null,
+      default: { content: null },
+    }));
+
+    const store = useContentStore(pinia);
+    await store.loadContent();
+
+    expect(store.content).toBe(null);
+    expect(store.error).toBeTruthy();
+    expect(mockConsoleError).toHaveBeenCalled();
+  });
+
+  it("validates content structure and rejects invalid content", async () => {
+    jest.resetModules();
+    jest.doMock("@/data/content.json", () => ({
+      content: { invalid: "structure" },
+      default: { content: { invalid: "structure" } },
+    }));
+
+    const store = useContentStore(pinia);
+    await store.loadContent();
+
+    expect(store.content).toBe(null);
+    expect(store.error).toBeTruthy();
+    expect(store.error.message).toContain("Missing required content field");
+    expect(mockConsoleError).toHaveBeenCalled();
+  });
+
+  it("validates meta field", async () => {
+    jest.resetModules();
+    jest.doMock("@/data/content.json", () => ({
+      content: {
+        meta: {},
+        navigation: [],
+        footer: { socialHeading: "Test", socialIcons: [] },
+      },
+      default: {
+        content: {
+          meta: {},
+          navigation: [],
+          footer: { socialHeading: "Test", socialIcons: [] },
         },
       },
-    };
-
-    mockGetEntry.mockResolvedValueOnce(mockedData);
+    }));
 
     const store = useContentStore(pinia);
     await store.loadContent();
 
-    expect(store.content).toEqual([
-      { id: 1, name: "Mocked Content from Contentful" },
-    ]);
+    expect(store.content).toBe(null);
+    expect(store.error.message).toContain("name field");
   });
 
-  it("loads content from local json in production mode if Contentful call fails", async () => {
-    process.env.NODE_ENV = "production";
-
-    mockGetEntry.mockRejectedValueOnce(new Error("Failed to fetch"));
+  it("validates navigation is an array", async () => {
+    jest.resetModules();
+    jest.doMock("@/data/content.json", () => ({
+      content: {
+        meta: { name: "Test" },
+        navigation: "not an array",
+        footer: { socialHeading: "Test", socialIcons: [] },
+      },
+      default: {
+        content: {
+          meta: { name: "Test" },
+          navigation: "not an array",
+          footer: { socialHeading: "Test", socialIcons: [] },
+        },
+      },
+    }));
 
     const store = useContentStore(pinia);
     await store.loadContent();
 
-    expect(store.content).toEqual([{ id: 1, name: "Mocked Content" }]);
+    expect(store.content).toBe(null);
+    expect(store.error.message).toContain("must be an array");
   });
 
-  it("logs error if Contentful configurations are missing", async () => {
-    process.env.NODE_ENV = "production";
-
-    delete process.env.VUE_APP_CONTENTFUL_SPACE;
+  it("validates footer structure", async () => {
+    jest.resetModules();
+    jest.doMock("@/data/content.json", () => ({
+      content: {
+        meta: { name: "Test" },
+        navigation: [],
+        footer: {},
+      },
+      default: {
+        content: {
+          meta: { name: "Test" },
+          navigation: [],
+          footer: {},
+        },
+      },
+    }));
 
     const store = useContentStore(pinia);
     await store.loadContent();
 
-    expect(mockConsoleError).toHaveBeenCalledWith(
-      "Failed to fetch content from Contentful:",
-      expect.any(Error)
-    );
-  });
-
-  it("loads content from local json in non-production mode", async () => {
-    process.env.NODE_ENV = "development";
-
-    const store = useContentStore(pinia);
-    await store.loadContent();
-
-    expect(store.content).toEqual([{ id: 1, name: "Mocked Content" }]);
+    expect(store.content).toBe(null);
+    expect(store.error.message).toContain("socialHeading");
   });
 });
 

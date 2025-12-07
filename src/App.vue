@@ -1,12 +1,15 @@
 <template>
   <div class="app-upper">
-    <Header :content="content.meta" />
+    <Header v-if="content.meta" :content="content.meta" />
     <MobileNav
-      v-if="mediaQuery.isSmall"
+      v-if="mediaQuery.isSmall && content.navigation"
       :content="content.navigation"
-      @MobileNavClicked="onMobileNavClicked"
+      @nav:clicked="onMobileNavClicked"
     />
-    <Navigation v-if="!mediaQuery.isSmall" :content="content.navigation" />
+    <Navigation
+      v-if="!mediaQuery.isSmall && content.navigation"
+      :content="content.navigation"
+    />
     <main>
       <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">
@@ -15,12 +18,16 @@
       </router-view>
     </main>
   </div>
-  <Footer class="app-sticky-bottom" :content="content.footer" />
+  <Footer
+    v-if="content.footer && content.footer.socialHeading"
+    class="app-sticky-bottom"
+    :content="content.footer"
+  />
 </template>
 
 <script setup>
 import { useContentStore } from "@/store";
-import { reactive, inject, computed, onBeforeMount, onUnmounted } from "vue";
+import { reactive, inject, computed, onBeforeMount } from "vue";
 
 const store = useContentStore();
 const mediaQuery = inject("mediaQuery");
@@ -30,17 +37,26 @@ const mobileNav = reactive({
 });
 
 const content = computed(() => {
-  return store.content || { meta: {}, navigation: {}, footer: {} };
+  if (!store.content) {
+    return {
+      meta: {},
+      navigation: [],
+      footer: {
+        socialHeading: "",
+        socialIcons: [],
+        legal: [],
+      },
+    };
+  }
+  return store.content;
 });
 
 const onMobileNavClicked = (value) => {
   mobileNav.isOpen = value;
 };
 
-onBeforeMount(() => store.loadContent());
-
-onUnmounted(() => {
-  this.$cleanupMediaQueryListeners();
+onBeforeMount(() => {
+  store.loadContent();
 });
 </script>
 

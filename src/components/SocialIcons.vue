@@ -1,41 +1,39 @@
 <template>
   <div class="svg-footer-icon">
     <a
-      :href="icon.url"
+      :href="props.url"
       :title="computedTitle"
       target="_blank"
-      v-html="icon.svg"
+      rel="noopener noreferrer"
+      v-html="props.svg"
     />
   </div>
 </template>
 
 <script setup>
-import { defineProps, computed } from "vue";
+import { computed } from "vue";
 
-const icon = defineProps({
+const props = defineProps({
   svg: {
     type: String,
     required: true,
   },
-
   alt: {
     type: String,
     required: true,
   },
-
   url: {
     type: String,
     required: true,
   },
-
   title: {
     type: String,
-    required: false,
+    default: null,
   },
 });
 
 const computedTitle = computed(() => {
-  return icon.title ? icon.title : `Follow me on ${icon.alt}`;
+  return props.title || `Follow me on ${props.alt}`;
 });
 </script>
 

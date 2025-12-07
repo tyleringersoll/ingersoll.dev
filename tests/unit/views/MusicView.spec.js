@@ -1,7 +1,6 @@
 import { shallowMount } from "@vue/test-utils";
 import MusicViewVue from "@/views/MusicView.vue";
 
-// Mock the Article component
 const Article = {
   name: "Article",
   props: ["article", "index"],
