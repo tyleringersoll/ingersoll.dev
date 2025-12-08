@@ -39,11 +39,8 @@ const computedTitle = computed(() => {
 
 <style lang="scss" scoped>
 .social-icon {
-  padding: $spacing-xs 0;
-
-  @include respond-to(sm) {
-    padding: $spacing-xs $spacing-sm;
-  }
+  flex: 0 0 auto;
+  padding: $spacing-xs;
 
   a {
     margin: 0;
@@ -54,9 +51,12 @@ const computedTitle = computed(() => {
     border: 2px solid $color-highlight-1;
     border-radius: 50%;
     @include transition(all);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    svg {
-      fill: $color-highlight-1;
+    :deep(svg) {
+      fill: $color-highlight-1 !important;
       max-height: 1rem;
       max-width: 1rem;
       width: 100%;
@@ -77,13 +77,23 @@ const computedTitle = computed(() => {
         max-height: 1.5rem;
         max-width: 1.5rem;
       }
+
+      &.email {
+        max-height: 1rem;
+        max-width: 1rem;
+      }
+
+      &.strava {
+        max-height: 1.2rem;
+        max-width: 1.2rem;
+      }
     }
 
     &:hover {
       border: 2px solid $color-highlight-3;
 
-      svg {
-        fill: $color-highlight-2;
+      :deep(svg) {
+        fill: $color-highlight-2 !important;
       }
     }
 

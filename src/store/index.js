@@ -7,6 +7,15 @@ export const useContentStore = defineStore("content", {
     error: null,
   }),
 
+  getters: {
+    getPageContent: (state) => {
+      return (pageName) => {
+        if (!state.content) return null;
+        return state.content[pageName] || null;
+      };
+    },
+  },
+
   actions: {
     async loadContent() {
       this.isLoading = true;

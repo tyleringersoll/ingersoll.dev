@@ -59,11 +59,13 @@ const processedLegal = computed(() => {
     margin: $spacing-sm 0 0;
     display: flex;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
     flex-wrap: wrap;
+    gap: $spacing-sm;
 
     @include respond-below(sm) {
       justify-content: space-between;
+      gap: $spacing-xs;
     }
   }
 

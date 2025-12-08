@@ -27,7 +27,7 @@
 
 <script setup>
 import { useContentStore } from "@/store";
-import { reactive, inject, computed, onBeforeMount } from "vue";
+import { reactive, inject, computed } from "vue";
 
 const store = useContentStore();
 const mediaQuery = inject("mediaQuery");
@@ -54,9 +54,5 @@ const content = computed(() => {
 const onMobileNavClicked = (value) => {
   mobileNav.isOpen = value;
 };
-
-onBeforeMount(() => {
-  store.loadContent();
-});
 </script>
 

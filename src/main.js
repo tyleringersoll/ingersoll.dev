@@ -1,18 +1,28 @@
 import { createApp } from "vue";
 import App from "./App.vue";
-import router from "./router";
+import router, { updateRoutes } from "./router";
 import { createPinia } from "pinia";
+import { useContentStore } from "@/store";
 import mediaQueryPlugin from "./plugins/mediaQuery";
 import { Header, MobileNav, Navigation, Footer, Article } from "@/components";
 import "@/styles/main.scss";
 
-createApp(App)
-  .use(createPinia())
-  .use(router)
-  .use(mediaQueryPlugin)
-  .component("Header", Header)
-  .component("MobileNav", MobileNav)
-  .component("Navigation", Navigation)
-  .component("Footer", Footer)
-  .component("Article", Article)
-  .mount("#app");
+const pinia = createPinia();
+const app = createApp(App);
+
+app.use(pinia);
+app.use(router);
+app.use(mediaQueryPlugin);
+app.component("Header", Header);
+app.component("MobileNav", MobileNav);
+app.component("Navigation", Navigation);
+app.component("Footer", Footer);
+app.component("Article", Article);
+
+const store = useContentStore();
+store.loadContent().then(() => {
+  if (store.content) {
+    updateRoutes(store.content);
+  }
+  app.mount("#app");
+});

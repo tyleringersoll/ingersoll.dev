@@ -1,37 +1,57 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import ContentView from "../views/ContentView.vue";
 
-const routes = [
-  {
-    path: "/",
-    name: "home",
-    component: HomeView,
-  },
-  {
-    path: "/development",
-    name: "Web development",
-    component: () =>
-      import(
-        /* webpackChunkName: "development" */ "../views/DevelopmentView.vue"
-      ),
-  },
-  {
-    path: "/projects",
-    name: "Projects",
-    component: () =>
-      import(/* webpackChunkName: "projects" */ "../views/ProjectsView.vue"),
-  },
-  {
-    path: "/music",
-    name: "Music",
-    component: () =>
-      import(/* webpackChunkName: "music" */ "../views/MusicView.vue"),
-  },
-];
+const createRoutesFromContent = (content) => {
+  const routes = [
+    {
+      path: "/",
+      name: "home",
+      component: ContentView,
+    },
+  ];
+
+  if (content && content.navigation) {
+    content.navigation.forEach((navItem) => {
+      if (navItem.url && navItem.url !== "/") {
+        const routeName = navItem.url.slice(1).replace(/\//g, "-");
+        routes.push({
+          path: navItem.url,
+          name: routeName,
+          component: ContentView,
+        });
+      }
+    });
+  }
+
+  routes.push({
+    path: "/:pathMatch(.*)*",
+    name: "not-found",
+    component: ContentView,
+  });
+
+  return routes;
+};
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes: createRoutesFromContent(null),
 });
+
+export const updateRoutes = (content) => {
+  if (!content) return;
+
+  const newRoutes = createRoutesFromContent(content);
+
+  newRoutes.forEach((route) => {
+    try {
+      if (router.hasRoute(route.name)) {
+        router.removeRoute(route.name);
+      }
+      router.addRoute(route);
+    } catch (error) {
+      console.warn(`Failed to add route ${route.name}:`, error);
+    }
+  });
+};
 
 export default router;
