@@ -23,7 +23,7 @@
         "heading": "Hi, I'm Tyler",
         "headingLevel": 2,
         "content": [
-          "I'm a front-end engineer with 20+ years of experience building web applications for companies like Vanguard, Bank of America, and Best Egg. I currently lead an engineering team at Best Egg.",
+          "I'm a front-end engineer with 20+ years of experience building web applications for companies like Vanguard, Bank of America, and Best Egg. I currently lead engineering at Best Egg.",
           "When I'm not coding, I'm usually behind a drum kit. I've toured nationally with a major-label band, played thousands of gigs, and I'm now exploring ways to share what I've learned about drumming with others."
         ]
       },
@@ -36,7 +36,7 @@
         "heading": "Engineering",
         "headingLevel": 4,
         "content": [
-          "I build front-end applications with Angular, Vue.js, and TypeScript. I've worked on design systems, authentication and authorization systems, payment processing interfaces for financial transactions, email campaigns, real-time instrument control interfaces, and customer-facing applications serving millions of users.",
+          "I build front-end applications with Angular, Vue.js, and TypeScript. I've worked on design systems, authentication and authorization systems, payment processing interfaces for financial transactions, email campaigns, real-time instrument control interfaces, and customer-facing applications.",
           "My focus is on building maintainable systems, mentoring engineers, and solving complex technical problems.",
           "<a href='/resume'>View my full resume →</a>"
         ]
@@ -53,7 +53,7 @@
         "heading": "Beyond work",
         "headingLevel": 3,
         "content": [
-          "I'm a father of two, an avid cyclist and runner, a craft beer enthusiast, and a vinyl collector. I graduated from the University of Delaware with a degree in Business Administration (Finance/Accounting).",
+          "I'm a father of two, an avid bicyclist and runner, a craft beer enthusiast, and a vinyl collector. I graduated from the University of Delaware with a degree in Business Administration (Finance/Accounting).",
           "I'm based in Kennett Square, Pennsylvania."
         ]
       }
@@ -71,14 +71,26 @@
         "headingLevel": 3,
         "subheading": "Senior Lead Software Engineer II · 2024 - Present",
         "content": [
-          "Lead a cross-functional engineering team responsible for customer-facing applications in verifications, servicing, and authentication serving millions of users.",
-          "• Mentor engineers through hands-on guidance, code reviews, and knowledge-sharing",
-          "• Develop customer-facing features with A/B testing integration for data-driven experimentation",
-          "• Implement comprehensive observability through enterprise events, FullStory, and DataDog",
-          "• Establish engineering standards and architectural patterns",
-          "• Drive adoption of AI-assisted development tools like Cursor with Claude",
-          "• Recognized with Golden Egg Award for \"BE a Builder of Great Teams\" (Q3 2023)",
+          "Lead engineering for customer-facing verifications, servicing, and authentication applications. Contribute to technical planning and estimations with stakeholders, designers, and UX. Mentor engineers and provide technical leadership and guidance to the engineering team.",
+          "<strong>Engineering areas:</strong>",
+          "• Customer verifications: identity verification and fraud prevention",
+          "• Payment servicing: payment processing, auto pay, payment methods, due date changes, flexible relief programs",
+          "• Authentication: login, signup, password recovery, customer servicing hub",
           "<strong>Tech:</strong> Angular, TypeScript, Jest, Karma, GitHub Actions, Node.js, Storybook, DataDog, FullStory"
+        ]
+      },
+      {
+        "heading": "Best Egg",
+        "headingLevel": 3,
+        "subheading": "Senior Lead Software Engineer I · 2022 - 2024",
+        "content": [
+          "Modernized authorization and payment applications. Mentored engineers.",
+          "• Refactored Angular application architecture for lazy loading modules, reduced main build bundle size",
+          "• Migrated Bootstrap to Angular Material, upgraded Angular multiple versions to current",
+          "• Established design system with Storybook and Tailwind CSS, created npm library for brand styles and shared components",
+          "• Built no-auth quick pay and auto payment scheduling features",
+          "• Golden Egg Award for \"BE a Builder of Great Teams\" (Q3 2023)",
+          "<strong>Tech:</strong> Angular, TypeScript, Angular Material, Storybook, Tailwind CSS, Karma, GitHub Actions, Docker, Nginx, Node.js"
         ]
       },
       {
@@ -206,6 +218,8 @@
           "Karma",
           "Node.js",
           "NestJS",
+          "Nginx",
+          "Docker",
           "Git",
           "GitHub Actions",
           "CI/CD",
@@ -237,12 +251,12 @@
           "• Madden NFL 2007 (EA Sports)",
           "• The Fantastic Four movie and soundtrack (20th Century Fox)",
           "• Licensed for 30+ NFL, MLB, NCAA, and NHL stadiums",
-          "• Network TV: NBC, FOX, CBS promotional campaigns; 2008 Olympic Trials; ESPN programming",         
+          "• Network TV: NBC, FOX, CBS promotional campaigns; 2008 Olympic Trials; ESPN programming",
           "<iframe height='450' width='100%' title='Media player' src='https://embed.music.apple.com/us/album/consequence/1444007166?itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1444007166&amp;theme=dark' id='embedPlayer' sandbox='allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation' allow='autoplay *; encrypted-media *; clipboard-write' style='border: 0px; border-radius: 12px; width: 100%; height: 450px; max-width: 660px;'></iframe>",
-          "The indepenedantly-released album was orignial shelved by the label, but we brought it back to life in July 2024 for the 20th anniversary of its release:",
+          "The independently released album was originally shelved by the label, but we brought it back to life in July 2024 for the 20th anniversary of its release:",
           "<iframe height='450' width='100%' title='Media player' src='https://embed.music.apple.com/us/album/happy-outside/1754410766?itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1754410766&amp;theme=dark' id='embedPlayer' sandbox='allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation' allow='autoplay *; encrypted-media *; clipboard-write' style='border: 0px; border-radius: 12px; width: 100%; height: 450px; max-width: 660px;'></iframe>"
         ]
-      },     
+      },
       {
         "heading": "The Healthy Doses (1999-2000)",
         "headingLevel": 3,
