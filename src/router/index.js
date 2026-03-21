@@ -1,5 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 import ContentView from "../views/ContentView.vue";
+import ResumeView from "../views/ResumeView.vue";
+
+const viewMap = {
+  resume: ResumeView,
+};
 
 const createRoutesFromContent = (content) => {
   const routes = [
@@ -17,7 +22,7 @@ const createRoutesFromContent = (content) => {
         routes.push({
           path: navItem.url,
           name: routeName,
-          component: ContentView,
+          component: viewMap[routeName] || ContentView,
         });
       }
     });

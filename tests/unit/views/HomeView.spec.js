@@ -53,4 +53,22 @@ describe("HomeView.vue", () => {
       expect(articleComponents[i].props().index).toBe(i);
     }
   });
+
+  it("renders the container but no articles when content.home is an empty array", () => {
+    const wrapper = shallowMount(HomeViewVue, {
+      props: {
+        content: {
+          home: [],
+        },
+      },
+      global: {
+        components: {
+          Article,
+        },
+      },
+    });
+
+    expect(wrapper.find(".home").exists()).toBe(true);
+    expect(wrapper.findAllComponents(Article)).toHaveLength(0);
+  });
 });

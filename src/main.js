@@ -11,7 +11,6 @@ const pinia = createPinia();
 const app = createApp(App);
 
 app.use(pinia);
-app.use(router);
 app.use(mediaQueryPlugin);
 app.component("Header", Header);
 app.component("MobileNav", MobileNav);
@@ -24,5 +23,6 @@ store.loadContent().then(() => {
   if (store.content) {
     updateRoutes(store.content);
   }
+  app.use(router);
   app.mount("#app");
 });

@@ -194,6 +194,54 @@ describe("content store", () => {
     expect(store.content).toBe(null);
     expect(store.error.message).toContain("socialHeading");
   });
+
+  it("getPageContent returns content for a valid page", () => {
+    const store = useContentStore(pinia);
+    store.content = mockContent;
+
+    const result = store.getPageContent("home");
+    expect(result).toEqual(mockContent.home);
+  });
+
+  it("getPageContent returns null for an unknown page", () => {
+    const store = useContentStore(pinia);
+    store.content = mockContent;
+
+    const result = store.getPageContent("nonexistent");
+    expect(result).toBeNull();
+  });
+
+  it("getPageContent returns null when content is not loaded", () => {
+    const store = useContentStore(pinia);
+    // content starts as null before loadContent is called
+    const result = store.getPageContent("home");
+    expect(result).toBeNull();
+  });
+
+  it("validates that footer.socialIcons is an array", async () => {
+    jest.resetModules();
+    jest.doMock("@/data/content.json", () => ({
+      content: {
+        meta: { name: "Test" },
+        navigation: [],
+        footer: { socialHeading: "Connect", socialIcons: "not-an-array" },
+      },
+      default: {
+        content: {
+          meta: { name: "Test" },
+          navigation: [],
+          footer: { socialHeading: "Connect", socialIcons: "not-an-array" },
+        },
+      },
+    }));
+
+    const { useContentStore: freshStore } = await import("@/store");
+    const store = freshStore(pinia);
+    await store.loadContent();
+
+    expect(store.content).toBe(null);
+    expect(store.error).toBeTruthy();
+  });
 });
 
 afterAll(() => {

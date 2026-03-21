@@ -56,24 +56,28 @@ describe("MediaQueryPlugin", () => {
     expect(mediaQuery.isLarge).toBe(false);
   });
 
-  const testMediaChange = (mock, expectedState) => {
-    mock.matches = true;
-    changeListeners.forEach((listener) => listener());
-    const app = setupPlugin();
-    const mediaQuery = app._context.provides.mediaQuery;
-    expect(mediaQuery).toEqual(expectedState);
-  };
-
   it("reacts to small media query changes", () => {
-    testMediaChange(mockSmall, { isSmall: true, isMedium: false, isLarge: false });
+    const app = setupPlugin();
+    mockSmall.matches = true;
+    changeListeners[0]();
+    const mediaQuery = app._context.provides.mediaQuery;
+    expect(mediaQuery).toEqual({ isSmall: true, isMedium: false, isLarge: false });
   });
 
   it("reacts to medium media query changes", () => {
-    testMediaChange(mockMedium, { isSmall: false, isMedium: true, isLarge: false });
+    const app = setupPlugin();
+    mockMedium.matches = true;
+    changeListeners[0]();
+    const mediaQuery = app._context.provides.mediaQuery;
+    expect(mediaQuery).toEqual({ isSmall: false, isMedium: true, isLarge: false });
   });
 
   it("reacts to large media query changes", () => {
-    testMediaChange(mockLarge, { isSmall: false, isMedium: false, isLarge: true });
+    const app = setupPlugin();
+    mockLarge.matches = true;
+    changeListeners[0]();
+    const mediaQuery = app._context.provides.mediaQuery;
+    expect(mediaQuery).toEqual({ isSmall: false, isMedium: false, isLarge: true });
   });
 
   it("cleans up event listeners", () => {
@@ -83,5 +87,16 @@ describe("MediaQueryPlugin", () => {
     expect(mockSmall.removeEventListener).toHaveBeenCalledWith("change", expect.any(Function));
     expect(mockMedium.removeEventListener).toHaveBeenCalledWith("change", expect.any(Function));
     expect(mockLarge.removeEventListener).toHaveBeenCalledWith("change", expect.any(Function));
+  });
+
+  it("provides mediaQuery with all false values when window.matchMedia is not available", () => {
+    window.matchMedia = undefined;
+
+    const app = setupPlugin();
+    const mediaQuery = app._context.provides.mediaQuery;
+
+    expect(mediaQuery.isSmall).toBe(false);
+    expect(mediaQuery.isMedium).toBe(false);
+    expect(mediaQuery.isLarge).toBe(false);
   });
 });

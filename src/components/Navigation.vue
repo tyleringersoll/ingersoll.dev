@@ -35,7 +35,7 @@ defineProps({
 
   &__items {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: $spacing-sm;
     list-style-type: none;
     margin: 0;
@@ -51,7 +51,7 @@ defineProps({
 
     @include respond-to(sm) {
       display: inline-block;
-      margin: 0 $spacing-sm $spacing-sm;
+      margin: 0 $spacing-lg $spacing-sm 0;
     }
 
     &::before {

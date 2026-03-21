@@ -71,4 +71,22 @@ describe("ProjectsView.vue", () => {
       expect(articleProps.index).toBe(i);
     }
   });
+
+  it("renders the container but no articles when content.projects is an empty array", async () => {
+    wrapper = mount(ProjectsViewVue, {
+      props: {
+        content: {
+          projects: [],
+        },
+      },
+      global: {
+        provide: commonProvide,
+        stubs: commonStubs,
+      },
+    });
+    await wrapper.vm.$nextTick();
+
+    expect(wrapper.find(".projects").exists()).toBe(true);
+    expect(wrapper.findAllComponents({ name: "Article" })).toHaveLength(0);
+  });
 });

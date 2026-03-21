@@ -87,4 +87,28 @@ describe("api.service", () => {
     expect(axios.get).toHaveBeenCalledWith(apiUrl);
     expect(consoleErrorSpy).toHaveBeenCalled();
   });
+
+  it("should return undefined when API URL is null", async () => {
+    const result = await getApiData(null);
+
+    expect(result).toBeUndefined();
+    expect(consoleErrorSpy).toHaveBeenCalledWith("API URL is required");
+    expect(axios.get).not.toHaveBeenCalled();
+  });
+
+  it("should handle axios config errors with no response or request", async () => {
+    const mockError = {
+      isAxiosError: true,
+      message: "Request setup failed",
+    };
+    axios.isAxiosError = jest.fn(() => true);
+    axios.get.mockRejectedValueOnce(mockError);
+
+    const apiUrl = "https://sampleapi.com/data";
+    const result = await getApiData(apiUrl);
+
+    expect(result).toBeUndefined();
+    expect(axios.get).toHaveBeenCalledWith(apiUrl);
+    expect(consoleErrorSpy).toHaveBeenCalled();
+  });
 });

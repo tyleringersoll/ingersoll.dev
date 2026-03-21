@@ -53,4 +53,22 @@ describe("DevelopmentViewVue.vue", () => {
       expect(articleComponents[i].props().index).toBe(i);
     }
   });
+
+  it("renders the container but no articles when content.development is an empty array", () => {
+    const wrapper = shallowMount(DevelopmentViewVue, {
+      props: {
+        content: {
+          development: [],
+        },
+      },
+      global: {
+        components: {
+          Article,
+        },
+      },
+    });
+
+    expect(wrapper.find(".development").exists()).toBe(true);
+    expect(wrapper.findAllComponents(Article)).toHaveLength(0);
+  });
 });

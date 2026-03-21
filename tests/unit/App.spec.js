@@ -117,4 +117,18 @@ describe("App.vue", () => {
     await nextTick();
     expect(wrapper.exists()).toBe(true);
   });
+
+  it("does not render Footer when store content is null", async () => {
+    useContentStore.mockReturnValue({
+      content: null,
+      loadContent: jest.fn(),
+    });
+    const nullWrapper = mountAppWithOption();
+    await nextTick();
+    expect(nullWrapper.findComponent({ name: "Footer" }).exists()).toBe(false);
+  });
+
+  it("mobileNav starts closed", () => {
+    expect(wrapper.vm.mobileNav.isOpen).toBe(false);
+  });
 });

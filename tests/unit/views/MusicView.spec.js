@@ -53,4 +53,22 @@ describe("MusicView.vue", () => {
       expect(articleComponents[i].props().index).toBe(i);
     }
   });
+
+  it("renders the container but no articles when content.music is an empty array", () => {
+    const wrapper = shallowMount(MusicViewVue, {
+      props: {
+        content: {
+          music: [],
+        },
+      },
+      global: {
+        components: {
+          Article,
+        },
+      },
+    });
+
+    expect(wrapper.find(".music").exists()).toBe(true);
+    expect(wrapper.findAllComponents(Article)).toHaveLength(0);
+  });
 });
