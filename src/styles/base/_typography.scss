@@ -40,12 +40,6 @@ h2 {
   font-size: 1.75rem;
   color: var(--color-accent-line);
 
-  &.first-heading {
-    @include respond-below(sm) {
-      padding-top: $spacing-lg;
-      border-top: 2px solid var(--color-accent-line);
-    }
-  }
 }
 
 h3 {
@@ -57,6 +51,7 @@ h3 {
 h4 {
   margin-bottom: $spacing-sm;
   font-size: 1.125rem;
+  color: var(--color-accent-line);
 }
 
 h5 {

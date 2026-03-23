@@ -1,14 +1,16 @@
 <template>
   <div class="app-upper">
-    <Header v-if="content.meta" :content="content.meta" />
+    <div class="mobile-header-bar">
+      <Header v-if="content.meta" :content="content.meta" />
+      <MobileNav
+        v-if="mediaQuery.isSmall && content.navigation"
+        :content="content.navigation"
+        @nav:clicked="onMobileNavClicked"
+      />
+    </div>
     <Navigation
       v-if="!mediaQuery.isSmall && content.navigation"
       :content="content.navigation"
-    />
-    <MobileNav
-      v-if="mediaQuery.isSmall && content.navigation"
-      :content="content.navigation"
-      @nav:clicked="onMobileNavClicked"
     />
     <main>
       <router-view v-slot="{ Component }">

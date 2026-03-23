@@ -41,7 +41,9 @@ const computedTitle = computed(() => {
 <style lang="scss" scoped>
 .social-icon {
   flex: 0 0 auto;
-  padding: $spacing-xs;
+  padding: 0 $spacing-xs;
+  display: flex;
+  align-items: center;
 
   a {
     margin: 0;

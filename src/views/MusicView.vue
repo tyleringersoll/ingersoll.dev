@@ -96,6 +96,10 @@ const toggle = (idx) => {
     padding-top: $spacing-xs;
     cursor: pointer;
     user-select: none;
+
+    @include respond-below(sm) {
+      padding-top: 0;
+    }
   }
 
   &__dates {

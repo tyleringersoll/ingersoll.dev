@@ -83,6 +83,7 @@ defineProps({
 
     @include respond-to(sm) {
       display: flex;
+      margin-bottom: 10px;
     }
   }
 

@@ -140,9 +140,7 @@ $menu-active-hover-filter: $menu-hover-filter;
 
 .mobile-nav {
   &__button {
-    position: fixed;
-    top: 0;
-    right: 0;
+    position: relative;
     padding: $menu-padding-y $menu-padding-x;
     display: inline-flex;
     align-items: center;
@@ -154,17 +152,17 @@ $menu-active-hover-filter: $menu-hover-filter;
     font: inherit;
     color: inherit;
     text-transform: none;
-    background-color: var(--color-bg-primary);
+    background-color: transparent;
     border: 0;
     border-radius: 50%;
-    margin: $spacing-sm;
+    margin: 0;
     width: 4rem;
     height: 4rem;
     min-width: 4rem;
     min-height: 4rem;
     overflow: visible;
     z-index: $z-index-overlay;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
 
     &:hover {
       @if $menu-hover-use-filter == true {
@@ -310,14 +308,15 @@ $menu-active-hover-filter: $menu-hover-filter;
   }
 
   &__theme-toggle {
-    position: relative;
+    position: absolute;
+    top: $spacing-sm;
+    left: $spacing-sm;
     z-index: 1;
-    margin: 5rem $spacing-xl $spacing-sm;
   }
 
   &__items {
     list-style-type: none;
-    margin-top: $spacing-sm;
+    margin-top: 8rem;
     padding: 0 $spacing-xl;
     overflow: hidden;
     position: relative;

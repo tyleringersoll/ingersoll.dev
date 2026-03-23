@@ -2,6 +2,7 @@
   <footer v-if="content" class="footer">
     <section class="container">
       <h2 v-html="content.socialHeading" />
+      <p v-if="content.socialTagline" class="footer__tagline" v-html="content.socialTagline" />
       <div class="footer__social">
         <SocialIcons
           v-for="(link, index) in content.socialIcons"
@@ -55,8 +56,15 @@ const processedLegal = computed(() => {
   padding: $spacing-lg 0;
   background-color: var(--color-bg-secondary);
 
+  &__tagline {
+    margin: $spacing-xs 0 0;
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+  }
+
   &__social {
     margin: $spacing-sm 0 0;
+    margin-left: -$spacing-xs;
     display: flex;
     justify-content: flex-start;
     align-items: center;

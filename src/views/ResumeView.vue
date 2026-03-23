@@ -97,7 +97,8 @@ const toggleRole = (entryIdx, roleIdx) => {
   align-items: center;
 
   @include respond-below(xs) {
-    display: block;
+    grid-template-columns: 8rem 1fr;
+    column-gap: $spacing-sm;
   }
 
   &__name {
@@ -117,7 +118,7 @@ const toggleRole = (entryIdx, roleIdx) => {
     user-select: none;
 
     @include respond-below(xs) {
-      display: none;
+      padding-top: 0;
     }
   }
 
@@ -140,6 +141,10 @@ const toggleRole = (entryIdx, roleIdx) => {
     user-select: none;
     position: relative;
     @include transition(color);
+
+    @include respond-below(xs) {
+      line-height: 1;
+    }
 
     &::before {
       content: "";

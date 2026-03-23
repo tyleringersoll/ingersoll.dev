@@ -38,8 +38,8 @@ defineProps({
 <style lang="scss" scoped>
 .header {
   @include respond-below(sm) {
-    margin: $spacing-lg 0 $spacing-sm;
-    padding: 0 $spacing-sm;
+    margin: 0;
+    padding: 0;
   }
 
   &__container {
@@ -48,6 +48,12 @@ defineProps({
     justify-content: center;
     flex-wrap: wrap-reverse;
     margin: $spacing-lg auto 0;
+
+    @include respond-below(sm) {
+      margin: 0;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+    }
 
     @include respond-to(sm) {
       margin: $spacing-lg auto $spacing-xs;
@@ -59,6 +65,12 @@ defineProps({
     margin-top: $spacing-sm;
     width: 100%;
     text-align: center;
+
+    @include respond-below(sm) {
+      margin-top: 0;
+      width: auto;
+      text-align: left;
+    }
 
     @include respond-to(sm) {
       margin-top: 0;
@@ -74,6 +86,10 @@ defineProps({
     border: 2px solid var(--color-accent-line);
     border-radius: 50%;
     overflow: hidden;
+
+    @include respond-below(sm) {
+      display: none;
+    }
 
     @include respond-to(sm) {
       width: 220px;

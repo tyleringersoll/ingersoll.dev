@@ -2,10 +2,12 @@ import { createRouter, createWebHistory } from "vue-router";
 import ContentView from "../views/ContentView.vue";
 import ResumeView from "../views/ResumeView.vue";
 import MusicView from "../views/MusicView.vue";
+import ContactView from "../views/ContactView.vue";
 
 const viewMap = {
   resume: ResumeView,
   music: MusicView,
+  contact: ContactView,
 };
 
 const createRoutesFromContent = (content) => {
