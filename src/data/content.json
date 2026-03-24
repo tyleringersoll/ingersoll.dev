@@ -66,7 +66,7 @@
         "heading": "Resume",
         "headingLevel": 2,
         "content": [
-          "I'm a frontend engineer and engineering leader with a track record of shipping production applications at scale. I've built for Best Egg, Vanguard, Bank of America, Agilent Technologies, DuPont, and Chemours across fintech, financial services, scientific instrumentation, and enterprise software."
+          "Frontend engineer and engineering leader with deep experience architecting and shipping production applications at scale. I specialize in the player-coach model, leading high-performing teams through complex product cycles while staying hands-on in the code. I've built for fintech, financial services, scientific instrumentation, and enterprise software, with a track record of modernizing legacy architectures, building enterprise-grade design systems, and navigating high-stakes third-party integrations."
         ]
       },
       {
@@ -77,37 +77,37 @@
           {
             "subheading": "Director of Software Engineering II · 2026 - Present",
             "content": [
-              "As Director of Software Engineering II, I lead a team of engineers across Best Egg's customer-facing identity verification, payment servicing, and authentication applications, products that touch millions of customer interactions annually. Drive technical planning and roadmap alignment with stakeholders, product, designers, and UX.",
+              "As Director of Software Engineering II, I lead engineering across Best Egg's customer-facing identity verification, payment servicing, and authentication applications serving millions of customer interactions annually.",
+              "• Lead a team of engineers across the full delivery cycle, from intake and roadmap alignment with product, design, and UX stakeholders through to production.",
+              "• Own the end-to-end lifecycle for critical third-party integrations, including MX and Method Financial, covering vendor evaluation, technical architecture, and production delivery for income verification and direct debt payoff.",
+              "• Champion team adoption of AI-assisted development tooling with Cursor AI and GitHub Copilot, establishing standards that measurably accelerated engineering output and code quality.",
               "<strong>Engineering areas:</strong>",
               "• Customer verifications: identity verification and fraud prevention",
               "• Payment servicing: payment processing, auto pay, payment methods, due date changes, flexible relief programs",
               "• Authentication: login, signup, password recovery, customer servicing hub",
-              "• Lead third-party service integrations across customer support, customer data and analytics, income verification, and direct debt payoff, owning vendor evaluation, technical integration, and production delivery",
-              "• Champion team adoption of AI-assisted development tooling with Cursor AI and GitHub Copilot to accelerate engineering velocity and code quality",
               "<strong>Tech:</strong> Angular, TypeScript, Jasmine, GitHub Actions, Node.js, Nginx, Django, Python, DataDog, FullStory"
             ]
           },
           {
             "subheading": "Senior Lead Software Engineer II · 2024 - 2026",
             "content": [
-              "As Senior Lead Engineer II, I owned frontend engineering across Best Egg's verification, payment servicing, and authentication applications. Drove roadmap planning and technical direction alongside product, stakeholders, and UX, and mentored engineers on the team.",
+              "As Senior Lead Software Engineer II, I owned frontend engineering across Best Egg's verification, payment servicing, and authentication applications, driving roadmap planning and technical direction alongside product, stakeholders, and UX while mentoring engineers on the team.",
+              "• Strengthened frontend security by implementing Content Security Policy (CSP) with nonce-based script integration across all customer-facing applications.",
               "<strong>Engineering areas:</strong>",
               "• Customer verifications: identity verification and fraud prevention",
               "• Payment servicing: payment processing, auto pay, payment methods, due date changes, flexible relief programs",
               "• Authentication: login, signup, password recovery, customer servicing hub",
-              "• Implemented Content Security Policy (CSP) with nonce-based script integration across customer-facing applications, strengthening frontend security posture",
               "<strong>Tech:</strong> Angular, TypeScript, Jasmine, GitHub Actions, Node.js, Nginx, Django, Python, DataDog, FullStory"
             ]
           },
           {
             "subheading": "Senior Lead Software Engineer I · 2022 - 2024",
             "content": [
-              "Came into Best Egg to modernize a legacy Angular codebase and built the foundation the team works from today. Overhauled the architecture, migrated the design system, and established the patterns and tooling that stuck.",
-              "• Refactored Angular application architecture for lazy loading modules, reduced main build bundle size",
-              "• Migrated Bootstrap to Angular Material, upgraded Angular multiple versions to current",
-              "• Established design system with Storybook and Tailwind CSS, created npm library for brand styles and shared components",
-              "• Built no-auth quick pay and auto payment scheduling features",
-              "• Golden Egg Award for \"BE a Builder of Great Teams\" (Q3 2023)",
+              "As Senior Lead Software Engineer I, I joined Best Egg to modernize a legacy Angular codebase and built the foundation the team works from today. Overhauled the architecture, migrated the design system, and established the patterns and tooling that stuck.",
+              "• Orchestrated a full architectural overhaul: implementing lazy-loaded modules, reducing main bundle size, and migrating Bootstrap to Angular Material across multiple major Angular versions.",
+              "• Built a unified design system with Storybook and Tailwind CSS, publishing a shared npm library of brand-compliant components used across the engineering org.",
+              "• Architected and launched No-Auth Quick Pay and automated payment scheduling, two high-impact features that simplified the customer payment experience.",
+              "• Golden Egg Award for \"BE a Builder of Great Teams\" (Q3 2023).",
               "<strong>Tech:</strong> Angular, TypeScript, Angular Material, Storybook, Tailwind CSS, Jasmine, GitHub Actions, Docker, Nginx, Node.js"
             ]
           }
@@ -121,12 +121,11 @@
           {
             "subheading": "Senior Frontend Developer · 2019 - 2022",
             "content": [
-              "As the lead frontend engineer for Vanguard's Financial Advisor Services, I designed and built a design system supporting thousands of advisors and millions of their clients across the country.",
-              "• Drove technical implementation of FAS design system through division-wide rebrand",
-              "• Architected web component solution with Angular-compatible custom element wrapper, enabling cross-framework integration (Vue, Angular, React, Adobe Experience Manager) and eliminating framework-specific support teams",
-              "• Architected and developed Vue.js/NestJS application prototype that became the standard foundation for all FAS single-page applications",
-              "• Presented integration strategy to IT leadership and drove adoption across three Angular development teams",
-              "• Implemented CI/CD deployment infrastructure for internal documentation using AWS services",
+              "As lead frontend engineer for Vanguard's Financial Advisor Services, I designed and built a design system supporting thousands of advisors and millions of their clients nationwide.",
+              "• Drove technical implementation of the FAS design system through a division-wide rebrand, ensuring consistency across a complex multi-team environment.",
+              "• Architected a web component solution with an Angular-compatible custom element wrapper, enabling seamless integration across Vue, React, Angular, and Adobe Experience Manager, eliminating the need for framework-specific support teams.",
+              "• Designed and built a Vue.js/NestJS application prototype that was adopted as the standard foundation for all FAS single-page applications.",
+              "• Implemented AWS-based CI/CD infrastructure to automate internal documentation deployment, increasing transparency and reducing manual overhead across three development teams.",
               "<strong>Tech:</strong> Vue.js, NestJS, Web Components, Storybook, Angular, Custom Elements, AWS, CI/CD"
             ]
           }
