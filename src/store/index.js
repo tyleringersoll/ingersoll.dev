@@ -22,7 +22,7 @@ export const useContentStore = defineStore("content", {
       this.error = null;
 
       try {
-        const jsonData = await import("@/data/content.json");
+        const jsonData = await import("@/data/content.js");
         const content = jsonData.content || jsonData.default?.content || null;
 
         if (!content) {
