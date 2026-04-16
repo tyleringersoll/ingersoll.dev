@@ -22,7 +22,6 @@
       ref="overlayEl"
       @keydown.tab.prevent="handleTabKey"
     >
-      <ThemeToggle v-if="nav.isOpen" class="mobile-nav__theme-toggle" />
       <ul v-if="nav.isOpen" class="mobile-nav__items">
         <li
           v-for="(item, index) in content"
@@ -32,6 +31,9 @@
           @click="onClick"
         >
           <router-link :to="item.url" v-html="item.name" />
+        </li>
+        <li class="mobile-nav__item mobile-nav__item--toggle">
+          <ThemeToggle />
         </li>
       </ul>
     </div>
@@ -305,13 +307,6 @@ $menu-active-hover-filter: $menu-hover-filter;
         opacity: 0.04;
       }
     }
-  }
-
-  &__theme-toggle {
-    position: absolute;
-    top: $spacing-sm;
-    left: $spacing-sm;
-    z-index: 1;
   }
 
   &__items {

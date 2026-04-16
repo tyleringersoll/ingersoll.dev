@@ -1,27 +1,29 @@
 <template>
-  <header v-if="content" class="header container">
-    <div class="header__container">
-      <div
-        class="header__content"
-        @keydown.enter="() => $router.push('/')"
-        @click="() => $router.push('/')"
-      >
-        <router-link to="/" custom>
-          <h1
-            class="header__name"
-            tabindex="0"
-            title="Home"
-            role="link"
-            v-html="content.name"
-          />
-        </router-link>
-      </div>
-      <div class="header__image">
+  <header v-if="content" class="header">
+    <div class="header__inner">
+      <router-link to="/" class="header__brand">
         <img
+          class="header__avatar"
           src="/profile_glitch_subtle.gif"
           :alt="`Profile image of ${content.name}`"
         />
-      </div>
+        <span class="header__name" v-html="content.name" />
+      </router-link>
+
+      <nav class="header__nav" aria-label="Main navigation">
+        <ul class="header__nav-items">
+          <li
+            v-for="(item, index) in navigation"
+            :key="index"
+            class="header__nav-item"
+          >
+            <router-link :to="item.url" v-html="item.name" />
+          </li>
+        </ul>
+        <ThemeToggle />
+      </nav>
+
+      <MobileNav class="header__mobile-nav" :content="navigation" />
     </div>
   </header>
 </template>
@@ -32,108 +34,148 @@ defineProps({
     type: Object,
     default: () => ({}),
   },
+  navigation: {
+    type: Array,
+    default: () => [],
+  },
 });
 </script>
 
 <style lang="scss" scoped>
 .header {
-  @include respond-below(sm) {
-    margin: 0;
-    padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: $z-index-sticky;
+  border-bottom: 1px solid var(--color-border);
+
+  // Blur background lives on ::before so the header element itself has no
+  // filter/transform/backdrop-filter properties. Any element with those
+  // properties becomes a containing block for position:fixed descendants,
+  // which would break the MobileNav overlay (position: fixed).
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-bg-header);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: -1;
   }
 
-  &__container {
+  &__inner {
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-wrap: wrap-reverse;
-    margin: $spacing-lg auto 0;
-
-    @include respond-below(sm) {
-      margin: 0;
-      flex-wrap: nowrap;
-      justify-content: flex-start;
-    }
+    justify-content: space-between;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: $spacing-xs $spacing-sm;
 
     @include respond-to(sm) {
-      margin: $spacing-lg auto $spacing-xs;
-      justify-content: space-between;
+      padding: $spacing-xs $spacing-lg;
     }
   }
 
-  &__content {
-    margin-top: $spacing-sm;
-    width: 100%;
-    text-align: center;
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    text-decoration: none;
+    color: var(--color-text-primary);
+    @include transition(color);
+    @include focus-visible(3px);
 
-    @include respond-below(sm) {
-      margin-top: 0;
-      width: auto;
-      text-align: left;
-    }
-
-    @include respond-to(sm) {
-      margin-top: 0;
-      width: auto;
-      text-align: left;
+    &:hover {
+      color: var(--color-link);
     }
   }
 
-  &__image {
-    position: relative;
-    width: 280px;
-    height: 280px;
-    border: 2px solid var(--color-accent-line);
+  &__avatar {
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    overflow: hidden;
-
-    @include respond-below(sm) {
-      display: none;
-    }
+    border: 2px solid var(--color-accent-line);
+    object-fit: cover;
+    flex-shrink: 0;
 
     @include respond-to(sm) {
-      width: 220px;
-      height: 220px;
-    }
-
-    img {
-      @include absolute-center;
-      height: 100%;
+      width: 44px;
+      height: 44px;
     }
   }
 
   &__name {
+    font-size: 1rem;
+    font-weight: 700;
+    @include text-uppercase;
+    color: inherit;
+
     @include respond-to(sm) {
-      cursor: pointer;
+      font-size: 1.1rem;
+    }
+  }
 
-      &::before {
-        display: block;
-        content: "";
-        padding-bottom: $spacing-sm;
-        border-top: 2px solid var(--color-accent-line);
-        transform: scaleX(0);
-        transform-origin: 0% 50%;
-        @include transition(transform, 250ms, ease-in-out);
-      }
+  &__nav {
+    display: none;
 
-      &::after {
-        display: block;
-        content: "";
-        padding-top: $spacing-sm;
-        border-bottom: 2px solid var(--color-accent-line);
-        transform: scaleX(0);
-        transform-origin: 100% 0%;
-        @include transition(transform, 250ms, ease-in-out);
-      }
+    @include respond-to(sm) {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+    }
+  }
+
+  &__nav-items {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__nav-item {
+    margin: 0;
+
+    &::before {
+      display: block;
+      content: "";
+      padding-bottom: 4px;
+      border-top: 2px solid var(--color-accent-line);
+      transform: scaleX(0);
+      transform-origin: 0% 50%;
+      @include transition(transform, 250ms, ease-in-out);
+    }
+
+    &:hover::before {
+      transform: scaleX(1);
+    }
+
+    a {
+      color: var(--color-nav-link);
+      font-size: 1rem;
+      font-weight: 600;
+      @include text-uppercase;
+      text-decoration: none;
 
       &:hover {
         color: var(--color-link);
-
-        &::before,
-        &::after {
-          transform: scaleX(1);
-        }
       }
+
+      @include focus-visible(3px);
+    }
+
+    :deep(.router-link-exact-active) {
+      color: var(--color-active-nav);
+      text-decoration: underline;
+      text-decoration-color: var(--color-accent-line);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 5px;
+    }
+  }
+
+  &__mobile-nav {
+    @include respond-to(sm) {
+      display: none;
     }
   }
 }

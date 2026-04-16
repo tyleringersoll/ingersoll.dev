@@ -2,6 +2,10 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  // Clip horizontal overflow without creating a scroll container.
+  // overflow-x: hidden on html/body breaks position:fixed (iOS Safari).
+  // overflow-x: clip prevents scrolling without affecting fixed elements.
+  overflow-x: clip;
 }
 
 .app {
