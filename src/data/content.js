@@ -12,42 +12,95 @@ export default {
     ],
     home: [
       {
-        heading: "Hi, I'm Tyler",
+        id: "hero",
+        heading: "Hi, I’m Tyler",
         headingLevel: 2,
         content: [
-          "I'm a frontend architect and engineering leader. Currently, I lead a team at Best Egg building customer-facing products that handle millions of user interactions. In the past, I've built solutions for Vanguard, Agilent Technologies, Bank of America, and others.",
-          "When I put down the laptop, I'm usually found behind a drum kit. I've spent the last three decades touring, recording, and producing music."
+          "I’m a frontend architect and engineering leader. Currently, I lead a team at Best Egg building customer-facing products that handle millions of user interactions. In the past, I’ve built solutions for Vanguard, Agilent Technologies, Bank of America, and others.",
+          "When I put down the laptop, I’m usually found behind a drum kit. I’ve spent the last three decades touring, recording, and producing music."
         ]
       },
       {
+        id: "what-i-do",
         heading: "What I do",
         headingLevel: 2,
         content: []
       },
       {
+        id: "engineering",
         heading: "Engineering",
         headingLevel: 4,
         content: [
           "I build frontend applications using frameworks like Angular and Vue.js, and I guide the teams that ship them. My work expertise spans from core authentication flows and payment processing, to specialized third-party fintech integrations and real-time hardware control software. Over my career, I’ve handled just about every aspect of the frontend ecosystem, including coding high-volume HTML email campaigns and driving division-wide design system rollouts.",
-          "<a href='/resume'>View my full resume →</a>"
+          "<a href=’/resume’>View my full resume →</a>"
         ]
       },
       {
+        id: "music",
         heading: "Music",
         headingLevel: 4,
         content: [
-          "My past work includes touring nationally under Wind-up Records with The Crash Motive, where our tracks landed placements in the Super Bowl, Madden NFL, and The Fantastic Four movie and soundtrack. Currently, I track remote drum sessions from a custom-built hybrid studio, pairing live cymbals mic'd through analog API preamps with zero-latency MIDI tracking.",
-          "<a href='/music'>More about my music →</a>"
+          "My past work includes touring nationally under Wind-up Records with The Crash Motive, where our tracks landed placements in the Super Bowl, Madden NFL, and The Fantastic Four movie and soundtrack. Currently, I track remote drum sessions from a custom-built hybrid studio, pairing live cymbals mic’d through analog API preamps with zero-latency MIDI tracking.",
+          "<a href=’/music’>More about my music →</a>"
         ]
       },
       {
+        id: "beyond",
         heading: "Beyond work",
         headingLevel: 3,
         content: [
-          "When I'm not writing code or tracking drums, you can usually find me logging miles on one of my bikes, or trying to keep up with my two kids. I'm a craft beer and bourbon fan, enjoy firing up the grill, and am based in Kennett Square, Pennsylvania."
+          "When I’m not writing code or tracking drums, you can usually find me logging miles on one of my bikes, or trying to keep up with my two kids. I’m a craft beer and bourbon fan, enjoy firing up the grill, and am based in Kennett Square, Pennsylvania."
         ]
       }
     ],
+    homePage: {
+      hero: {
+        eyebrow: "Frontend Engineer / Musician",
+        primaryCta: "View My Work",
+        secondaryCta: "Learn More About Me"
+      },
+      engineering: {
+        competenciesLabel: "Competencies",
+        competencies: [
+          { icon: "grid", label: "Design Systems" },
+          { icon: "shield", label: "Authentication Flows" },
+          { icon: "credit-card", label: "Payment Processing" },
+          { icon: "code", label: "Fintech Integration" },
+          { icon: "envelope", label: "HTML Email" }
+        ],
+        clientsLabel: "Featured Solutions",
+        clients: [
+          { name: "Vanguard", description: "FAS Design System & SPA Framework" },
+          { name: "Agilent Technologies", description: "Instrument Control UI & Data Visualization" },
+          { name: "Bank of America", description: "Adaptive Email Campaigns & Web" }
+        ],
+        cta: "View Full Resume"
+      },
+      music: {
+        placementsLabel: "Music Sync Placements",
+        placements: [
+          { icon: "star", label: "Super Bowl LVII" },
+          { icon: "gamepad", label: "Madden NFL" },
+          { icon: "film", label: "Fantastic Four (Movie & Soundtrack)" }
+        ],
+        studioLabel: "Hybrid Studio Setup",
+        studioText: "Mesh heads with Roland triggers for zero-latency MIDI. Live Zildjian cymbals mic’d through an API 3124 preamp. Real room sound, tracked remotely.",
+        cta: "More About My Music"
+      },
+      beyond: {
+        cards: [
+          { icon: "bicycle", label: "Cyclist", sub: "Road, Gravel, MTB" },
+          { icon: "users", label: "Family", sub: "Parent of Two" },
+          { icon: "beer", label: "Enthusiast", sub: "Craft Beer & Bourbon" },
+          { icon: "map-pin", label: "Local", sub: "Kennett Square, PA" }
+        ]
+      },
+      connect: {
+        heading: "Let’s Collaborate",
+        subtext: "Engineering, drumming, or just to say hello.",
+        cta: "Get in Touch"
+      }
+    },
     resume: [
       {
         heading: "Resume",

@@ -21,7 +21,7 @@
     </main>
   </div>
   <Footer
-    v-if="content.footer && content.footer.socialHeading"
+    v-if="content.footer && content.footer.socialHeading && $route.path !== '/'"
     class="app-sticky-bottom"
     :content="content.footer"
   />

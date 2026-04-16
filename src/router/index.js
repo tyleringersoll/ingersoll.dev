@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import ContentView from "../views/ContentView.vue";
+import HomeView from "../views/HomeView.vue";
 import ResumeView from "../views/ResumeView.vue";
 import MusicView from "../views/MusicView.vue";
 import ContactView from "../views/ContactView.vue";
@@ -15,7 +16,7 @@ const createRoutesFromContent = (content) => {
     {
       path: "/",
       name: "home",
-      component: ContentView,
+      component: HomeView,
     },
   ];
 

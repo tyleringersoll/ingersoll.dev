@@ -1,7 +1,31 @@
 <template>
   <section v-if="resumeContent" class="resume container">
     <template v-for="(entry, entryIdx) in resumeContent" :key="entryIdx">
-      <Article v-if="!entry.roles" :article="entry" :index="entryIdx" />
+      <!-- First entry: flex header with download button + intro paragraph -->
+      <article v-if="!entry.roles && entryIdx === 0" class="article resume-intro">
+        <div class="resume-header">
+          <h2 class="first-heading" v-html="entry.heading" />
+          <a
+            href="/Tyler_Ingersoll_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="resume-download"
+          >
+            <svg class="resume-download__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Download PDF
+          </a>
+        </div>
+        <p
+          v-for="(para, paraIdx) in entry.content"
+          :key="paraIdx"
+          v-html="para"
+        />
+      </article>
+      <Article v-else-if="!entry.roles" :article="entry" :index="entryIdx" />
       <article v-else class="article employer">
         <component
           :is="`h${entry.headingLevel || 3}`"
@@ -9,55 +33,26 @@
           :class="{ 'first-heading': entryIdx === 0 }"
           v-html="entry.heading"
         />
-        <div class="employer__timeline">
-          <div
+        <Timeline>
+          <TimelineItem
             v-for="(role, roleIdx) in entry.roles"
             :key="roleIdx"
-            class="role"
-            :class="{ 'role--expanded': isExpanded(entryIdx, roleIdx) }"
+            :dates="roleDates(role.subheading)"
+            :title="roleTitle(role.subheading)"
+            :title-tag="`h${(entry.headingLevel || 3) + 1}`"
+            :expandable="true"
+            :expanded="isExpanded(entryIdx, roleIdx)"
+            @toggle="toggleRole(entryIdx, roleIdx)"
           >
-            <div
-              class="role__trigger"
-              role="button"
-              tabindex="0"
-              :aria-expanded="isExpanded(entryIdx, roleIdx)"
-              @click="toggleRole(entryIdx, roleIdx)"
-              @keydown.enter.prevent="toggleRole(entryIdx, roleIdx)"
-              @keydown.space.prevent="toggleRole(entryIdx, roleIdx)"
-            >
-              <div class="role__left">
-                <span class="role__dates-col">{{ roleDates(role.subheading) }}</span>
-              </div>
-              <div class="role__axis" aria-hidden="true">
-                <span class="role__node">
-                  <span class="role__icon">
-                    <span class="role__icon-bar role__icon-bar--h" />
-                    <span class="role__icon-bar role__icon-bar--v" />
-                  </span>
-                </span>
-              </div>
-              <component
-                :is="`h${(entry.headingLevel || 3) + 1}`"
-                class="role__subheading"
-              >{{ roleTitle(role.subheading) }}</component>
-            </div>
-            <div
-              class="role__content-wrapper"
-              :aria-hidden="!isExpanded(entryIdx, roleIdx)"
-              :inert="!isExpanded(entryIdx, roleIdx)"
-            >
-              <div class="role__content">
-                <template v-for="(para, paraIdx) in role.content" :key="paraIdx">
-                  <hr v-if="para.trim().startsWith('<strong>Tech:')" class="tech-divider" />
-                  <p
-                    :class="{ 'article__bullet-item': para.trim().startsWith('•') }"
-                    v-html="formatPara(para)"
-                  />
-                </template>
-              </div>
-            </div>
-          </div>
-        </div>
+            <template v-for="(para, paraIdx) in role.content" :key="paraIdx">
+              <hr v-if="para.trim().startsWith('<strong>Tech:')" class="tech-divider" />
+              <p
+                :class="{ 'article__bullet-item': para.trim().startsWith('•') }"
+                v-html="formatPara(para)"
+              />
+            </template>
+          </TimelineItem>
+        </Timeline>
       </article>
     </template>
   </section>
@@ -72,6 +67,8 @@ import { ref, computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useContentStore } from "@/store";
 import Article from "@/components/Article.vue";
+import Timeline from "@/components/Timeline.vue";
+import TimelineItem from "@/components/TimelineItem.vue";
 
 const store = useContentStore();
 const { content, isLoading } = storeToRefs(store);
@@ -110,209 +107,66 @@ const toggleRole = (entryIdx, roleIdx) => {
 </script>
 
 <style lang="scss" scoped>
-.employer {
-  &__name {
-    margin-bottom: $spacing-md;
-  }
+.resume {
+  max-width: 900px;
+}
 
-  &__timeline {
-    --col-date: 8rem;
-    --col-axis: 1.5rem;
-    --col-gap: 1.25rem;
-    position: relative;
+// ─── Header row with download button ──────────────────────────────────────────
 
-    @include respond-below(xs) {
-      --col-date: 6rem;
-      --col-axis: 1.5rem;
-      --col-gap: 1rem;
-    }
+.resume-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-sm;
+  flex-wrap: wrap;
 
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: calc(var(--col-date) + var(--col-gap) + var(--col-axis) / 2);
-      width: 1px;
-      background: var(--color-text-muted);
-      opacity: 0.4;
-      pointer-events: none;
-    }
+  h2 {
+    margin-bottom: 0;
   }
 }
 
-.role {
-  display: grid;
-  grid-template-columns: var(--col-date) var(--col-axis) 1fr;
-  column-gap: var(--col-gap);
-  padding: 0.75rem 0;
+.resume-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.25rem;
+  border: 2px solid var(--color-accent-line);
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--color-accent-line);
+  text-decoration: none;
+  white-space: nowrap;
+  @include transition(all);
 
-  &__trigger {
-    grid-column: 1 / -1;
-    grid-row: 1;
-    display: grid;
-    grid-template-columns: var(--col-date) var(--col-axis) 1fr;
-    column-gap: var(--col-gap);
-    align-items: center;
-    cursor: pointer;
-    user-select: none;
-    @include focus-visible;
+  &:hover {
+    background-color: var(--color-accent-line);
+    color: #0d1014;
   }
 
-  &__left {
-    grid-column: 1;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-  }
-
-  &__dates-col {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--color-text-secondary);
-    white-space: nowrap;
-    line-height: 1.4;
-    @include transition(color);
-
-    @include respond-below(xs) {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-    }
-  }
-
-  &__axis {
-    grid-column: 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    z-index: 1;
-  }
-
-  &__node {
-    width: 1.5rem;
-    height: 1.5rem;
-    border-radius: 50%;
-    border: 1px solid var(--color-text-muted);
-    background: var(--color-bg-nav);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-text-secondary);
-    transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
-  }
-
-  &__subheading {
-    grid-column: 3;
-    margin: 0;
-    padding: 0;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--color-text-primary);
-    line-height: 1.4;
-    @include transition(color);
+  &:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 3px;
   }
 
   &__icon {
-    position: relative;
-    display: inline-block;
-    width: 0.55rem;
-    height: 0.55rem;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
   }
+}
 
-  &__icon-bar {
-    position: absolute;
-    background: currentColor;
-    border-radius: 1px;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+.resume-intro p {
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+}
 
-    &--h {
-      top: 50%;
-      left: 0;
-      right: 0;
-      height: 1.5px;
-      transform: translateY(-50%);
-    }
+// ─── Employer ────────────────────────────────────────────────────────────────
 
-    &--v {
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      width: 1.5px;
-      transform: translateX(-50%);
-    }
-  }
-
-  &__trigger:hover {
-    .role__subheading {
-      color: var(--color-accent-line);
-    }
-
-    .role__node {
-      border-color: var(--color-accent-line);
-      color: var(--color-accent-line);
-    }
-  }
-
-  &--expanded {
-    .role__subheading {
-      color: var(--color-accent-line);
-    }
-
-    .role__node {
-      border-color: var(--color-accent-line);
-      color: var(--color-accent-line);
-    }
-
-    .role__icon-bar--v {
-      transform: translateX(-50%) rotate(90deg);
-      opacity: 0;
-    }
-
-    .role__dates-col {
-      color: var(--color-text-secondary);
-    }
-  }
-
-  &__content-wrapper {
-    grid-column: 3;
-    grid-row: 2;
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    visibility: hidden;
-    transition:
-      max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-      opacity 0.25s ease,
-      visibility 0s linear 0.45s;
-  }
-
-  &--expanded &__content-wrapper {
-    max-height: 200rem;
-    opacity: 1;
-    visibility: visible;
-    transition:
-      max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-      opacity 0.3s ease 0.1s,
-      visibility 0s linear 0s;
-  }
-
-  &__content {
-    padding: $spacing-sm 0 $spacing-md;
-
-    p {
-      margin: 0 0 $spacing-sm;
-      line-height: 1.75;
-    }
-
-    p:last-child {
-      margin-bottom: 0;
-    }
-
-    strong {
-      color: var(--color-text-primary);
-    }
+.employer {
+  &__name {
+    margin-bottom: $spacing-md;
   }
 }
 

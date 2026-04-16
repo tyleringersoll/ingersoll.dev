@@ -28,13 +28,15 @@ defineProps({
 
 <style lang="scss" scoped>
 .navigation {
-  padding-bottom: $spacing-xs;
-
+  // Sticky on desktop — background matches the hero so the top of the page
+  // reads as one unified dark block. The subtle border provides visual
+  // separation when scrolling over lighter sections below.
   @include respond-to(sm) {
     position: sticky;
     top: 0;
     z-index: $z-index-sticky;
-    background-color: var(--color-bg-nav);
+    background-color: var(--color-bg-primary);
+    border-bottom: 1px solid var(--color-border);
   }
 
   &__items {
@@ -44,21 +46,21 @@ defineProps({
     gap: $spacing-sm;
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    padding: $spacing-xs 0 $spacing-md;
     overflow: hidden;
-    border-bottom: 2px solid var(--color-accent-line);
   }
 
   &__item {
     display: none;
-    margin: 0 0 $spacing-sm 0;
+    margin: 0;
     @include transition(all);
 
     @include respond-to(sm) {
       display: inline-block;
-      margin: 0 $spacing-lg $spacing-sm 0;
+      margin: 0 $spacing-lg 0 0;
     }
 
+    // Hover: short top-edge sweep animation (unchanged)
     &::before {
       display: block;
       content: "";
@@ -69,10 +71,8 @@ defineProps({
       @include transition(transform, 250ms, ease-in-out);
     }
 
-    &:hover {
-      &::before {
-        transform: scaleX(1);
-      }
+    &:hover::before {
+      transform: scaleX(1);
     }
   }
 
@@ -102,9 +102,14 @@ defineProps({
     @include focus-visible(3px);
   }
 
+  // Active page: short cyan underline only under the current link
   :deep(.router-link-exact-active) {
     display: inline-block;
     color: var(--color-active-nav);
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent-line);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
 
     @include respond-below(sm) {
       pointer-events: none;
