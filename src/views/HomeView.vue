@@ -106,28 +106,34 @@
             <div class="hv2-block">
               <p class="hv2-label">{{ eng.competenciesLabel }}</p>
               <div class="hv2-comp-grid">
-                <div
+                <component
                   v-for="item in eng.competencies"
+                  :is="linkTag(item)"
                   :key="item.label"
+                  v-bind="linkAttrs(item)"
                   class="hv2-comp-item"
+                  :class="{ 'hv2-comp-item--linked': hasLink(item) }"
                 >
                   <span class="hv2-comp-icon" v-html="icons[item.icon]" aria-hidden="true" />
                   <span>{{ item.label }}</span>
-                </div>
+                </component>
               </div>
             </div>
 
             <div class="hv2-block">
               <p class="hv2-label">{{ eng.clientsLabel }}</p>
               <div class="hv2-clients-list">
-                <div
+                <component
                   v-for="client in eng.clients"
+                  :is="linkTag(client)"
                   :key="client.name"
+                  v-bind="linkAttrs(client)"
                   class="hv2-client-item"
+                  :class="{ 'hv2-client-item--linked': hasLink(client) }"
                 >
                   <span class="hv2-client-name">{{ client.name }}</span>
                   <span class="hv2-client-desc">{{ client.description }}</span>
-                </div>
+                </component>
               </div>
             </div>
 
@@ -156,16 +162,31 @@
               <p class="hv2-label">{{ mus.placementsLabel }}</p>
               <ul class="hv2-placements-list">
                 <li v-for="item in mus.placements" :key="item.label">
-                  <span class="hv2-placement-icon" v-html="icons[item.icon]" aria-hidden="true" />
-                  <span>{{ item.label }}</span>
+                  <component
+                    :is="linkTag(item, 'span')"
+                    v-bind="linkAttrs(item)"
+                    class="hv2-placement-item"
+                    :class="{ 'hv2-placement-item--linked': hasLink(item) }"
+                  >
+                    <span class="hv2-placement-icon" v-html="icons[item.icon]" aria-hidden="true" />
+                    <span>{{ item.label }}</span>
+                  </component>
                 </li>
               </ul>
             </div>
 
-            <div class="hv2-studio-callout">
+            <component
+              :is="linkTag(mus.studio)"
+              v-bind="linkAttrs(mus.studio)"
+              class="hv2-studio-callout"
+              :class="{ 'hv2-studio-callout--linked': hasLink(mus.studio) }"
+            >
               <p class="hv2-label">{{ mus.studioLabel }}</p>
-              <p>{{ mus.studioText }}</p>
-            </div>
+              <p>{{ mus.studio?.text }}</p>
+              <span v-if="mus.studio?.ctaText" class="hv2-studio-callout__cta">
+                {{ mus.studio.ctaText }} →
+              </span>
+            </component>
 
           </div>
 
@@ -186,15 +207,18 @@
       <div class="hv2-inner">
         <h2 class="hv2-section-header">{{ beyondSection.heading }}</h2>
         <div class="hv2-beyond__cards">
-          <div
+          <component
             v-for="card in bey.cards"
+            :is="linkTag(card)"
             :key="card.label"
+            v-bind="linkAttrs(card)"
             class="hv2-beyond-card"
+            :class="{ 'hv2-beyond-card--linked': hasLink(card) }"
           >
             <div class="hv2-beyond-card__icon" v-html="icons[card.icon]" aria-hidden="true" />
             <span class="hv2-beyond-card__label">{{ card.label }}</span>
             <span class="hv2-beyond-card__sub">{{ card.sub }}</span>
-          </div>
+          </component>
         </div>
       </div>
     </section>
@@ -253,6 +277,25 @@ const con  = computed(() => pg.value.connect         || {});
 
 // Social icons from footer (reused in connect section)
 const socialIcons = computed(() => store.content?.footer?.socialIcons || []);
+
+// Link wrapper helpers — choose router-link, <a>, or static element per item.
+const hasLink = (item) => !!item?.url;
+
+const isExternalUrl = (item) =>
+  item?.external === true || /^(https?:|mailto:|tel:)/i.test(item?.url || "");
+
+const linkTag = (item, fallback = "div") => {
+  if (!hasLink(item)) return fallback;
+  return isExternalUrl(item) ? "a" : "router-link";
+};
+
+const linkAttrs = (item) => {
+  if (!hasLink(item)) return {};
+  if (isExternalUrl(item)) {
+    return { href: item.url, target: "_blank", rel: "noopener noreferrer" };
+  }
+  return { to: item.url };
+};
 
 // SVG icon map — keyed by the icon string stored in content.js.
 // These are design assets, not content, so they live here rather than in content.js.
@@ -557,10 +600,22 @@ const icons = {
   font-size: 0.82rem;
   font-weight: 600;
   color: var(--color-text-primary);
-  @include transition(border-color);
+  text-decoration: none;
+  cursor: default;
+  @include transition(all);
 
-  &:hover {
-    border-color: var(--color-accent-line);
+  &--linked {
+    cursor: pointer;
+
+    &:hover {
+      border-color: var(--color-accent-line);
+      transform: translateY(-2px);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 2px;
+    }
   }
 }
 
@@ -592,14 +647,30 @@ const icons = {
   flex-direction: column;
   padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--color-border);
+  text-decoration: none;
+  color: inherit;
+  cursor: default;
   @include transition(background-color);
 
   &:last-child {
     border-bottom: none;
   }
 
-  &:hover {
-    background-color: var(--color-bg-surface);
+  &--linked {
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--color-bg-surface);
+
+      .hv2-client-name {
+        color: var(--color-accent-line);
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: -2px;
+    }
   }
 }
 
@@ -656,14 +727,38 @@ const icons = {
   gap: 0.7rem;
 
   li {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--color-text-primary);
     margin: 0;
     padding: 0;
+  }
+}
+
+.hv2-placement-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  cursor: default;
+  @include transition(color);
+
+  &--linked {
+    cursor: pointer;
+
+    &:hover {
+      color: var(--color-link-hover);
+
+      .hv2-placement-icon {
+        color: var(--color-link-hover);
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
   }
 }
 
@@ -681,17 +776,55 @@ const icons = {
 }
 
 .hv2-studio-callout {
+  display: block;
   background-color: var(--color-bg-secondary);
   border: 1px solid var(--color-border);
   border-left: 3px solid var(--color-link);
   border-radius: 8px;
   padding: 1.25rem 1.25rem 1.25rem 1.1rem;
+  text-decoration: none;
+  color: inherit;
+  cursor: default;
+  @include transition(all);
 
-  p:last-child {
-    margin: 0;
+  p {
+    margin: 0 0 0.4rem;
     font-size: 0.88rem;
     line-height: 1.65;
     color: var(--color-text-secondary);
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  &__cta {
+    display: inline-block;
+    margin-top: 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--color-link);
+    @include transition(color);
+  }
+
+  &--linked {
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-2px);
+      border-color: var(--color-link-hover);
+      border-left-color: var(--color-link-hover);
+
+      .hv2-studio-callout__cta {
+        color: var(--color-link-hover);
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+    }
   }
 }
 
@@ -721,11 +854,23 @@ const icons = {
   border: 1px solid var(--color-border);
   border-radius: 12px;
   gap: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+  cursor: default;
   @include transition(all);
 
-  &:hover {
-    border-color: var(--color-accent-line);
-    transform: translateY(-2px);
+  &--linked {
+    cursor: pointer;
+
+    &:hover {
+      border-color: var(--color-accent-line);
+      transform: translateY(-2px);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+    }
   }
 
   &__icon {

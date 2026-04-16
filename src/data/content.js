@@ -62,37 +62,42 @@ export default {
       engineering: {
         competenciesLabel: "Competencies",
         competencies: [
-          { icon: "grid", label: "Design Systems" },
-          { icon: "shield", label: "Authentication Flows" },
-          { icon: "credit-card", label: "Payment Processing" },
-          { icon: "code", label: "Fintech Integration" },
-          { icon: "envelope", label: "HTML Email" }
+          { icon: "grid", label: "Design Systems", url: "/resume#vanguard" },
+          { icon: "shield", label: "Authentication Flows", url: "/resume#best-egg" },
+          { icon: "credit-card", label: "Payment Processing", url: "/resume#best-egg" },
+          { icon: "code", label: "Fintech Integration", url: "/resume#best-egg" },
+          { icon: "envelope", label: "HTML Email", url: "/resume#trellist-marketing-and-technology" }
         ],
         clientsLabel: "Featured Solutions",
         clients: [
-          { name: "Vanguard", description: "FAS Design System & SPA Framework" },
-          { name: "Agilent Technologies", description: "Instrument Control UI & Data Visualization" },
-          { name: "Bank of America", description: "Adaptive Email Campaigns & Web" }
+          { name: "Vanguard", description: "FAS Design System & SPA Framework", url: "/resume#vanguard" },
+          { name: "Agilent Technologies", description: "Instrument Control UI & Data Visualization", url: "/resume#technical-writers-inc" },
+          { name: "Bank of America", description: "Adaptive Email Campaigns & Web", url: "/resume#trellist-marketing-and-technology" }
         ],
         cta: "View Full Resume"
       },
       music: {
         placementsLabel: "Music Sync Placements",
         placements: [
-          { icon: "star", label: "Super Bowl LVII" },
-          { icon: "gamepad", label: "Madden NFL" },
-          { icon: "film", label: "Fantastic Four (Movie & Soundtrack)" }
+          { icon: "star", label: "Super Bowl LVII", url: "/music#the-crash-motive" },
+          { icon: "gamepad", label: "Madden NFL", url: "/music#the-crash-motive" },
+          { icon: "film", label: "Fantastic Four (Movie & Soundtrack)", url: "/music#the-crash-motive" }
         ],
         studioLabel: "Hybrid Studio Setup",
-        studioText: "Mesh heads with Roland triggers for zero-latency MIDI. Live Zildjian cymbals mic’d through an API 3124 preamp. Real room sound, tracked remotely.",
+        studio: {
+          text: "Mesh heads with Roland triggers for zero-latency MIDI. Live Zildjian cymbals mic’d through an API 3124 preamp. Real room sound, tracked remotely.",
+          url: "https://tyleringersolldrums.com",
+          external: true,
+          ctaText: "Explore the Studio"
+        },
         cta: "More About My Music"
       },
       beyond: {
         cards: [
-          { icon: "bicycle", label: "Cyclist", sub: "Road, Gravel, MTB" },
-          { icon: "users", label: "Family", sub: "Parent of Two" },
-          { icon: "beer", label: "Enthusiast", sub: "Craft Beer & Bourbon" },
-          { icon: "map-pin", label: "Local", sub: "Kennett Square, PA" }
+          { icon: "bicycle", label: "Cyclist", sub: "Road, Gravel, MTB", url: "https://www.strava.com/athletes/3303002", external: true },
+          { icon: "users", label: "Family", sub: "Parent of Two", url: null },
+          { icon: "beer", label: "Enthusiast", sub: "Craft Beer & Bourbon", url: null },
+          { icon: "map-pin", label: "Local", sub: "Kennett Square, PA", url: null }
         ]
       },
       connect: {

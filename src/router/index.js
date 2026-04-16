@@ -46,11 +46,11 @@ const router = createRouter({
   history: createWebHistory(),
   routes: createRoutesFromContent(null),
   scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition;
-    } else {
-      return { top: 0 };
-    }
+    if (savedPosition) return savedPosition;
+    // Hash navigation is handled manually by the destination view so it can
+    // expand the targeted section first, then scroll after layout settles.
+    if (to.hash) return false;
+    return { top: 0, behavior: "smooth" };
   },
 });
 

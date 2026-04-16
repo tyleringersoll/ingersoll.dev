@@ -24,7 +24,7 @@
           </span>
         </span>
       </div>
-      <component :is="titleTag" class="timeline-item__title">{{ title }}</component>
+      <component :is="titleTag" class="timeline-item__title" :id="titleId || undefined">{{ title }}</component>
     </div>
     <div
       v-if="expandable"
@@ -47,6 +47,7 @@ defineProps({
   dates: { type: String, default: "" },
   title: { type: String, default: "" },
   titleTag: { type: String, default: "h4" },
+  titleId: { type: String, default: "" },
   expandable: { type: Boolean, default: false },
   expanded: { type: Boolean, default: false },
 });

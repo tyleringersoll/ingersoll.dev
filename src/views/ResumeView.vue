@@ -30,6 +30,7 @@
         <component
           :is="`h${entry.headingLevel || 3}`"
           class="employer__name"
+          :id="slugify(entry.heading)"
           :class="{ 'first-heading': entryIdx === 0 }"
           v-html="entry.heading"
         />
@@ -63,7 +64,8 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, watch, onMounted, nextTick } from "vue";
+import { useRoute } from "vue-router";
 import { storeToRefs } from "pinia";
 import { useContentStore } from "@/store";
 import Article from "@/components/Article.vue";
@@ -72,6 +74,7 @@ import TimelineItem from "@/components/TimelineItem.vue";
 
 const store = useContentStore();
 const { content, isLoading } = storeToRefs(store);
+const route = useRoute();
 
 const resumeContent = computed(() => {
   if (isLoading.value || !content.value) return null;
@@ -82,6 +85,12 @@ const expandedRoles = ref(new Set());
 
 const roleTitle = (subheading) => subheading.split(' · ')[0];
 const roleDates = (subheading) => subheading.split(' · ')[1] ?? '';
+
+const slugify = (str) =>
+  String(str ?? '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 
 const formatPara = (para) => {
   const trimmed = para.trim();
@@ -104,6 +113,43 @@ const toggleRole = (entryIdx, roleIdx) => {
   }
   expandedRoles.value = set;
 };
+
+const expandRolesForHash = (hash) => {
+  if (!hash) return;
+  const slug = hash.replace(/^#/, '');
+  const entries = resumeContent.value || [];
+  const set = new Set(expandedRoles.value);
+  entries.forEach((entry, entryIdx) => {
+    if (entry.roles && slugify(entry.heading) === slug) {
+      entry.roles.forEach((_, roleIdx) => set.add(`${entryIdx}-${roleIdx}`));
+    }
+  });
+  expandedRoles.value = set;
+};
+
+const scrollToHash = async (hash) => {
+  if (!hash) return;
+  await nextTick();
+  requestAnimationFrame(() => {
+    const el = document.querySelector(hash);
+    if (!el) return;
+    const nav = document.querySelector('.navigation');
+    const navHeight = nav && getComputedStyle(nav).position === 'sticky'
+      ? nav.getBoundingClientRect().height
+      : 0;
+    const top = el.getBoundingClientRect().top + window.scrollY - navHeight - 16;
+    window.scrollTo({ top, behavior: 'smooth' });
+  });
+};
+
+const handleHash = (hash) => {
+  expandRolesForHash(hash);
+  scrollToHash(hash);
+};
+
+onMounted(() => handleHash(route.hash));
+watch(() => route.hash, handleHash);
+watch(resumeContent, () => handleHash(route.hash));
 </script>
 
 <style lang="scss" scoped>
