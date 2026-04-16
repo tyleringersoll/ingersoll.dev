@@ -26,13 +26,13 @@ export default {
         headingLevel: 2,
         content: []
       },
-      {
+     {
         id: "engineering",
         heading: "Engineering",
         headingLevel: 4,
         content: [
-          "I build frontend applications using frameworks like Angular and Vue.js, and I guide the teams that ship them. My work expertise spans from core authentication flows and payment processing, to specialized third-party fintech integrations and real-time hardware control software. Over my career, I’ve handled just about every aspect of the frontend ecosystem, including coding high-volume HTML email campaigns and driving division-wide design system rollouts.",
-          "<a href=’/resume’>View my full resume →</a>"
+          "I build frontend applications using frameworks like Angular and Vue.js, and I guide the team that ships them. My expertise spans from core identity and payment processing, to specialized third-party fintech integrations and real-time hardware control software. Over my career, I’ve handled just about every aspect of the frontend ecosystem, from driving division-wide design system rollouts to modernizing legacy architectures for scale and security.",
+          "<a href='/resume'>View my full resume →</a>"
         ]
       },
       {
@@ -62,17 +62,17 @@ export default {
       engineering: {
         competenciesLabel: "Competencies",
         competencies: [
+          { icon: "layers", label: "Frontend Architecture", url: "/resume#best-egg" },
           { icon: "grid", label: "Design Systems", url: "/resume#vanguard" },
-          { icon: "shield", label: "Authentication Flows", url: "/resume#best-egg" },
-          { icon: "credit-card", label: "Payment Processing", url: "/resume#best-egg" },
-          { icon: "code", label: "Fintech Integration", url: "/resume#best-egg" },
-          { icon: "envelope", label: "HTML Email", url: "/resume#trellist-marketing-and-technology" }
+          { icon: "shield", label: "Identity & Security", url: "/resume#best-egg" },
+          { icon: "credit-card", label: "Payment Platforms", url: "/resume#best-egg" },
+          { icon: "code", label: "Fintech Integration", url: "/resume#best-egg" }
         ],
-        clientsLabel: "Featured Solutions",
+        clientsLabel: "Featured Work",
         clients: [
+          { name: "Best Egg", description: "Identity & Payment Platforms at Scale", url: "/resume#best-egg" },
           { name: "Vanguard", description: "FAS Design System & SPA Framework", url: "/resume#vanguard" },
-          { name: "Agilent Technologies", description: "Instrument Control UI & Data Visualization", url: "/resume#technical-writers-inc" },
-          { name: "Bank of America", description: "Adaptive Email Campaigns & Web", url: "/resume#trellist-marketing-and-technology" }
+          { name: "Agilent Technologies", description: "Instrument Control UI & Data Visualization", url: "/resume#technical-writers-inc" }
         ],
         cta: "View Full Resume"
       },
