@@ -203,6 +203,13 @@ defineEmits(["toggle"]);
       max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
       opacity 0.25s ease,
       visibility 0s linear 0.45s;
+
+    @include respond-below(sm) {
+      grid-column: 1 / -1;
+      position: relative;
+      z-index: 2;
+      background: var(--color-bg-primary);
+    }
   }
 
   &--expanded &__content-wrapper {
