@@ -11,13 +11,13 @@ export default {
       { name: "Contact", url: "/contact" }
     ],
     home: [
-      {
+    {
         id: "hero",
         heading: "Hi, I’m Tyler",
         headingLevel: 2,
         content: [
-          "I’m a frontend architect and engineering leader. Currently, I lead a team at Best Egg building customer-facing products that handle millions of user interactions. In the past, I’ve built solutions for Vanguard, Agilent Technologies, Bank of America, and others.",
-          "When I put down the laptop, I’m usually found behind a drum kit. I’ve spent the last three decades touring, recording, and producing music."
+          "I’m a frontend architect and engineering leader. Currently, I lead a team at Best Egg focused on building reliable, customer-facing applications that help millions of people. Over the years, I’ve built enterprise frontend solutions for Fortune 500 brands like Vanguard, Bank of America, and DuPont.",
+          "When I'm not working my day job, I’m likely found behind a drum kit in my studio. I’ve spent the last three decades touring, recording, and producing music."
         ]
       },
       {
@@ -26,22 +26,21 @@ export default {
         headingLevel: 2,
         content: []
       },
-      {
+     {
         id: "engineering",
         heading: "Engineering",
         headingLevel: 4,
         content: [
-          "I build frontend applications using frameworks like Angular and Vue.js, and I guide the team that ships them. My expertise spans from core identity and payment processing, to specialized third-party fintech integrations and real-time hardware control software. Over my career, I’ve handled just about every aspect of the frontend ecosystem, from driving division-wide design system rollouts to modernizing legacy architectures for scale and security.",
+          "I build frontend applications using frameworks like Angular and Vue.js, and I guide the team that ships them. My expertise spans from core identity and payment processing, to specialized third-party fintech integrations and real-time hardware control software. Over my career, I’ve worked across most of the frontend ecosystem—whether that means rolling out division-wide design systems or modernizing legacy architectures so they can scale securely.",
           "<a href='/resume'>View my full resume →</a>"
         ]
       },
-      {
+     {
         id: "music",
         heading: "Music",
         headingLevel: 4,
         content: [
-          "My past work includes touring nationally with my band under label support. As The Crash Motive, our tracks landed sync placements in Super Bowl XLII, Madden NFL, and The Fantastic Four movie and soundtrack. Today, I track remote drum sessions from a purpose-built hybrid studio, pairing live Zildjian cymbals mic’d through an API 3124V preamp with a flawless MIDI performance.",
-          "<a href='/music'>More about my music →</a>"
+          "I’ve spent a big part of my life behind a drum kit. From touring the country and hearing my tracks pop up during the Super Bowl, to building out a custom hybrid recording rig at home, making music has always been a constant. Now, I spend most of my studio time tracking drums for videos and playing on remote sessions for other artists."
         ]
       },
       {
@@ -76,19 +75,20 @@ export default {
         ],
         cta: "View Full Resume"
       },
-      music: {
+     music: {
         placementsLabel: "Music Sync Placements",
         placements: [
           { icon: "star", label: "Super Bowl XLII", url: "/music#the-crash-motive" },
           { icon: "gamepad", label: "Madden NFL", url: "/music#the-crash-motive" },
-          { icon: "film", label: "Fantastic Four (Movie & Soundtrack)", url: "/music#the-crash-motive" }
+          { icon: "film", label: "Fantastic Four (Movie & Soundtrack)", url: "/music#the-crash-motive" },
+          { icon: "tv", label: "Network TV (CBS, NBC, ESPN)", url: "/music#the-crash-motive" }
         ],
         studioLabel: "Hybrid Studio Setup",
-        studio: {
-          text: "Roland mesh heads and triggers for zero-latency MIDI, paired with live Zildjian cymbals mic’d through an API 3124V preamp. A breathing, human groove with total digital control.",
+       studio: {
+          text: "I've spent 18+ months designing and refining a hybrid drum recording technique that I'm finally close to perfecting. By pairing real cymbals with triggered mesh heads, it captures live room energy with total MIDI control. Want to learn more about how it works?",
           url: "https://tyleringersolldrums.com",
           external: true,
-          ctaText: "Explore the Studio"
+          ctaText: "Explore My Drum Studio"
         },
         cta: "More About My Music"
       },
@@ -111,7 +111,7 @@ export default {
         heading: "Resume",
         headingLevel: 2,
         content: [
-          "Frontend architect and engineering leader focused on driving technical strategy and shipping applications at scale. I build high-performing teams, align product cycles with business goals, and set development standards that speed up delivery. My background spans fintech, financial services, and enterprise software, where I've modernized legacy architectures, built enterprise design systems, and managed critical third-party integrations."
+          "Frontend architect and engineering leader focused on guiding technical strategy and delivering scalable applications. I care deeply about building a strong, focused team, aligning our work with actual business needs, and setting standards that make development smoother. My background spans fintech, financial services, and enterprise software, where I've modernized legacy architectures, built enterprise design systems, and managed critical third-party integrations."
         ]
       },
       {
@@ -223,7 +223,7 @@ export default {
           {
             subheading: "Drummer, DJ, & Co-Founder · 2010 - 2016",
             content: [
-              "I co-founded SpeakerCity and helped build it into one of the most in-demand event bands in the Mid-Atlantic. What started with a debut to thousands at the University of Delaware quickly expanded into a year-round schedule playing two to three shows a week.",
+              "I co-founded SpeakerCity and helped grow it into a highly active event band in the Mid-Atlantic. What started with a large debut at the University of Delaware quickly turned into a steady schedule of two to three shows a week.",
               "As we transitioned from the regional club circuit into a high-end wedding and corporate band, our calendar grew to include week-long residencies in Key West, large-scale university events, and performances at major regional sports venues.",
               "• Performed as drummer and DJ at weddings, corporate events, and club venues throughout the Mid-Atlantic.",
               "• Composed and produced musical sequences with click tracks, serving as the production backbone for live performances.",
@@ -258,8 +258,8 @@ export default {
           {
             subheading: "Drummer, Studio Musician & Founding Member · 2002 - 2008",
             content: [
-              "Helped build the band from an independent college act into a major label touring rock band, signing a comprehensive deal with Wind-up Records in 2005.",
-              "• Dominated the regional scene early on, winning the University of Delaware's Battle of the Bands and holding a 31-day #1 requested spot on WSTW 93.7.",
+              "Helped grow the band from an independent college act into a national touring rock band with label support. We signed a comprehensive deal with Wind-up Records in 2005 and rebranded as The Crash Motive in 2006.",
+              "• Built a strong regional following early on, winning the University of Delaware's Battle of the Bands and holding a 31-day #1 requested spot on WSTW 93.7.",
               "• Performed drum parts on studio recordings and arranged drum compositions for albums and singles.",
               "• Toured nationally and performed extensively at major venues, opening for recognized acts like Sugar Ray, The All-American Rejects, Collective Soul, and Lifehouse.",
               "• Secured high-profile sync placements, including Super Bowl XLII, Madden NFL 2007, and The Fantastic Four soundtrack.",
@@ -397,12 +397,12 @@ export default {
           "<div style='position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px;'><iframe style='position: absolute; top: 0; left: 0; width: 100%; height: 100%;' src='https://www.youtube.com/embed/2D9R9hRWPwM?si=o9nR8Whg3ZEDizJH' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe></div>"
         ]
       },
-      {
+     {
         heading: "The Crash Motive",
         years: "2005–2008",
         headingLevel: 3,
         content: [
-          "Rebranding as The Crash Motive, the band toured nationally under label support with Wind-up Records. We tracked our debut album, <em>Consequence</em>, at Avatar Studios in NYC and The Pass in LA. The release earned strong critical praise, with Drum! magazine noting the album 'demonstrates the sort of pop-with-power sensibility that career dreams are made of.' Seeing those same drum parts land in Super Bowl XLII, Madden NFL, and network placements across CBS and ESPN proved how crucial it is to craft a groove that translates on a massive scale.",
+          "Rebranding as The Crash Motive, the band toured nationally under label support with Wind-up Records. We tracked our debut album, <em>Consequence</em>, at Avatar Studios in NYC and The Pass in LA. The release earned strong critical praise, with Drum! magazine noting the album 'demonstrates the sort of pop-with-power sensibility that career dreams are made of.' Having those drum parts land in Super Bowl XLII, Madden NFL, and network spots on CBS and ESPN was an incredible experience, and a great lesson in crafting grooves that translate on a larger stage.",
           "<iframe height='450' width='100%' title='Media player' src='https://embed.music.apple.com/us/album/consequence/1444007166?itscg=30200&itsct=music_box_player&ls=1&app=music&mttnsubad=1444007166&theme=dark' id='embedPlayer' sandbox='allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation' allow='autoplay *; encrypted-media *; clipboard-write' style='border: 0px; border-radius: 12px; width: 100%; height: 450px; max-width: 660px;'></iframe>"
         ]
       },
@@ -457,7 +457,7 @@ export default {
         heading: "Engineering & Leadership",
         headingLevel: 3,
         content: [
-          "I'm always open to discussing frontend architecture, team growth, and modern web standards. If you're a recruiter, founder, or fellow engineer tackling complex scaling challenges, let's connect."
+          "Whether you're looking to discuss frontend architecture, team growth, or how to tackle complex scaling challenges, I'm always up for a good conversation."
         ],
         links: [
           { label: "Email Tyler", url: "mailto:tyler@ingersoll.dev" },

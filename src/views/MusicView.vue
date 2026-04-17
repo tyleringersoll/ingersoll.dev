@@ -33,15 +33,17 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, nextTick } from "vue";
+import { ref, computed, watch, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { storeToRefs } from "pinia";
 import { useContentStore } from "@/store";
 import Article from "@/components/Article.vue";
 import Timeline from "@/components/Timeline.vue";
 import TimelineItem from "@/components/TimelineItem.vue";
+import { useScrollToHash } from "@/composables/useScrollToHash";
 
 const route = useRoute();
+const { scrollToHash } = useScrollToHash();
 const expandedSections = ref(new Set());
 
 const slugify = (str) =>
@@ -84,21 +86,6 @@ const expandSectionForHash = (hash) => {
     if (slugify(entry.heading) === slug) set.add(idx);
   });
   expandedSections.value = set;
-};
-
-const scrollToHash = async (hash) => {
-  if (!hash) return;
-  await nextTick();
-  requestAnimationFrame(() => {
-    const el = document.querySelector(hash);
-    if (!el) return;
-    const nav = document.querySelector('.navigation');
-    const navHeight = nav && getComputedStyle(nav).position === 'sticky'
-      ? nav.getBoundingClientRect().height
-      : 0;
-    const top = el.getBoundingClientRect().top + window.scrollY - navHeight - 16;
-    window.scrollTo({ top, behavior: 'smooth' });
-  });
 };
 
 const handleHash = (hash) => {
