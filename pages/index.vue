@@ -157,23 +157,14 @@
         <div class="hv2-two-col">
 
           <div class="hv2-music__left">
-
-            <div class="hv2-placements-card">
-              <p class="hv2-label">{{ mus.placementsLabel }}</p>
-              <ul class="hv2-placements-list">
-                <li v-for="item in mus.placements" :key="item.label">
-                  <component
-                    :is="linkTag(item, 'span')"
-                    v-bind="linkAttrs(item)"
-                    class="hv2-placement-item"
-                    :class="{ 'hv2-placement-item--linked': hasLink(item) }"
-                  >
-                    <span class="hv2-placement-icon" v-html="icons[item.icon]" aria-hidden="true" />
-                    <span>{{ item.label }}</span>
-                  </component>
-                </li>
-              </ul>
+            <h2>{{ musicSection.heading }}</h2>
+            <p>{{ musicSection.content[0] }}</p>
+            <div class="hv2-btn-wrap">
+              <NuxtLink to="/music" class="hv2-btn hv2-btn--primary">{{ mus.cta }}</NuxtLink>
             </div>
+          </div>
+
+          <div class="hv2-music__right">
 
             <component
               :is="linkTag(mus.studio)"
@@ -188,14 +179,6 @@
               </span>
             </component>
 
-          </div>
-
-          <div class="hv2-music__right">
-            <h2>{{ musicSection.heading }}</h2>
-            <p>{{ musicSection.content[0] }}</p>
-            <div class="hv2-btn-wrap">
-              <NuxtLink to="/music" class="hv2-btn hv2-btn--primary">{{ mus.cta }}</NuxtLink>
-            </div>
           </div>
 
         </div>
@@ -686,12 +669,6 @@ const icons = {
   border-bottom: 1px solid var(--color-border);
 
   &__left {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  &__right {
     h2 {
       margin-bottom: 1.25rem;
     }
@@ -700,6 +677,16 @@ const icons = {
       font-size: 1rem;
       line-height: 1.7;
       color: var(--color-text-secondary);
+    }
+  }
+
+  &__right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    @include respond-to(md) {
+      padding-top: 4rem;
     }
   }
 }

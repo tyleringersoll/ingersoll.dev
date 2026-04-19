@@ -76,13 +76,6 @@ export default {
         cta: "View Full Resume"
       },
       music: {
-        placementsLabel: "Music Sync Placements",
-        placements: [
-          { icon: "star", label: "Super Bowl XLII", url: "/music#the-crash-motive" },
-          { icon: "gamepad", label: "Madden NFL", url: "/music#the-crash-motive" },
-          { icon: "film", label: "Fantastic Four (Movie & Soundtrack)", url: "/music#the-crash-motive" },
-          { icon: "tv", label: "Network TV (CBS, NBC, ESPN)", url: "/music#the-crash-motive" }
-        ],
         studioLabel: "Hybrid Drum Tracking Setup",
         studio: {
           text: "I've spent almost two years designing and refining a hybrid drum recording technique that I'm finally close to perfecting. By pairing real cymbals with nearly silent mesh heads that trigger precise MIDI data, I can capture live room energy with total post-performance control. Want to learn more about how this setup works?",
