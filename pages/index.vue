@@ -99,51 +99,30 @@
     <!-- ===================== ENGINEERING ===================== -->
     <section class="hv2-engineering" id="engineering">
       <div class="hv2-inner">
+        <h2>{{ engineeringSection.heading }}</h2>
         <div class="hv2-two-col">
 
           <div class="hv2-engineering__left">
-
-            <div class="hv2-block">
-              <p class="hv2-label">{{ eng.competenciesLabel }}</p>
-              <div class="hv2-comp-grid">
-                <component
-                  v-for="item in eng.competencies"
-                  :is="linkTag(item)"
-                  :key="item.label"
-                  v-bind="linkAttrs(item)"
-                  class="hv2-comp-item"
-                  :class="{ 'hv2-comp-item--linked': hasLink(item) }"
-                >
-                  <span class="hv2-comp-icon" v-html="icons[item.icon]" aria-hidden="true" />
-                  <span>{{ item.label }}</span>
-                </component>
-              </div>
-            </div>
-
-            <div class="hv2-block">
-              <p class="hv2-label">{{ eng.clientsLabel }}</p>
-              <div class="hv2-clients-list">
-                <component
-                  v-for="client in eng.clients"
-                  :is="linkTag(client)"
-                  :key="client.name"
-                  v-bind="linkAttrs(client)"
-                  class="hv2-client-item"
-                  :class="{ 'hv2-client-item--linked': hasLink(client) }"
-                >
-                  <span class="hv2-client-name">{{ client.name }}</span>
-                  <span class="hv2-client-desc">{{ client.description }}</span>
-                </component>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="hv2-engineering__right">
-            <h2>{{ engineeringSection.heading }}</h2>
             <p>{{ engineeringSection.content[0] }}</p>
             <div class="hv2-btn-wrap">
               <NuxtLink to="/resume" class="hv2-btn hv2-btn--primary">{{ eng.cta }}</NuxtLink>
+            </div>
+          </div>
+
+          <div class="hv2-engineering__right">
+            <p class="hv2-label">{{ eng.competenciesLabel }}</p>
+            <div class="hv2-comp-grid">
+              <component
+                v-for="item in eng.competencies"
+                :is="linkTag(item)"
+                :key="item.label"
+                v-bind="linkAttrs(item)"
+                class="hv2-comp-item"
+                :class="{ 'hv2-comp-item--linked': hasLink(item) }"
+              >
+                <span class="hv2-comp-icon" v-html="icons[item.icon]" aria-hidden="true" />
+                <span>{{ item.label }}</span>
+              </component>
             </div>
           </div>
 
@@ -491,18 +470,13 @@ const icons = {
 .hv2-engineering {
   border-bottom: 1px solid var(--color-border);
 
-  &__left {
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
+  > .hv2-inner > h2 {
+    margin-bottom: 2rem;
   }
 
-  &__right {
-    h2 {
-      margin-bottom: 1.25rem;
-    }
-
+  &__left {
     p {
+      margin-top: 0;
       font-size: 1rem;
       line-height: 1.7;
       color: var(--color-text-secondary);
