@@ -201,7 +201,7 @@ export default {
           {
             subheading: "Digital Development Services · 2014 - 2017",
             content: [
-              "I delivered web, email, and enterprise solutions across multiple agency projects for Fortune 500 brands including Bank of America, David's Bridal, Chemours, Blue Cross Blue Shield Global, and DuPont, ultimately reaching tens of millions of users.",
+              "Delivered web, email, and enterprise solutions across multiple agency projects for Fortune 500 brands including Bank of America, David's Bridal, Chemours, Blue Cross Blue Shield Global, and DuPont, ultimately reaching tens of millions of users.",
               "• Built responsive websites and landing pages for enterprise clients like Bank of America, David's Bridal, NASA Federal Credit Union,and Chemours.",
               "• Developed adaptive HTML email campaigns for Bank of America's rewards and retention programs, optimizing for deliverability and cross-client compatibility.",
               "• Acted as Systems Owner for DuPont's SharePoint security auditing system, managing weekly reports and a server migrations alongside IBM consultants.",
@@ -231,7 +231,7 @@ export default {
           {
             subheading: "Technical Writer / Web Developer · 2003 - 2005",
             content: [
-              "Embedded on-site at AstraZeneca, I supported the global pharmaceutical regulatory submission team by packaging official FDA submissions and contributing to their global regulatory intranet site.",
+              "Embedded on-site at AstraZeneca; supported the global pharmaceutical regulatory submission team by packaging official FDA submissions and contributing to their global regulatory intranet site.",
               "• Designed and built the global regulatory intranet site to centralize team content and establish an internal digital presence.",
               "• Packaged complex regulatory and compliance documentation for official FDA submissions.",
               "• Managed project timelines and documentation workflows across the team.",
@@ -291,8 +291,7 @@ export default {
           {
             subheading: "Drummer, DJ, & Co-Founder · 2010 - 2016",
             content: [
-              "I co-founded SpeakerCity and helped grow it into a highly active event band in the Mid-Atlantic. What started with a 2000-person debut at the University of Delaware quickly turned into a steady schedule of two to three shows a week.",
-              "As we transitioned from the regional club circuit into a high-end wedding and corporate band, our calendar grew to include week-long residencies in Key West, large-scale university events, and performances at major regional sports venues.",
+              "Co-founded and scaled a highly active event band, transitioning from the regional club circuit to high-end corporate events, large-scale universities, and week-long residencies in Key West.",
               "• Performed as drummer and DJ at weddings, corporate events, and club venues throughout the Mid-Atlantic.",
               "• Composed and produced musical sequences with click tracks, serving as the production backbone for live performances.",
               "• Handled business tax filings as part of shared co-founder responsibilities."
@@ -308,7 +307,7 @@ export default {
           {
             subheading: "Drummer, Studio Musician & Founding Member · 2002 - 2008",
             content: [
-              "Helped grow the band from an independent college act into a national touring rock band with label support. We signed a comprehensive deal with Wind-up Records in 2005 and rebranded as The Crash Motive in 2006.",
+              "Scaled an independent college act into a national touring rock band with label support, securing a comprehensive deal with Wind-up Records in 2005 and rebranding as The Crash Motive.",
               "• Built a strong regional following early on, winning the University of Delaware's Battle of the Bands and holding a 31-day #1 requested song run on WSTW 93.7.",
               "• Performed drum parts on studio recordings and arranged drum compositions for albums and singles.",
               "• Toured nationally and performed extensively at major venues, opening for recognized acts like Sugar Ray, The All-American Rejects, Collective Soul, and Lifehouse.",
