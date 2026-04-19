@@ -1,14 +1,37 @@
 <template>
   <article class="article">
-    <component
-      v-if="props.article.heading"
-      :is="headingLevel"
+    <h2
+      v-if="props.article.heading && headingLevel === 'h2'"
       :class="{ 'first-heading': props.index === 0 }"
       v-html="props.article.heading"
     />
-    <component
-      v-if="props.article.subheading"
-      :is="subheadingLevel"
+    <h3
+      v-else-if="props.article.heading && headingLevel === 'h3'"
+      :class="{ 'first-heading': props.index === 0 }"
+      v-html="props.article.heading"
+    />
+    <h4
+      v-else-if="props.article.heading && headingLevel === 'h4'"
+      :class="{ 'first-heading': props.index === 0 }"
+      v-html="props.article.heading"
+    />
+    <h5
+      v-else-if="props.article.heading"
+      :class="{ 'first-heading': props.index === 0 }"
+      v-html="props.article.heading"
+    />
+    <h3
+      v-if="props.article.subheading && subheadingLevel === 'h3'"
+      class="article__subheading"
+      v-html="props.article.subheading"
+    />
+    <h4
+      v-else-if="props.article.subheading && subheadingLevel === 'h4'"
+      class="article__subheading"
+      v-html="props.article.subheading"
+    />
+    <h5
+      v-else-if="props.article.subheading"
       class="article__subheading"
       v-html="props.article.subheading"
     />

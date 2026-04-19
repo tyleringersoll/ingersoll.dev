@@ -10,7 +10,7 @@
     </main>
   </div>
   <Footer
-    v-if="content.footer && content.footer.socialHeading && route.path !== '/'"
+    v-if="content.footer && content.footer.socialHeading"
     class="app-sticky-bottom"
     :content="content.footer"
   />
@@ -19,7 +19,6 @@
 <script setup>
 import { useContentStore } from "~/stores/content";
 
-const route = useRoute();
 const store = useContentStore();
 
 const content = computed(() => {

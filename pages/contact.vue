@@ -38,10 +38,10 @@
 import { useContentStore } from "~/stores/content";
 
 const store = useContentStore();
-const { content, isLoading } = storeToRefs(store);
+const { content } = storeToRefs(store);
 
 const contactContent = computed(() => {
-  if (isLoading.value || !content.value) return null;
+  if (!content.value) return null;
   return content.value.contact ?? null;
 });
 

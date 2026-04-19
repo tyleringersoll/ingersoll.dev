@@ -206,34 +206,6 @@
       </div>
     </section>
 
-    <!-- ===================== CONNECT ===================== -->
-    <section class="hv2-connect">
-      <div class="hv2-inner">
-        <h2 class="hv2-section-header hv2-section-header--light">{{ con.heading }}</h2>
-        <p class="hv2-connect__sub">{{ con.subtext }}</p>
-
-        <div class="hv2-social-circles">
-          <a
-            v-for="link in socialIcons"
-            :key="link.alt"
-            :href="link.url"
-            :target="link.url.startsWith('mailto') ? null : '_blank'"
-            :rel="link.url.startsWith('mailto') ? null : 'noopener noreferrer'"
-            class="hv2-social-circle"
-            :aria-label="link.title || link.alt"
-          >
-            <div class="hv2-social-circle__disk" v-html="link.svg" />
-            <span>{{ link.alt }}</span>
-          </a>
-        </div>
-
-        <div class="hv2-connect__cta">
-          <a href="mailto:tyler@ingersoll.dev" class="hv2-btn hv2-btn--cta">{{ con.cta }}</a>
-        </div>
-
-      </div>
-    </section>
-
   </div>
 </template>
 
@@ -255,9 +227,6 @@ const hero = computed(() => pg.value.hero            || {});
 const eng  = computed(() => pg.value.engineering     || {});
 const mus  = computed(() => pg.value.music           || {});
 const bey  = computed(() => pg.value.beyond          || {});
-const con  = computed(() => pg.value.connect         || {});
-
-const socialIcons = computed(() => store.content?.footer?.socialIcons || []);
 
 const hasLink = (item) => !!item?.url;
 
@@ -338,22 +307,16 @@ const icons = {
   background-color: var(--color-bg-secondary);
 }
 
-.hv2-connect {
-  background-color: var(--color-bg-deepest);
-}
-
 .hv2-hero        { padding: 6.5rem 0 5.5rem; }
 .hv2-engineering { padding: 5rem 0; }
 .hv2-music       { padding: 5rem 0; }
 .hv2-beyond      { padding: 5rem 0; }
-.hv2-connect     { padding: 5rem 0 4rem; }
 
 @include respond-below(md) {
   .hv2-hero,
   .hv2-engineering,
   .hv2-music,
-  .hv2-beyond,
-  .hv2-connect {
+  .hv2-beyond {
     padding-top: 3rem;
     padding-bottom: 3rem;
   }
@@ -407,25 +370,6 @@ const icons = {
     }
   }
 
-  &--cta {
-    background-color: var(--color-accent-line);
-    color: #0d1014;
-    border: 2px solid var(--color-accent-line);
-    font-size: 1rem;
-    padding: 0.85rem 2.5rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-
-    &:hover {
-      background-color: transparent;
-      color: var(--color-accent-line);
-    }
-
-    &:focus-visible {
-      outline: 2px solid var(--color-focus);
-      outline-offset: 3px;
-    }
-  }
 }
 
 .hv2-btn-wrap {
@@ -882,95 +826,4 @@ const icons = {
   }
 }
 
-// ─── Connect section ───────────────────────────────────────────────────────────
-
-.hv2-connect {
-  &__sub {
-    text-align: center;
-    font-size: 1rem;
-    color: var(--color-text-secondary);
-    margin: -1.5rem 0 2.5rem;
-  }
-}
-
-.hv2-social-circles {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  margin-bottom: 2.5rem;
-
-  @include respond-below(xs) {
-    gap: 1rem;
-  }
-}
-
-.hv2-social-circle {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
-  @include transition(all);
-
-  &__disk {
-    width: 76px;
-    height: 76px;
-    border-radius: 50%;
-    border: 2px solid var(--color-border);
-    background-color: var(--color-bg-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    @include transition(all);
-
-    :deep(svg),
-    :deep(svg path),
-    :deep(svg circle),
-    :deep(svg polygon) {
-      fill: var(--color-text-secondary);
-      width: 28px;
-      height: 28px;
-      max-width: 28px;
-      max-height: 28px;
-    }
-  }
-
-  span {
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
-    @include transition(color);
-  }
-
-  &:hover &__disk {
-    border-color: var(--color-link-hover);
-    background-color: var(--color-bg-surface);
-
-    :deep(svg),
-    :deep(svg path),
-    :deep(svg circle),
-    :deep(svg polygon) {
-      fill: var(--color-link-hover);
-    }
-  }
-
-  &:hover span {
-    color: var(--color-text-secondary);
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--color-focus);
-    outline-offset: 4px;
-    border-radius: 4px;
-  }
-}
-
-.hv2-connect__cta {
-  display: flex;
-  justify-content: center;
-  margin-top: 0.5rem;
-}
 </style>
