@@ -96,6 +96,17 @@ a {
   @include text-link;
 }
 
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.85em;
+  background-color: var(--color-bg-surface);
+  color: var(--color-accent-line);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  word-break: break-word;
+}
+
 article {
   margin-top: $spacing-xl;
   margin-bottom: $spacing-xl;

@@ -126,34 +126,18 @@ export default {
         heading: "Built With",
         headingLevel: 3,
         content: [
+          "Think of this site as a living component library. The dual-career layout, balancing my engineering background with my session drum work, required a thoughtful UX approach rather than a disjointed, multi-page maze.",
+          "Under the hood, it follows the same patterns I use on professional design systems. Scoped SCSS modules, CSS custom properties for dynamic theming, and component-driven state management keep the codebase maintainable as it grows.",
+          "Feel free to <a href='https://github.com/tyleringersoll/ingersoll.dev' target='_blank' rel='noopener noreferrer'>dig into the source code on GitHub</a> or explore the <a href='/resume'>interactive resume</a>.",
           "Most of my daily production code is locked behind enterprise firewalls, so this site serves as my open-source sandbox. I went with Vue 3 and Nuxt because they hit the sweet spot between developer ergonomics and production-grade output.",
           "• <strong>Nuxt 3 & Static Pre-rendering:</strong> Every page is pre-rendered to static HTML at build time, delivering instant first paints and full SEO without a running Node.js server.",
           "• <strong>Vue 3 Composition API:</strong> Component logic is organized with the Composition API and script setup, keeping state management and reactivity clean and composable.",
           "• <strong>Pinia State Management:</strong> A Pinia store wraps the static content file and a separate store manages theme state, keeping both reactive and accessible anywhere in the component tree without prop drilling.",
           "• <strong>SCSS & CSS Custom Properties:</strong> A hand-rolled design system using scoped SCSS modules and CSS custom properties powers the dual-theme color system and responsive layout.",
-          "• <strong>SCSS Auto-injection via Vite:</strong> Variables and mixins are injected into every component's style block automatically via Vite's preprocessorOptions.additionalData config. No @import needed in any .vue file. It is a developer ergonomics decision that eliminates boilerplate without changing the output.",
-          "• <strong>Page Transitions:</strong> A global fade transition is configured via pageTransition in nuxt.config.ts, with a dedicated _fade.scss partial handling the enter/leave animation classes Nuxt applies during route changes.",
-          "• <strong>Purpose-Built Components:</strong> The inline SVG hero and the expand/collapse resume timeline are custom Vue components built to handle state, DOM updates, and accessibility in a way that reflects real-world engineering patterns.",
+          "• <strong>SCSS Auto-injection via Vite:</strong> Variables and mixins are injected into every component's style block automatically via Vite's <code>preprocessorOptions.additionalData</code> config. No <code>@import</code> needed in any <code>.vue</code> file. It is a developer ergonomics decision that eliminates boilerplate without changing the output.",
+          "• <strong>Page Transitions:</strong> A global fade transition is configured via <code>pageTransition</code> in <code>nuxt.config.ts</code>, with a dedicated <code>_fade.scss</code> partial handling the enter/leave animation classes Nuxt applies during route changes.",
+          "• <strong>Purpose-Built Components:</strong> The inline SVG hero uses explicit width and height attributes to prevent Cumulative Layout Shift (CLS) and keep the main thread unblocked during initial paint. The expand/collapse resume timeline is a custom Vue component built to handle state, DOM updates, and accessibility in a way that reflects real-world engineering patterns.",
           "• <strong>Netlify Deployment:</strong> Commits trigger automated builds and deploy pre-rendered output to Netlify's edge CDN."
-        ]
-      },
-      {
-        id: "content-architecture",
-        heading: "Content-Driven Architecture",
-        headingLevel: 3,
-        content: [
-          "All page content lives in a single data/content.js file as a plain JavaScript export. A Pinia store wraps it to make it reactive and globally accessible. Every page uses storeToRefs and computed to derive the exact content slice it needs, with no prop drilling and no repeated data fetching.",
-          "This is a deliberate CMS-without-a-CMS pattern. The separation of concerns mirrors what a headless CMS provides: content is authored in one place, the store is the delivery layer, and components are pure renderers. Swapping in a real API or a CMS integration would only require updating the store, leaving every component untouched.",
-          "The pre-render config in nuxt.config.ts lists only the routes that exist in the data layer, keeping the build output predictable and the deployment surface minimal."
-        ]
-      },
-      {
-        id: "anti-fouc",
-        heading: "Anti-FOUC Theme Initialization",
-        headingLevel: 3,
-        content: [
-          "Theme persistence is handled by a Pinia store that reads localStorage and applies a .light-mode class to the html element. But Pinia initializes after the page paints, which means returning users with light mode saved would see a flash of the dark theme on every load.",
-          "The fix is a blocking inline script injected into the head via nuxt.config.ts. It runs synchronously before any HTML renders, reads localStorage, and applies .light-mode immediately if needed. The script executes in under a millisecond and prevents any visible flash. Without it, the Pinia-driven approach would be correct but visually broken on every page load for light-mode users."
         ]
       },
       {
@@ -176,12 +160,32 @@ export default {
         ]
       },
       {
+        id: "content-architecture",
+        heading: "Content-Driven Architecture",
+        headingLevel: 3,
+        content: [
+          "All page content lives in a single <code>data/content.js</code> file as a plain JavaScript export. A Pinia store wraps it to make it reactive and globally accessible. Every page uses <code>storeToRefs</code> and <code>computed</code> to derive the exact content slice it needs, with no prop drilling and no repeated data fetching.",
+          "This is a deliberate CMS-without-a-CMS pattern. The separation of concerns mirrors what a headless CMS provides: content is authored in one place, the store is the delivery layer, and components are pure renderers. Swapping in a real API or a CMS integration would only require updating the store, leaving every component untouched.",
+          "The pre-render config in <code>nuxt.config.ts</code> lists only the routes that exist in the data layer, keeping the build output predictable and the deployment surface minimal."
+        ]
+      },
+      {
+        id: "anti-fouc",
+        heading: "Anti-FOUC Theme Initialization",
+        headingLevel: 3,
+        content: [
+          "Theme persistence is handled by a Pinia store that reads <code>localStorage</code> and applies a <code>.light-mode</code> class to the html element. But Pinia initializes after the page paints, which means returning users with light mode saved would see a flash of the dark theme on every load.",
+          "The fix is a blocking inline script injected into the head via <code>nuxt.config.ts</code>. It runs synchronously before any HTML renders, reads <code>localStorage</code>, and applies <code>.light-mode</code> immediately if needed. The script executes in under a millisecond and prevents any visible flash. Without it, the Pinia-driven approach would be correct but visually broken on every page load for light-mode users."
+        ]
+      },
+
+      {
         id: "deep-linking",
         heading: "Hash-Based Deep Linking",
         headingLevel: 3,
         content: [
           "The resume timeline supports URL hash navigation. Visiting /resume#best-egg automatically expands all of that employer's roles and scrolls to the section. The homepage links to specific employers this way, so the experience feels like navigating directly into a document rather than landing on a page and hunting for content.",
-          "The implementation watches route.hash, matches it against a slugified employer heading, and adds the matching entries to an expandedRoles Set. It then calls a custom useScrollToHash composable that uses nextTick plus requestAnimationFrame to wait for the DOM before computing scroll position. The offset calculation accounts for the sticky header height so the section heading is never obscured on arrival."
+          "The implementation watches <code>route.hash</code>, matches it against a slugified employer heading, and adds the matching entries to an <code>expandedRoles</code> Set. It then calls a custom <code>useScrollToHash</code> composable that uses <code>nextTick</code> plus <code>requestAnimationFrame</code> to wait for the DOM before computing scroll position. The offset calculation accounts for the sticky header height so the section heading is never obscured on arrival."
         ]
       },
       {
@@ -193,22 +197,13 @@ export default {
           "• <strong>Skip Navigation:</strong> A skip-to-content link lets keyboard and screen reader users bypass the header and jump straight to the page content.",
           "• <strong>Semantic HTML:</strong> Proper heading hierarchy, landmark elements, and native interactive controls throughout.",
           "• <strong>Keyboard Navigation:</strong> Every interactive element, including the expanding resume timeline and mobile navigation, is fully operable via keyboard with visible focus indicators. The mobile menu traps focus while open and closes on Escape.",
-          "• <strong>Inert on Collapsed Panels:</strong> The timeline uses the inert attribute on collapsed content panels, not just aria-hidden. aria-hidden removes content from the accessibility tree. inert goes further, removing keyboard focus, pointer events, and accessibility tree presence in a single attribute. It is the correct modern primitive for this pattern.",
+          "• <strong>Inert on Collapsed Panels:</strong> The timeline uses the <code>inert</code> attribute on collapsed content panels, not just <code>aria-hidden</code>. <code>aria-hidden</code> removes content from the accessibility tree. <code>inert</code> goes further, removing keyboard focus, pointer events, and accessibility tree presence in a single attribute. It is the correct modern primitive for this pattern.",
           "• <strong>Reduced Motion:</strong> A global <code>prefers-reduced-motion</code> media query disables animations and transitions for users who request it.",
           "• <strong>ARIA Where It Counts:</strong> Custom components like the timeline toggle, theme switch, and mobile menu use appropriate roles, labels, and state attributes for assistive technologies.",
           "• <strong>Dual-Theme Contrast:</strong> Both the dark and light themes use color pairings chosen to maintain readable contrast ratios."
         ]
       },
-      {
-        id: "case-study",
-        heading: "The Architecture",
-        headingLevel: 3,
-        content: [
-          "Think of this site as a living component library. The dual-career layout, balancing my engineering background with my session drum work, required a thoughtful UX approach rather than a disjointed, multi-page maze.",
-          "Under the hood, it follows the same patterns I use on professional design systems. Scoped SCSS modules, CSS custom properties for dynamic theming, and component-driven state management keep the codebase maintainable as it grows.",
-          "Feel free to <a href='https://github.com/tyleringersoll/ingersoll.dev' target='_blank' rel='noopener noreferrer'>dig into the source code on GitHub</a> or explore the <a href='/resume'>interactive resume</a>."
-        ]
-      }
+
     ],
     resume: [
       {
@@ -396,10 +391,10 @@ export default {
         heading: "Technical Skills",
         headingLevel: 2,
         skills: {
-          languages: ["JavaScript", "TypeScript", "HTML5", "CSS/SCSS", "SQL"],
-          frameworks: ["Angular", "Vue.js", "NestJS", "Node.js", "Web Components", "Sencha/Ext JS", "jQuery"],
-          infrastructure: ["GitHub Actions", "CI/CD", "Docker", "Nginx", "AWS", "Netlify"],
-          tools: ["Storybook", "Design Systems", "Jest", "Cypress", "Jasmine", "Git", "DataDog", "FullStory", "A/B Testing", "Accessibility (WCAG)"]
+          languages: ["JavaScript", "TypeScript", "HTML5", "CSS/SCSS", "Python"],
+          frameworks: ["Angular", "Vue.js", "Nuxt 3", "NestJS", "Django"],
+          infrastructure: ["Node.js", "Nginx", "Docker", "AWS", "GitHub Actions", "Netlify"],
+          concepts: ["Web Components", "Design Systems", "SSR", "Accessibility (WCAG 2.2 AA)", "CI/CD"]
         }
       }
     ],

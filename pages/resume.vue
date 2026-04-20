@@ -9,7 +9,7 @@
       <div class="resume-inner">
         <template v-for="{ entry, idx } in section.entries" :key="idx">
           <!-- First entry: flex header with download button + intro paragraph -->
-          <article v-if="!entry.roles && idx === 0" class="article resume-intro">
+          <article v-if="!entry.roles && !entry.skills && idx === 0" class="article resume-intro">
             <div class="resume-header">
               <h2 class="first-heading" v-html="entry.heading" />
               <a
@@ -34,7 +34,7 @@
           </article>
           <!-- Section heading (h2 with no content) -->
           <h2
-            v-else-if="!entry.roles && (!entry.content || entry.content.length === 0)"
+            v-else-if="!entry.roles && !entry.skills && (!entry.content || entry.content.length === 0)"
             class="section-heading"
             v-html="entry.heading"
           />
@@ -156,7 +156,13 @@ const formatPara = (para) => {
 };
 
 const formatCategory = (key) => {
-  return key.charAt(0).toUpperCase() + key.slice(1);
+  const labels = {
+    languages: 'Languages',
+    frameworks: 'Frameworks',
+    infrastructure: 'Infrastructure & Tools',
+    concepts: 'Concepts',
+  };
+  return labels[key] ?? (key.charAt(0).toUpperCase() + key.slice(1));
 };
 
 const isExpanded = (entryIdx, roleIdx) =>

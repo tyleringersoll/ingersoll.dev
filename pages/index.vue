@@ -103,7 +103,7 @@
         <div class="hv2-two-col">
 
           <div class="hv2-engineering__left">
-            <p>{{ engineeringSection.content[0] }}</p>
+            <p v-html="engineeringSection.content[0]" />
             <div class="hv2-btn-wrap">
               <NuxtLink to="/resume" class="hv2-btn hv2-btn--primary">{{ eng.cta }}</NuxtLink>
             </div>
@@ -137,7 +137,7 @@
 
           <div class="hv2-music__left">
             <h2>{{ musicSection.heading }}</h2>
-            <p>{{ musicSection.content[0] }}</p>
+            <p v-html="musicSection.content[0]" />
             <div class="hv2-btn-wrap">
               <NuxtLink to="/music" class="hv2-btn hv2-btn--primary">{{ mus.cta }}</NuxtLink>
             </div>
