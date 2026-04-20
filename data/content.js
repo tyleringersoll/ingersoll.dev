@@ -78,7 +78,7 @@ export default {
       music: {
         studioLabel: "Hybrid Drum Tracking Setup",
         studio: {
-          text: "I spent two years engineering a custom hybrid drum kit to recording pro-level tracks. I pair real cymbals with nearly-silent mesh heads, each hit triggering through the eDRUMin interface to output precise MIDI data to a DAW. The setup captures the energy of a live room while maintaining total post-performance control.",
+          text: "I spent two years engineering a custom hybrid drum kit to record pro-level tracks. I pair live cymbals with nearly-silent mesh heads. When struck, the heads fire a piezo trigger through the eDRUMin interface to output precise MIDI data to my DAW. The setup captures the energy of a live room while maintaining total post-performance control.",
           url: "https://tyleringersolldrums.com",
           external: true,
           ctaText: "Explore My Drum Studio"
@@ -283,7 +283,7 @@ export default {
             subheading: "Digital Development Services · 2014 - 2017",
             content: [
               "Delivered web, email, and enterprise solutions across multiple agency projects for Fortune 500 brands including Bank of America, David's Bridal, Chemours, Blue Cross Blue Shield Global, and DuPont, ultimately reaching tens of millions of users.",
-              "• Built responsive websites and landing pages for enterprise clients like Bank of America, David's Bridal, NASA Federal Credit Union,and Chemours.",
+              "• Built responsive websites and landing pages for enterprise clients like Bank of America, David's Bridal, NASA Federal Credit Union, and Chemours.",
               "• Developed adaptive HTML email campaigns for Bank of America's rewards and retention programs, optimizing for deliverability and cross-client compatibility.",
               "• Acted as Systems Owner for DuPont's SharePoint security auditing system, managing weekly reports and a server migrations alongside IBM consultants.",
               "• Developed SharePoint intranet solutions for Chemours and Everything But Water.",
@@ -413,8 +413,26 @@ export default {
           {
             subheading: "Producer & Session Drummer · 2024 - Present",
             content: [
-              "After the 2024 Omnisoul reunion at World Cafe Live, I engineered a purpose-built hybrid recording rig and opened for remote drum sessions. Now actively tracking for other artists from my home studio in Kennett Square, PA.",
-              "• Delivers professional stems to clients within a week, with full post-production flexibility."
+              "• Launched a professional remote tracking studio following two years of intensive research and iterative engineering to perfect a custom hybrid recording rig.",
+              "• Bridge the gap between acoustic character and digital control by tracking live Zildjian cymbals through a dedicated API 3124 analog chain, paired with a flawless MIDI translation triggered by physical hits on mesh heads via an eDRUMin 8 interface.",
+              "• Provide real-time remote co-production, streaming high-quality studio audio and video directly to client monitors to dial in arrangements on the fly.",
+              "• Deliver mix-ready 24-bit / 96kHz WAV files and raw MIDI data within a one-week turnaround, offering clients live cymbal audio, full post-production flexibility, and optional direct bass tracking."
+            ]
+          }
+        ]
+      },
+      {
+        heading: "SpeakerCity Band",
+        headingLevel: 3,
+        years: "2010 - 2016",
+        roles: [
+          {
+            subheading: "Drummer, DJ, & Co-Founder · 2010 - 2016",
+            content: [
+              "Co-founded and scaled a highly active event band, transitioning from the regional club circuit to high-end corporate events, large-scale universities, and week-long residencies in Key West.",
+              "• Performed as drummer and DJ at weddings, corporate events, and club venues throughout the Mid-Atlantic.",
+              "• Composed and produced musical sequences with click tracks, serving as the production backbone for live performances.",
+              "• Handled business tax filings as part of shared co-founder responsibilities."
             ]
           }
         ]
@@ -440,22 +458,6 @@ export default {
         ]
       },
       {
-        heading: "SpeakerCity Band",
-        headingLevel: 3,
-        years: "2010 - 2016",
-        roles: [
-          {
-            subheading: "Drummer, DJ, & Co-Founder · 2010 - 2016",
-            content: [
-              "Co-founded and scaled a highly active event band, transitioning from the regional club circuit to high-end corporate events, large-scale universities, and week-long residencies in Key West.",
-              "• Performed as drummer and DJ at weddings, corporate events, and club venues throughout the Mid-Atlantic.",
-              "• Composed and produced musical sequences with click tracks, serving as the production backbone for live performances.",
-              "• Handled business tax filings as part of shared co-founder responsibilities."
-            ]
-          }
-        ]
-      },
-      {
         heading: "The Healthy Doses",
         headingLevel: 3,
         years: "1999 - 2000",
@@ -464,7 +466,9 @@ export default {
             subheading: "Drummer · 1999 - 2000",
             content: [
               "Toured the regional jam band circuit with this project, sharing festival bills with established national acts.",
-              "• Performed alongside acts like The Disco Biscuits and played Phish's Camp Oswego festival."
+              "• Anchored a pioneering experimental jam band, building a massive local following at staple University of Delaware venues including Deer Park Tavern and The East End Cafe.",
+              "• Scaled from the college circuit to outdoor stages, sharing festival bills with national acts like The Disco Biscuits and Lake Trout, and performing at Phish's 65,000-capacity Camp Oswego festival.",
+              "• Treated the relentless touring schedule as a masterclass in live performance, honing skills in listening, improvising, and mastering dynamic control to live in the moment rather than just keeping time.",
             ]
           }
         ]
