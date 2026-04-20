@@ -41,7 +41,7 @@ export default {
         heading: "Music",
         headingLevel: 4,
         content: [
-          "With over three decades behind the kit, I've moved my playing out of the venues and into the studio. After years of touring with bands under label support and playing festival-sized crowds from the Mid-Atlantic to Key West, my focus is now entirely on production. Today, I track remote sessions and shoot drum videos using a hybrid setup that pairs the energy of live cymbals with total digital control."
+          "With over three decades behind the kit, I've moved my playing out of the venues and into the studio. After years of touring nationally under label support, and later anchoring massive university events and sports complexes from the Mid-Atlantic to Key West, my focus is now entirely on production. Today, I track remote sessions and shoot drum videos using a hybrid setup that pairs the energy of live cymbals with total digital control."
         ]
       },
       {
@@ -104,7 +104,7 @@ export default {
       {
         id: "about-site",
         heading: "About This Site",
-        headingLevel: 3,
+        headingLevel: 2,
         content: [
           "Most of my daily production code is locked behind enterprise firewalls, so this site serves as my open-source sandbox. Built with Vue 3 and Nuxt 3, it balances developer ergonomics with production-grade SSR performance. Every page is pre-rendered to static HTML at build time, styled with a hand-rolled SCSS design system, and deployed to Netlify's edge CDN."
         ],
@@ -122,13 +122,20 @@ export default {
     ],
     architecture: [
       {
-        id: "built-with",
-        heading: "Built With",
-        headingLevel: 3,
+        id: "intro",
+        heading: "Architecture",
+        headingLevel: 2,
         content: [
           "Think of this site as a living component library. The dual-career layout, balancing my engineering background with my session drum work, required a thoughtful UX approach rather than a disjointed, multi-page maze.",
           "Under the hood, it follows the same patterns I use on professional design systems. Scoped SCSS modules, CSS custom properties for dynamic theming, and component-driven state management keep the codebase maintainable as it grows.",
           "Feel free to <a href='https://github.com/tyleringersoll/ingersoll.dev' target='_blank' rel='noopener noreferrer'>dig into the source code on GitHub</a> or explore the <a href='/resume'>interactive resume</a>.",
+        ]
+      },
+      {
+        id: "built-with",
+        heading: "Built With",
+        headingLevel: 2,
+        content: [
           "Most of my daily production code is locked behind enterprise firewalls, so this site serves as my open-source sandbox. I went with Vue 3 and Nuxt because they hit the sweet spot between developer ergonomics and production-grade output.",
           "• <strong>Nuxt 3 & Static Pre-rendering:</strong> Every page is pre-rendered to static HTML at build time, delivering instant first paints and full SEO without a running Node.js server.",
           "• <strong>Vue 3 Composition API:</strong> Component logic is organized with the Composition API and script setup, keeping state management and reactivity clean and composable.",
@@ -143,7 +150,7 @@ export default {
       {
         id: "performance",
         heading: "Performance & Lighthouse",
-        headingLevel: 3,
+        headingLevel: 2,
         content: [
           "Leading an engineering team means treating performance as a fundamental requirement, not an afterthought. I brought that same standard to this site. Pre-rendering every route at build time and keeping the JavaScript payload minimal means consistently strong metrics on live audits."
         ],
@@ -162,7 +169,7 @@ export default {
       {
         id: "content-architecture",
         heading: "Content-Driven Architecture",
-        headingLevel: 3,
+        headingLevel: 2,
         content: [
           "All page content lives in a single <code>data/content.js</code> file as a plain JavaScript export. A Pinia store wraps it to make it reactive and globally accessible. Every page uses <code>storeToRefs</code> and <code>computed</code> to derive the exact content slice it needs, with no prop drilling and no repeated data fetching.",
           "This is a deliberate CMS-without-a-CMS pattern. The separation of concerns mirrors what a headless CMS provides: content is authored in one place, the store is the delivery layer, and components are pure renderers. Swapping in a real API or a CMS integration would only require updating the store, leaving every component untouched.",
@@ -172,7 +179,7 @@ export default {
       {
         id: "anti-fouc",
         heading: "Anti-FOUC Theme Initialization",
-        headingLevel: 3,
+        headingLevel: 2,
         content: [
           "Theme persistence is handled by a Pinia store that reads <code>localStorage</code> and applies a <code>.light-mode</code> class to the html element. But Pinia initializes after the page paints, which means returning users with light mode saved would see a flash of the dark theme on every load.",
           "The fix is a blocking inline script injected into the head via <code>nuxt.config.ts</code>. It runs synchronously before any HTML renders, reads <code>localStorage</code>, and applies <code>.light-mode</code> immediately if needed. The script executes in under a millisecond and prevents any visible flash. Without it, the Pinia-driven approach would be correct but visually broken on every page load for light-mode users."
@@ -182,7 +189,7 @@ export default {
       {
         id: "deep-linking",
         heading: "Hash-Based Deep Linking",
-        headingLevel: 3,
+        headingLevel: 2,
         content: [
           "The resume timeline supports URL hash navigation. Visiting /resume#best-egg automatically expands all of that employer's roles and scrolls to the section. The homepage links to specific employers this way, so the experience feels like navigating directly into a document rather than landing on a page and hunting for content.",
           "The implementation watches <code>route.hash</code>, matches it against a slugified employer heading, and adds the matching entries to an <code>expandedRoles</code> Set. It then calls a custom <code>useScrollToHash</code> composable that uses <code>nextTick</code> plus <code>requestAnimationFrame</code> to wait for the DOM before computing scroll position. The offset calculation accounts for the sticky header height so the section heading is never obscured on arrival."
@@ -191,7 +198,7 @@ export default {
       {
         id: "accessibility",
         heading: "Accessibility (A11Y)",
-        headingLevel: 3,
+        headingLevel: 2,
         content: [
           "Building for massive user bases at work taught me that digital quality means building for everyone. I built this site with accessibility as a baseline, not an afterthought.",
           "• <strong>Skip Navigation:</strong> A skip-to-content link lets keyboard and screen reader users bypass the header and jump straight to the page content.",
@@ -243,7 +250,7 @@ export default {
               "• Guide technical direction and delivery for core customer platforms, focusing on stability and performance at scale.",
               "• Manage an engineering team and establish technical priorities, collaborating cross-functionally with other pods to align delivery with broader business goals.",
               "• Drive team growth and scale engineering capacity to meet expanding technical demands, leading candidate evaluations and key hiring decisions.",
-              "• Drive the team's adoption of AI-assisted development tools like Cursor AI and GitHub Copilot, establishing shared standards that improve workflow and code quality."
+              "• Championed the adoption of Cursor AI and GitHub Copilot across the engineering organization, establishing standards that accelerated feature delivery and standardized code quality."
             ]
           },
           {
@@ -377,7 +384,7 @@ export default {
         heading: "Additional Experience",
         headingLevel: 2,
         content: [
-          "For my 30-year history as a touring and session drummer, please visit my <a href='/music'>music portfolio</a>."
+          "Prior to engineering, built a 30-year career as a professional touring and session drummer. Scaled an independent act to national syndication with major label support (Wind-up Records), secured sync placements in network television, and managed regional business operations for a highly active event band. See full discography and timeline at <a href='/music'>/music</a>."
         ]
       },
       {
@@ -404,14 +411,6 @@ export default {
         heading: "Music & Production",
         content: [
           "After decades of touring under label support and tracking in major rooms, my focus is now entirely on my home studio. I spend my time outside of engineering producing remote drum sessions and creating content using a custom hybrid recording architecture."
-        ]
-      },
-      {
-        heading: "The Hybrid Rig",
-        headingLevel: 3,
-        content: [
-          "The reality of modern recording requires both the raw energy of a live room and the total post-performance control of digital production. I spent two years engineering a silent hybrid recording rig. By pairing acoustic Zildjian cymbals with nearly-silent mesh heads, each hit signals a trigger through the eDRUMin interface, which outputs highly precise MIDI note data. The result captures the exact feel of a performance with limitless tonal flexibility.",
-          "On the signal chain side, the live cymbals run through an analog API 3124V preamp to preserve the full overtone wash of the acoustic sound. The MIDI output feeds directly into my DAW for sample selection and mixing. This gives me a recording that sounds like a live room but behaves like a fully programmable instrument."
         ]
       },
       {
@@ -495,6 +494,14 @@ export default {
               "Began serious studio work with this alt-hard rock project, playing drums and bass and tracking multiple full-length independent records."
             ]
           }
+        ]
+      },
+      {
+        heading: "The Hybrid Rig",
+        headingLevel: 3,
+        content: [
+          "The reality of modern recording requires both the raw energy of a live room and the total post-performance control of digital production. I spent two years engineering a silent hybrid recording rig. By pairing acoustic Zildjian cymbals with nearly-silent mesh heads, each hit signals a trigger through the eDRUMin interface, which outputs highly precise MIDI note data. The result captures the exact feel of a performance with limitless tonal flexibility.",
+          "On the signal chain side, the live cymbals run through an analog API 3124V preamp to preserve the full overtone wash of the acoustic sound. The MIDI output feeds directly into my DAW for sample selection and mixing. This gives me a recording that sounds like a live room but behaves like a fully programmable instrument."
         ]
       },
       {

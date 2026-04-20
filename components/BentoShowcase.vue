@@ -1,37 +1,42 @@
 <template>
   <section v-if="section" id="about-site" class="showcase-section">
-    <div class="showcase-container">
-      <h2 class="showcase-heading">About This Site</h2>
+    <div class="showcase-inner">
+      <div class="showcase-two-col">
 
-      <div class="showcase-card">
-        <div class="showcase-card__body">
+        <div class="showcase-left">
+          <h2>{{ section.heading }}</h2>
           <p v-for="(para, i) in section.content" :key="i" v-html="para" />
-        </div>
-
-        <div v-if="section.scores" class="gauges">
-          <div v-for="score in section.scores" :key="score.label" class="gauges__item">
-            <div class="gauge">
-              <svg viewBox="0 0 80 80" aria-hidden="true">
-                <circle class="gauge__track" cx="40" cy="40" r="34" />
-                <circle
-                  class="gauge__fill"
-                  cx="40" cy="40" r="34"
-                  :stroke-dasharray="circ"
-                  :stroke-dashoffset="circ * (1 - score.value / 100)"
-                  transform="rotate(-90 40 40)"
-                />
-              </svg>
-              <span class="gauge__value">{{ score.value }}</span>
-            </div>
-            <span class="gauges__label">{{ score.label }}</span>
+          <div v-if="section.cta" class="showcase-btn-wrap">
+            <NuxtLink :to="section.cta.url" class="showcase-btn">
+              {{ section.cta.label }} →
+            </NuxtLink>
           </div>
         </div>
 
-        <div v-if="section.cta" class="showcase-card__cta">
-          <NuxtLink :to="section.cta.url" class="showcase-btn">
-            {{ section.cta.label }} →
-          </NuxtLink>
+        <div class="showcase-right">
+          <div v-if="section.scores" class="scores-card">
+            <p class="scores-label">Lighthouse Scores</p>
+            <div class="gauges">
+              <div v-for="score in section.scores" :key="score.label" class="gauges__item">
+                <div class="gauge">
+                  <svg viewBox="0 0 80 80" aria-hidden="true">
+                    <circle class="gauge__track" cx="40" cy="40" r="34" />
+                    <circle
+                      class="gauge__fill"
+                      cx="40" cy="40" r="34"
+                      :stroke-dasharray="circ"
+                      :stroke-dashoffset="circ * (1 - score.value / 100)"
+                      transform="rotate(-90 40 40)"
+                    />
+                  </svg>
+                  <span class="gauge__value">{{ score.value }}</span>
+                </div>
+                <span class="gauges__label">{{ score.label }}</span>
+              </div>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -52,80 +57,85 @@ const circ = 2 * Math.PI * 34;
 // ─── Section wrapper ────────────────────────────────────────────────────────
 
 .showcase-section {
-  padding: 6rem 0 5rem;
+  padding: 5rem 0;
+  background-color: var(--color-bg-secondary);
   border-bottom: 1px solid var(--color-border);
   scroll-margin-top: 6rem;
 
-  @include respond-below(sm) {
-    padding: 4rem 0 3rem;
+  @include respond-below(md) {
+    padding: 3rem 0;
   }
 }
 
-.showcase-container {
+.showcase-inner {
   max-width: 1160px;
+  width: 100%;
   margin: 0 auto;
   padding: 0 $container-padding-x;
 }
 
-.showcase-heading {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--color-accent-line);
-  margin-bottom: 3rem;
+// ─── Two-column grid ────────────────────────────────────────────────────────
 
-  @include respond-below(sm) {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
+.showcase-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+
+  @include respond-below(md) {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
   }
 }
 
-// ─── Card ──────────────────────────────────────────────────────────────────
+// ─── Left column ────────────────────────────────────────────────────────────
 
-.showcase-card {
-  margin: 0;
-  padding: 2.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  background-color: var(--color-bg-secondary);
-  border: 1px solid var(--color-border);
-  border-radius: 1rem;
-  max-width: 720px;
-
-  &__body {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-
-    p {
-      font-size: 0.95rem;
-      line-height: 1.75;
-      color: var(--color-text-secondary);
-      margin: 0;
-    }
+.showcase-left {
+  h2 {
+    margin-bottom: 1.25rem;
   }
 
-  &__cta {
-    padding-top: 0.5rem;
+  p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin: 0 0 1rem;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.showcase-btn-wrap {
+  margin-top: 2rem;
+
+  @include respond-below(sm) {
+    .showcase-btn {
+      width: 100%;
+    }
   }
 }
 
 .showcase-btn {
   display: inline-flex;
   align-items: center;
-  padding: 0.6rem 1.5rem;
+  justify-content: center;
+  padding: 0.7rem 1.75rem;
   border-radius: 9999px;
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-decoration: none;
-  color: var(--color-accent-line);
-  border: 2px solid var(--color-accent-line);
+  background-color: var(--color-link);
+  color: var(--color-btn-primary-text);
+  border: 2px solid var(--color-link);
   @include transition(all);
 
   &:hover {
-    background-color: var(--color-accent-line);
-    color: #0d1014;
+    background-color: var(--color-link-hover);
+    border-color: var(--color-link-hover);
+    color: #1a1a1a;
   }
 
   &:focus-visible {
@@ -134,14 +144,43 @@ const circ = 2 * Math.PI * 34;
   }
 }
 
-// ─── Lighthouse gauges ──────────────────────────────────────────────────────
+// ─── Right column ────────────────────────────────────────────────────────────
+
+.showcase-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  @include respond-to(md) {
+    padding-top: 4rem;
+  }
+}
+
+// ─── Scores card ────────────────────────────────────────────────────────────
+
+.scores-card {
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-accent-line);
+  border-radius: 8px;
+  padding: 1.5rem 1.25rem 1.25rem 1.1rem;
+}
+
+.scores-label {
+  margin: 0 0 1.25rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent-line);
+}
+
+// ─── Gauges ─────────────────────────────────────────────────────────────────
 
 .gauges {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-  max-width: 400px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem 0.5rem;
 
   &__item {
     display: flex;
@@ -156,6 +195,7 @@ const circ = 2 * Math.PI * 34;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--color-text-secondary);
+    text-align: center;
   }
 }
 

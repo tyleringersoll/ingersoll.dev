@@ -164,6 +164,9 @@
       </div>
     </section>
 
+    <!-- ===================== ABOUT THIS SITE ===================== -->
+    <BentoShowcase :sections="showcase" />
+
     <!-- ===================== BEYOND WORK ===================== -->
     <section class="hv2-beyond">
       <div class="hv2-inner">
@@ -199,9 +202,6 @@
         </div>
       </div>
     </section>
-
-    <!-- ===================== ABOUT THIS SITE ===================== -->
-    <BentoShowcase :sections="showcase" />
 
   </div>
 </template>
@@ -299,12 +299,12 @@ const icons = {
 // ─── Section backgrounds ──────────────────────────────────────────────────────
 
 .hv2-hero,
-.hv2-music {
+.hv2-music,
+.hv2-beyond {
   background-color: var(--color-bg-primary);
 }
 
-.hv2-engineering,
-.hv2-beyond {
+.hv2-engineering {
   background-color: var(--color-bg-secondary);
 }
 

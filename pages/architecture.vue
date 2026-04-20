@@ -1,10 +1,24 @@
 <template>
   <div v-if="archContent" class="arch-page">
+
+    <!-- Page intro -->
+    <section v-if="introSection" class="arch-section arch-intro">
+      <div class="arch-inner">
+        <h2>{{ introSection.heading }}</h2>
+        <p
+          v-for="(para, i) in introSection.content"
+          :key="i"
+          class="arch-intro__body"
+          v-html="para"
+        />
+      </div>
+    </section>
+
     <section
-      v-for="(section, sIdx) in archContent"
+      v-for="(section, sIdx) in contentSections"
       :key="sIdx"
       class="arch-section"
-      :class="{ 'arch-section--alt': sIdx % 2 !== 0 }"
+      :class="{ 'arch-section--alt': sIdx % 2 === 0 }"
     >
       <div class="arch-inner">
         <article :id="section.id" class="arch-card">
@@ -63,6 +77,16 @@ const archContent = computed(() => {
   return content.value.architecture ?? null;
 });
 
+const introSection = computed(() => {
+  const first = archContent.value?.[0];
+  return first?.headingLevel === 2 ? first : null;
+});
+
+const contentSections = computed(() => {
+  const sections = archContent.value || [];
+  return introSection.value ? sections.slice(1) : sections;
+});
+
 const strip = (s) => s.trim().replace(/^•\s*/, '');
 const prose = (section) => (section?.content || []).filter(p => !p.trim().startsWith('•'));
 const bullets = (section) => (section?.content || []).filter(p => p.trim().startsWith('•')).map(strip);
@@ -78,11 +102,11 @@ const circ = 2 * Math.PI * 34;
 // ─── Section wrappers ─────���──────────────────────────────────────────────────
 
 .arch-section {
-  padding: 3rem 0;
+  padding: 2.5rem 0;
   border-bottom: 1px solid var(--color-border);
 
   @include respond-below(md) {
-    padding: 2rem 0;
+    padding: 1.5rem 0;
   }
 
   &:last-child {
@@ -99,6 +123,30 @@ const circ = 2 * Math.PI * 34;
   width: 100%;
   margin: 0 auto;
   padding: 0 $container-padding-x;
+
+  :deep(article) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+// ─── Intro section ──────────────────────────────────────────────────────────
+
+.arch-intro {
+  h2 {
+    margin-bottom: 1.25rem;
+  }
+}
+
+.arch-intro__body {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  margin: 0 0 1rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 // ─── Card ───────────────────────���──────────────────────────────────────────
@@ -109,8 +157,6 @@ const circ = 2 * Math.PI * 34;
   gap: 1.5rem;
 
   &__title {
-    font-size: 1.25rem;
-    font-weight: 700;
     color: var(--color-accent-line);
     margin: 0;
   }
