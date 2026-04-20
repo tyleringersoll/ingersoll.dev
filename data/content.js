@@ -126,24 +126,13 @@ export default {
         heading: "Architecture",
         headingLevel: 2,
         content: [
-          "Think of this site as a living component library. The dual-career layout, balancing my engineering background with my session drum work, required a thoughtful UX approach rather than a disjointed, multi-page maze.",
-          "Under the hood, it follows the same patterns I use on professional design systems. Scoped SCSS modules, CSS custom properties for dynamic theming, and component-driven state management keep the codebase maintainable as it grows.",
-          "Feel free to <a href='https://github.com/tyleringersoll/ingersoll.dev' target='_blank' rel='noopener noreferrer'>dig into the source code on GitHub</a> or explore the <a href='/resume'>interactive resume</a>.",
-        ]
-      },
-      {
-        id: "built-with",
-        heading: "Built With",
-        headingLevel: 2,
-        content: [
-          "Most of my daily production code is locked behind enterprise firewalls, so this site serves as my open-source sandbox. I went with Vue 3 and Nuxt because they hit the sweet spot between developer ergonomics and production-grade output.",
+          "Think of this site as a living component library and open-source sandbox. Because most of my daily production code is locked behind enterprise firewalls, I designed this layout to balance my engineering background with my session drum work. Built with Vue 3 and Nuxt, it hits the sweet spot between developer ergonomics and production-grade SSR performance.",
           "• <strong>Nuxt 3 & Static Pre-rendering:</strong> Every page is pre-rendered to static HTML at build time, delivering instant first paints and full SEO without a running Node.js server.",
           "• <strong>Vue 3 Composition API:</strong> Component logic is organized with the Composition API and script setup, keeping state management and reactivity clean and composable.",
           "• <strong>Pinia State Management:</strong> A Pinia store wraps the static content file and a separate store manages theme state, keeping both reactive and accessible anywhere in the component tree without prop drilling.",
           "• <strong>SCSS & CSS Custom Properties:</strong> A hand-rolled design system using scoped SCSS modules and CSS custom properties powers the dual-theme color system and responsive layout.",
           "• <strong>SCSS Auto-injection via Vite:</strong> Variables and mixins are injected into every component's style block automatically via Vite's <code>preprocessorOptions.additionalData</code> config. No <code>@import</code> needed in any <code>.vue</code> file. It is a developer ergonomics decision that eliminates boilerplate without changing the output.",
           "• <strong>Page Transitions:</strong> A global fade transition is configured via <code>pageTransition</code> in <code>nuxt.config.ts</code>, with a dedicated <code>_fade.scss</code> partial handling the enter/leave animation classes Nuxt applies during route changes.",
-          "• <strong>Purpose-Built Components:</strong> The inline SVG hero uses explicit width and height attributes to prevent Cumulative Layout Shift (CLS) and keep the main thread unblocked during initial paint. The expand/collapse resume timeline is a custom Vue component built to handle state, DOM updates, and accessibility in a way that reflects real-world engineering patterns.",
           "• <strong>Netlify Deployment:</strong> Commits trigger automated builds and deploy pre-rendered output to Netlify's edge CDN."
         ]
       },
@@ -427,7 +416,6 @@ export default {
             subheading: "Producer & Session Drummer · 2024 - Present",
             content: [
               "Following a 2024 reunion show with Omnisoul at World Cafe Live, I designed and built a custom hybrid recording rig. Now actively tracking remote drum sessions from a purpose-built home studio in PA.",
-              "• Produces drum covers and remote session tracks using a hybrid eDRUMin/mesh head/live cymbal architecture.",
               "• Delivers professional stems to clients within a week, with full post-production flexibility."
             ]
           }
@@ -498,7 +486,7 @@ export default {
       },
       {
         heading: "The Hybrid Rig",
-        headingLevel: 3,
+        headingLevel: 2,
         content: [
           "The reality of modern recording requires both the raw energy of a live room and the total post-performance control of digital production. I spent two years engineering a silent hybrid recording rig. By pairing acoustic Zildjian cymbals with nearly-silent mesh heads, each hit signals a trigger through the eDRUMin interface, which outputs highly precise MIDI note data. The result captures the exact feel of a performance with limitless tonal flexibility.",
           "On the signal chain side, the live cymbals run through an analog API 3124V preamp to preserve the full overtone wash of the acoustic sound. The MIDI output feeds directly into my DAW for sample selection and mixing. This gives me a recording that sounds like a live room but behaves like a fully programmable instrument."
@@ -506,7 +494,7 @@ export default {
       },
       {
         heading: "Explore the Studio",
-        headingLevel: 3,
+        headingLevel: 2,
         content: [
           "To see the hybrid rig in action, view my gear list, check out my latest covers, or review my full 30-year discography, visit my dedicated studio site."
         ],

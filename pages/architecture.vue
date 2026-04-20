@@ -6,11 +6,14 @@
       <div class="arch-inner">
         <h2>{{ introSection.heading }}</h2>
         <p
-          v-for="(para, i) in introSection.content"
+          v-for="(para, i) in prose(introSection)"
           :key="i"
           class="arch-intro__body"
           v-html="para"
         />
+        <ul v-if="bullets(introSection).length" class="arch-list">
+          <li v-for="(item, i) in bullets(introSection)" :key="i" v-html="item" />
+        </ul>
       </div>
     </section>
 

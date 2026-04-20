@@ -71,7 +71,13 @@
               </div>
               <div v-if="entry.techStack" class="employer__tech">
                 <p class="employer__context-label">Tech</p>
-                <p class="employer__tech-list" v-html="entry.techStack" />
+                <div class="employer__tech-pills">
+                  <span
+                    v-for="(tech, tIdx) in entry.techStack.split(', ')"
+                    :key="tIdx"
+                    class="tech-pill"
+                  >{{ tech.trim() }}</span>
+                </div>
               </div>
             </div>
             <Timeline>
@@ -86,8 +92,19 @@
                 @toggle="toggleRole(idx, roleIdx)"
               >
                 <template v-for="(para, paraIdx) in role.content" :key="paraIdx">
-                  <hr v-if="para.trim().startsWith('<strong>Tech:')" class="tech-divider" />
+                  <template v-if="para.trim().startsWith('<strong>Tech:')">
+                    <hr class="tech-divider" />
+                    <p class="employer__context-label">Tech</p>
+                    <div class="employer__tech-pills">
+                      <span
+                        v-for="(tech, tIdx) in parseTech(para)"
+                        :key="tIdx"
+                        class="tech-pill"
+                      >{{ tech }}</span>
+                    </div>
+                  </template>
                   <p
+                    v-else
                     :class="{ 'article__bullet-item': para.trim().startsWith('•') }"
                     v-html="formatPara(para)"
                   />
@@ -154,6 +171,9 @@ const formatPara = (para) => {
   }
   return para;
 };
+
+const parseTech = (para) =>
+  para.replace(/<strong>Tech:<\/strong>\s*/i, '').split(',').map(t => t.trim()).filter(Boolean);
 
 const formatCategory = (key) => {
   const labels = {
@@ -420,10 +440,23 @@ watch(resumeContent, () => handleHash(route.hash));
   border-top: 1px solid var(--color-border);
 }
 
-.employer__tech-list {
-  font-size: 0.88rem;
-  line-height: 1.7;
-  color: var(--color-text-secondary);
+.employer__tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
   margin: 0;
+}
+
+.tech-pill {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  white-space: nowrap;
 }
 </style>
