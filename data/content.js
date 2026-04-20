@@ -171,7 +171,7 @@ export default {
         headingLevel: 2,
         content: [
           "Theme persistence is handled by a Pinia store that reads <code>localStorage</code> and applies a <code>.light-mode</code> class to the html element. But Pinia initializes after the page paints, which means returning users with light mode saved would see a flash of the dark theme on every load.",
-          "The fix is a blocking inline script injected into the head via <code>nuxt.config.ts</code>. It runs synchronously before any HTML renders, reads <code>localStorage</code>, and applies <code>.light-mode</code> immediately if needed. The script executes in under a millisecond and prevents any visible flash. Without it, the Pinia-driven approach would be correct but visually broken on every page load for light-mode users."
+          "The fix is a blocking inline script injected into the head via the <code>app.head.script</code> array in <code>nuxt.config.ts</code>. It runs synchronously before any HTML renders, reads <code>localStorage</code>, and applies <code>.light-mode</code> immediately if needed. The script executes in under a millisecond and prevents any visible flash. Without it, the Pinia-driven approach would be correct but visually broken on every page load for light-mode users."
         ]
       },
 
@@ -225,21 +225,17 @@ export default {
         heading: "Best Egg",
         headingLevel: 3,
         years: "2022 - Present",
-        domain: [
-          "• Customer verifications: identity verification and fraud prevention",
-          "• Payment servicing: payment processing, auto pay, payment methods, due date changes",
-          "• Authentication: login, signup, password recovery, customer servicing hub"
-        ],
-        techStack: "Angular, TypeScript, Jasmine, GitHub Actions, Node.js, Nginx, Django, Python, DataDog, FullStory",
+        lead: "Leading engineering across core customer platforms, including identity verification, payment processing, and authentication.",
         roles: [
           {
             subheading: "Director II, Software Engineering · 2026 - Present",
             content: [
-              "Promoted to Director II to own technical direction and delivery across all customer-facing platforms, expanding scope from hands-on engineering leadership to organizational strategy and team scaling.",
+              "Promoted to Director II across verification, servicing, and authentication  platforms, with scope spanning organizational leadership and active engineering. I drive team strategy and hiring decisions while contributing directly to high-visibility technical work.",
               "• Guide technical direction and delivery for core customer platforms, focusing on stability and performance at scale.",
               "• Manage an engineering team and establish technical priorities, collaborating cross-functionally with other pods to align delivery with broader business goals.",
               "• Drive team growth and scale engineering capacity to meet expanding technical demands, leading candidate evaluations and key hiring decisions.",
-              "• Championed the adoption of Cursor AI and GitHub Copilot across the engineering organization, establishing standards that accelerated feature delivery and standardized code quality."
+              "• Contributed to the adoption of Cursor AI and GitHub Copilot across the engineering organization, establishing standards that accelerated feature delivery and standardized code quality.",
+              "<strong>Tech:</strong> Angular, TypeScript, DataDog, Figma, Miro, Jira, Confluence, FullStory"
             ]
           },
           {
@@ -247,7 +243,8 @@ export default {
             content: [
               "Promoted to Senior Lead II to take ownership of frontend architecture and roadmap planning, partnering directly with product and UX while mentoring engineers across the company.",
               "• Managed the technical lifecycle for critical third-party fintech integrations like MX and Method Financial, driving the process from frontend architectural design through production rollout.",
-              "• Strengthened frontend security by implementing a Level 3 Content Security Policy (CSP) utilizing dynamic nonces, and operationalized the deployment by integrating violation reporting and alerting through DataDog."
+              "• Strengthened frontend security by implementing a Level 3 Content Security Policy (CSP) utilizing dynamic nonces, and operationalized the deployment by integrating violation reporting and alerting through DataDog.",
+              "<strong>Tech:</strong> Angular, TypeScript, Node.js, Python, Django, Cursor AI, GitHub Copilot"
             ]
           },
           {
@@ -256,7 +253,8 @@ export default {
               "Joined Best Egg to modernize legacy Angular codebases and build the foundation our teams use today. Updated the architecture and libraries and established lasting development patterns.",
               "• Drove an architectural update that implemented lazy-loaded modules, reduced main bundle sizes, and migrated the platform from Bootstrap to Angular Material.",
               "• Collaborated to architect and launch No-Auth Quick Pay and automated payment scheduling, simplifying the payment experience for customers.",
-              "• Golden Egg Award for \"BE a Builder of Great Teams\" (Q3 2023)."
+              "• Golden Egg Award for \"BE a Builder of Great Teams\" (Q3 2023).",
+              "<strong>Tech:</strong> Angular, TypeScript, Tailwind CSS, Angular Material, Docker, Nginx, Jasmine"
             ]
           }
         ]
@@ -494,7 +492,7 @@ export default {
       },
       {
         heading: "Explore the Studio",
-        headingLevel: 2,
+        headingLevel: 3,
         content: [
           "To see the hybrid rig in action, view my gear list, check out my latest covers, or review my full 30-year discography, visit my dedicated studio site."
         ],

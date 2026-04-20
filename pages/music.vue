@@ -17,17 +17,24 @@
           />
           <!-- Regular article (no roles) -->
           <template v-else-if="!entry.roles">
-            <Article :article="entry" :index="idx" />
-            <div v-if="entry.cta" class="music-cta-wrap">
-              <a
-                :href="entry.cta.url"
-                :target="entry.cta.external ? '_blank' : null"
-                :rel="entry.cta.external ? 'noopener noreferrer' : null"
-                class="music-cta-btn"
-              >
-                {{ entry.cta.label }} →
-              </a>
-            </div>
+            <template v-if="entry.cta">
+              <div class="music-cta-card">
+                <Article :article="entry" :index="idx" />
+                <div class="music-cta-wrap">
+                  <a
+                    :href="entry.cta.url"
+                    :target="entry.cta.external ? '_blank' : null"
+                    :rel="entry.cta.external ? 'noopener noreferrer' : null"
+                    class="music-cta-btn"
+                  >
+                    {{ entry.cta.label }} →
+                  </a>
+                </div>
+              </div>
+            </template>
+            <template v-else>
+              <Article :article="entry" :index="idx" />
+            </template>
           </template>
           <!-- Timeline entry with roles -->
           <article v-else class="article employer">
@@ -202,24 +209,41 @@ watch(musicContent, () => handleHash(route.hash));
   margin-bottom: $spacing-md;
 }
 
+// ─── CTA section ─────────────────────────────────────────────────────────────
+
+.music-cta-card {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-link);
+  border-radius: 12px;
+  padding: $spacing-lg;
+  margin-top: $spacing-md;
+
+  :deep(h3) {
+    margin-top: 0;
+    margin-bottom: $spacing-sm;
+  }
+}
+
 // ─── CTA button ──────────────────────────────────────────────────────────────
 
 .music-cta-wrap {
   margin-top: $spacing-md;
-  margin-bottom: $spacing-lg;
+  margin-bottom: 0;
 }
 
 .music-cta-btn {
   display: inline-flex;
   align-items: center;
-  padding: 0.7rem 1.75rem;
+  justify-content: center;
+  padding: 0.75rem 2rem;
 
   @include respond-below(sm) {
     width: 100%;
     justify-content: center;
   }
   border-radius: 9999px;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-decoration: none;

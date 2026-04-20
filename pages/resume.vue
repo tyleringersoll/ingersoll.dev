@@ -59,27 +59,7 @@
               :id="slugify(entry.heading)"
               v-html="entry.heading"
             />
-            <div v-if="entry.domain || entry.techStack" class="employer__context">
-              <div v-if="entry.domain" class="employer__domain">
-                <p class="employer__context-label">Engineering areas</p>
-                <p
-                  v-for="(item, dIdx) in entry.domain"
-                  :key="dIdx"
-                  class="article__bullet-item"
-                  v-html="formatPara(item)"
-                />
-              </div>
-              <div v-if="entry.techStack" class="employer__tech">
-                <p class="employer__context-label">Tech</p>
-                <div class="employer__tech-pills">
-                  <span
-                    v-for="(tech, tIdx) in entry.techStack.split(', ')"
-                    :key="tIdx"
-                    class="tech-pill"
-                  >{{ tech.trim() }}</span>
-                </div>
-              </div>
-            </div>
+            <p v-if="entry.lead" class="employer__lead" v-html="entry.lead" />
             <Timeline>
               <TimelineItem
                 v-for="(role, roleIdx) in entry.roles"
@@ -94,7 +74,7 @@
                 <template v-for="(para, paraIdx) in role.content" :key="paraIdx">
                   <template v-if="para.trim().startsWith('<strong>Tech:')">
                     <hr class="tech-divider" />
-                    <p class="employer__context-label">Tech</p>
+                    <p class="tech-stack-label">Core Tech Stack:</p>
                     <div class="employer__tech-pills">
                       <span
                         v-for="(tech, tIdx) in parseTech(para)"
@@ -414,29 +394,29 @@ watch(resumeContent, () => handleHash(route.hash));
   }
 }
 
-// ─── Employer domain context ─────────────────────────────────────────────────
+// ─── Employer lead paragraph ──────────────────────────────────────────────────
 
-.employer__context {
-  background-color: var(--section-bg, var(--color-bg-primary));
-  border: 1px solid var(--color-border);
-  border-left: 3px solid var(--color-accent-line);
-  border-radius: 8px;
-  padding: $spacing-md $spacing-md $spacing-sm;
-  margin-bottom: $spacing-lg;
+.employer__lead {
+  margin: 0 0 $spacing-lg;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--color-text-muted);
 }
 
-.employer__context-label {
-  font-size: 0.75rem;
+// ─── Tech stack ───────────────────────────────────────────────────────────────
+
+.tech-stack-label {
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-accent-line);
+  color: var(--color-text-muted);
   margin: 0 0 $spacing-xs;
 }
 
-.employer__tech {
-  margin-top: $spacing-sm;
-  padding-top: $spacing-sm;
+.employer__tech-footer {
+  margin-top: $spacing-md;
+  padding-top: $spacing-md;
   border-top: 1px solid var(--color-border);
 }
 

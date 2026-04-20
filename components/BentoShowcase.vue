@@ -16,6 +16,7 @@
         <div class="showcase-right">
           <div v-if="section.scores" class="scores-card">
             <p class="scores-label">Lighthouse Scores</p>
+            <p class="scores-intro">By leaning into Nuxt's SSR and keeping the JavaScript payload minimal, the site consistently hits top-tier performance metrics.</p>
             <div class="gauges">
               <div v-for="score in section.scores" :key="score.label" class="gauges__item">
                 <div class="gauge">
@@ -167,12 +168,19 @@ const circ = 2 * Math.PI * 34;
 }
 
 .scores-label {
-  margin: 0 0 1.25rem;
+  margin: 0 0 0.5rem;
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-accent-line);
+}
+
+.scores-intro {
+  margin: 0 0 1.25rem;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
 }
 
 // ─── Gauges ─────────────────────────────────────────────────────────────────
