@@ -31,7 +31,7 @@ export default {
         heading: "Engineering",
         headingLevel: 4,
         content: [
-          "I build frontend applications using frameworks like Angular and Vue.js, and I guide the team that ships them. My expertise spans from core identity and payment processing, to specialized third-party fintech integrations and real-time hardware control software. Over my career, I’ve worked across most of the frontend ecosystem—whether that means rolling out division-wide design systems or modernizing legacy architectures so they can scale securely.",
+          "I build frontend applications using frameworks like Angular and Vue.js, and I guide the teams that ship them. My expertise spans from core identity and payment processing, to specialized third-party fintech integrations and real-time hardware control software. Over my career, I’ve worked across most of the frontend ecosystem—whether that means rolling out division-wide design systems or modernizing legacy architectures so they can scale securely.",
           "<a href='/resume'>View my full resume →</a>"
         ]
       },
@@ -376,7 +376,7 @@ export default {
         headingLevel: 2,
         heading: "Music & Production",
         content: [
-          "My approach to tracking is built on 30 years of live energy and major-label studio discipline. Today, I record using a custom hybrid drumset in my studio designed to deliver the energy and feel of a live performance with the absolute precision of digital production."
+          "My approach to tracking is built on 30 years of live performance and major-label studio discipline. Today, I record using a custom hybrid drumset in my studio designed to deliver the energy and feel of a live performance with the absolute precision of digital production."
         ]
       },
       {
@@ -465,7 +465,6 @@ export default {
           {
             subheading: "Drummer · 1999 - 2000",
             content: [
-              "Toured the regional jam band circuit with this project, sharing festival bills with established national acts.",
               "• Anchored a pioneering experimental jam band, building a massive local following at staple University of Delaware venues including Deer Park Tavern and The East End Cafe.",
               "• Scaled from the college circuit to outdoor stages, sharing festival bills with national acts like The Disco Biscuits and Lake Trout, and performing at Phish's 65,000-capacity Camp Oswego festival.",
               "• Treated the relentless touring schedule as a masterclass in live performance, honing skills in listening, improvising, and mastering dynamic control to live in the moment rather than just keeping time.",
