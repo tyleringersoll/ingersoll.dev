@@ -31,7 +31,7 @@ export default {
         heading: "Engineering",
         headingLevel: 4,
         content: [
-          "I build frontend applications using frameworks like Angular and Vue.js, and I guide the team that ships them. My expertise spans from core identity and payment processing, to specialized third-party fintech integrations and real-time hardware control software. Over my career, I’ve worked across most of the frontend ecosystem—whether that means rolling out division-wide design systems or modernizing legacy architectures so they can scale securely.",
+          "I build frontend applications using frameworks like Angular and Vue.js, and I guide the teams that ship them. My expertise spans from core identity and payment processing, to specialized third-party fintech integrations and real-time hardware control software. Over my career, I’ve worked across most of the frontend ecosystem—whether that means rolling out division-wide design systems or modernizing legacy architectures so they can scale securely.",
           "<a href='/resume'>View my full resume →</a>"
         ]
       },

@@ -74,13 +74,18 @@
       <div class="hv2-inner">
         <div class="hv2-music__layout">
 
-          <h2 class="hv2-music__heading">{{ musicSection.heading }}</h2>
-
-          <div class="hv2-music__studio">
+          <div class="hv2-music__visual-column">
+            <img
+              class="hv2-music__cover-img"
+              src="/images/studio_kit.jpeg"
+              alt="Tyler Ingersoll's hybrid drum studio"
+              draggable="false"
+            />
+            <!-- Desktop: card sits inside visual-column for overlap -->
             <component
               :is="linkTag(mus.studio)"
               v-bind="linkAttrs(mus.studio)"
-              class="hv2-studio-callout"
+              class="hv2-studio-callout hv2-studio-callout--desktop"
               :class="{ 'hv2-studio-callout--linked': hasLink(mus.studio) }"
             >
               <p class="hv2-label">{{ mus.studioLabel }}</p>
@@ -91,7 +96,22 @@
             </component>
           </div>
 
-          <div class="hv2-music__content">
+          <!-- Mobile: card is a separate grid item for stacking order -->
+          <component
+            :is="linkTag(mus.studio)"
+            v-bind="linkAttrs(mus.studio)"
+            class="hv2-studio-callout hv2-studio-callout--mobile"
+            :class="{ 'hv2-studio-callout--linked': hasLink(mus.studio) }"
+          >
+            <p class="hv2-label">{{ mus.studioLabel }}</p>
+            <p>{{ mus.studio?.text }}</p>
+            <span v-if="mus.studio?.ctaText" class="hv2-studio-callout__cta">
+              {{ mus.studio.ctaText }} →
+            </span>
+          </component>
+
+          <div class="hv2-music__text-column">
+            <h2 class="hv2-music__heading">{{ musicSection.heading }}</h2>
             <p v-html="musicSection.content[0]" />
             <div class="hv2-btn-wrap">
               <NuxtLink to="/music" class="hv2-btn hv2-btn--primary">{{ mus.cta }}</NuxtLink>
@@ -641,47 +661,51 @@ const icons = {
   &__layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto 1fr;
-    column-gap: 4rem;
-    row-gap: 1.5rem;
+    gap: 4rem;
     align-items: start;
 
     @include respond-below(md) {
       grid-template-columns: 1fr;
-      grid-template-rows: none;
-      gap: 2rem;
+      gap: 0;
     }
   }
 
-  &__heading {
-    grid-column: 2;
-    grid-row: 1;
-    margin: 0;
+  &__visual-column {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    min-height: 500px;
+    border-radius: 10px;
+    overflow: visible;
 
     @include respond-below(md) {
-      order: 1;
-      grid-column: auto;
-      grid-row: auto;
-      margin-bottom: 0.5rem;
+      order: 2;
+      min-height: 320px;
+      border-radius: 8px;
     }
   }
 
-  &__studio {
-    grid-column: 1;
-    grid-row: 2;
-    align-self: start;
+  &__cover-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    border-radius: 10px;
+    filter: brightness(0.8);
 
     @include respond-below(md) {
-      order: 3;
-      grid-column: auto;
-      grid-row: auto;
+      border-radius: 8px;
     }
   }
 
-  &__content {
-    grid-column: 2;
-    grid-row: 2;
-    align-self: start;
+  &__text-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     p {
       margin-top: 0;
@@ -691,24 +715,64 @@ const icons = {
     }
 
     @include respond-below(md) {
-      order: 2;
-      grid-column: auto;
-      grid-row: auto;
+      order: 1;
+      margin-bottom: 2rem;
     }
+  }
+
+  &__heading {
+    margin: 0 0 1.25rem;
   }
 }
 
 .hv2-studio-callout {
+  --glass-bg: rgba(21, 26, 30, 0.7);
+  --glass-border: rgba(79, 91, 102, 0.4);
+
+  html.light-mode & {
+    --glass-bg: rgba(245, 245, 240, 0.72);
+    --glass-border: rgba(192, 197, 203, 0.5);
+  }
+
+  position: relative;
+  z-index: 1;
   display: block;
-  background-color: var(--color-bg-secondary);
-  border: 1px solid var(--color-border);
+  max-width: 380px;
+  padding: 1.25rem 1.25rem 1.25rem 1.1rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
   border-left: 3px solid var(--color-link);
   border-radius: 8px;
-  padding: 1.25rem 1.25rem 1.25rem 1.1rem;
   text-decoration: none;
   color: inherit;
   cursor: default;
   @include transition(all);
+
+  // Desktop: inside visual-column, mobile copy hidden
+  &--desktop {
+    @include respond-below(md) {
+      display: none;
+    }
+  }
+
+  // Mobile: separate grid item, desktop copy hidden
+  &--mobile {
+    display: none;
+
+    @include respond-below(md) {
+      display: block;
+      order: 3;
+      width: 100%;
+      max-width: none;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: -8rem;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+  }
 
   p {
     margin: 0 0 0.4rem;
@@ -736,7 +800,7 @@ const icons = {
     cursor: pointer;
 
     &:hover {
-      transform: translateY(-2px);
+      transform: translate(2rem, 2rem) translateY(-2px);
       border-color: var(--color-link-hover);
       border-left-color: var(--color-link-hover);
 
@@ -748,6 +812,12 @@ const icons = {
     &:focus-visible {
       outline: 2px solid var(--color-focus);
       outline-offset: 3px;
+    }
+  }
+
+  &--linked#{&}--mobile:hover {
+    @include respond-below(md) {
+      transform: translateY(-2px);
     }
   }
 }
