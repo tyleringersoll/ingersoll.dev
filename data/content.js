@@ -76,10 +76,10 @@ export default {
       music: {
         studioLabel: "Hybrid Drum Tracking Setup",
         studio: {
-          text: "Today, I track remote sessions and shoot video content using a hybrid rig that pairs live cymbals with silent mesh heads. By capturing the exact performance as clean MIDI data alongside analog audio through API preamps, it delivers the human energy of a live performance with total digital control.",
+          text: "The reality of modern recording requires both the raw energy of a live room and the total post-performance control of digital production. To bridge that gap, I engineered a custom hybrid tracking setup. By pairing live, acoustically treated cymbals with a flawless MIDI translation of the drum performance, I deliver phase-perfect stems that drop right into any mix. For a full breakdown of the signal chain, the API preamps, and the conversion methodology, visit my dedicated studio site.",
           url: "https://tyleringersolldrums.com",
           external: true,
-          ctaText: "Explore my session work, gear, and videos at tyleringersolldrums.com"
+          ctaText: "Explore the Interactive Sound Lab, full gear specs, and my remote session workflow at tyleringersolldrums.com →"
         },
         cta: "Learn more about my music"
       },
@@ -207,12 +207,11 @@ export default {
           {
             subheading: "Director II, Software Engineering · 2026 - Present",
             content: [
-              "Hands-on engineering leader for a customer-facing cross-functional team. I balance active frontend development (~50% IC) with team management, architectural strategy, and cross-functional alignment.",
+              "Hands-on engineering leader for a customer-facing cross-functional team. I balance active frontend development with team management, architectural strategy, and cross-functional alignment.",
               "• Partner directly with product managers and stakeholders to define technical priorities, establish delivery timelines, and distribute resources across backend and frontend initiatives.",
               "• Manage the engineering lifecycle and professional development for a single, dedicated team, scaling capacity to meet the demands of our customer-facing verification, servicing, and authentication platforms.",
               "• Guide technical direction and delivery for core customer platforms, contributing directly to high-visibility frontend feature work.",
-              "• Contributed to the adoption of Cursor AI and GitHub Copilot across the engineering organization, establishing standards that accelerated feature delivery and standardized code quality.",
-              "<strong>Tech:</strong> Angular, TypeScript, DataDog, Figma, Miro, Jira, Confluence, FullStory"
+              "<strong>Tech:</strong> Angular, TypeScript, DataDog, Figma, Miro, Jira, Confluence, FullStory, Cursor AI, GitHub Copilot, Claude Code"
             ]
           },
           {
@@ -245,8 +244,8 @@ export default {
             subheading: "Senior Frontend Developer · 2019 - 2022",
             content: [
               "As a senior frontend developer for Vanguard's Financial Advisor Services marketing department, I led the engineering of a comprehensive design system within a four-person team, building the core component library to support thousands of advisors across applications serving millions of daily users.",
-              "• Guided the technical implementation of the FAS design system during a division-wide rebrand, ensuring UI consistency across all teams.",
               "• Built a web component library with custom element wrappers to allow seamless integration across Vue, Angular, and Adobe Experience Manager. This eliminated the need for framework-specific design system support teams.",
+              "• Partnered with management to secure leadership buy-in for the design system during a division-wide rebrand, presenting the architecture to the organization and embedding directly with multiple independent development teams to drive hands-on adoption and UI consistency.",
               "• Designed and built a Vue.js/NestJS application prototype that was adopted as the standard foundation for all FAS single-page applications.",
               "• Set up AWS-based CI/CD pipelines to automate internal Storybook-based documentation deployments, establishing transparency and guidelines across FAS development teams.",
               "<strong>Tech:</strong> Vue.js, NestJS, Web Components, Storybook, Angular, Custom Elements, AWS, CI/CD"
@@ -263,8 +262,7 @@ export default {
             subheading: "Web Application Developer · 2017 - 2019",
             content: [
               "Embedded with Agilent Technologies's R&D software engineering team as the sole frontend specialist, building web-based instrument control interfaces shipped globally with Agilent's flagship hardware product lines.",
-              "• Drove the frontend development for Agilent's Gas Chromatography web UI, partnering with a large engineering team to implement real-time WebSocket monitoring and control using Sencha/Ext JS.",
-              "• Created data visualization for live instrument data graphing and visual hardware configuration displays.",
+              "• Drove the frontend development for Agilent's Gas Chromatography web UI, partnering with a large engineering team to implement real-time WebSocket monitoring and two-way control using Sencha/Ext JS.",
               "• Designed custom SVG icons and CSS styling aligned with Agilent's product design standards.",
               "• Designed an automated build system for Adobe RoboHelp documentation across multiple product lines. This supported over eight languages with dynamic template generation and command-line automation.",
               "<strong>Tech:</strong> JavaScript, Sencha/Ext JS, HTML5, CSS/SCSS, SVG, WebSockets, Adobe RoboHelp, Command-line scripting"
@@ -364,7 +362,7 @@ export default {
         skills: {
           languages: ["JavaScript", "TypeScript", "HTML5", "CSS/SCSS", "Python", "SQL"],
           frameworks: ["Angular", "Vue.js", "Nuxt 3", "NestJS", "Django", "Tailwind CSS", "Angular Material"],
-          infrastructure: ["Node.js", "Nginx", "Docker", "AWS", "GitHub Actions", "Netlify", "DataDog", "Figma", "Cursor AI", "GitHub Copilot"],
+          infrastructure: ["Node.js", "Nginx", "Docker", "AWS", "GitHub Actions", "Netlify", "DataDog", "Figma", "Cursor AI", "GitHub Copilot", "Claude Code"],
           concepts: ["Web Components", "Design Systems", "SSR", "Accessibility (WCAG)", "CI/CD", "State Management", "Content Security Policy"]
         }
       }
@@ -395,6 +393,9 @@ export default {
           { title: "Fantastic Four: The Album", format: "Soundtrack", year: "2005", label: "Wind-up Records", image: "/images/fantastic4_thealbum.webp", alt: "Fantastic Four: The Album", url: "https://youtu.be/WvEj9uWOo04?si=7XOafsoygKkG2uF6", description: "Omnisoul's \"Waiting (Save Your Life)\" appeared on this Wind-up Records release alongside a full major-label roster. Drums tracked at Avatar Studios, New York City." },
           { title: "Omnisoul — Happy Outside", format: "LP", year: "2004", label: "Independent", image: "/images/omnisoul_happyoutside.webp", alt: "Omnisoul – Happy Outside", url: "https://youtube.com/playlist?list=OLAK5uy_kyIVrwfzRWBveu2Tq6yNvsb8rYzj5fqVE&si=yAKZ_yXK7p4jgEj6", description: "Self-produced and recorded between touring stints in 2003 and 2004. Mixed by Grammy-winning engineer Phil Nicolo at Studio 4, Conshohocken, PA. Nicolo also stepped in to track the standout single, \"Waiting (Save Your Life).\"" },
           { title: "Omnisoul — Climbing Ladders", format: "LP", year: "2002", label: "Independent", image: "/images/omnisoul_climbingladders.jpg", alt: "Omnisoul — Climbing Ladders", url: null, description: "Independently released and recorded." },
+          {
+            title: "The Healthy Doses — The Healthy Doses", format: "EP", year: "2000", label: "Independent", image: "/images/thehealthydoses_ep.jpg", alt: "The Healthy Doses – The Healthy Doses", url: "https://thehealthydoses.bandcamp.com/album/clay-creek-recording-ep", description: "Recorded live in Clay Creek Recording Studio, in Newark, DE."
+          },
           { title: "Skitzo Calypso — Premeditated Acts of Stupidity", format: "LP", year: "1999", label: "Independent", image: "/images/skitzocalypso_premeditatedactsofstupidity.webp", alt: "Skitzo Calypso – Premeditated Acts of Stupidity", url: "https://www.youtube.com/watch?v=GZsOHYEbTpE&list=OLAK5uy_kZNhPkIdxFo0RGqphf9FZvgNeFFlagjiQ", description: "Handled both drum and bass duties throughout this entire record. Engineered by Dave Pace at 12th Planet Recording Studio during the early days of the local scene." },
           { title: "Skitzo Calypso — Join the Cult", format: "LP", year: "1998", label: "Independent", image: "/images/skitzocalypso_jointhecult.webp", alt: "Skitzo Calypso – Join the Cult", url: "https://youtu.be/3ocX1WZt5e4?si=K_xKrm4bXLO26KZo", description: "One of my earliest full-length studio projects. Tracked drums with engineer Dave Pace at Time Machine Starship and 12th Planet Recording Studio." }
         ]
@@ -403,6 +404,21 @@ export default {
         heading: "Touring & Industry Experience",
         headingLevel: 2,
         content: []
+      },
+      {
+        heading: "Remote Session Drummer & Producer",
+        headingLevel: 3,
+        years: "2025 - Present",
+        roles: [
+          {
+            subheading: "Custom Hybrid Drum Studio · 2025 - Present",
+            content: [
+              "Launched a professional remote tracking studio, engineering a custom hybrid recording rig to bridge the gap between acoustic cymbal character and complete digital control.",
+              "• Track live Zildjian cymbals through a dedicated analog chain paired with a high-resolution MIDI translation of the drum performance.",
+              "• Deliver mix-ready, phase-perfect audio stems and MIDI data to artists and producers globally."
+            ]
+          }
+        ]
       },
       {
         heading: "SpeakerCity Band",

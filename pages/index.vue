@@ -733,7 +733,7 @@ const icons = {
 
   display: block;
   width: 100%;
-  margin-top: auto;
+  margin-top: 2.5rem;
   padding: 1.25rem 1.25rem 1.25rem 1.1rem;
 
   @include respond-below(md) {
