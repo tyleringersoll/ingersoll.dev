@@ -16,8 +16,8 @@ export default {
         heading: "Hi, I’m Tyler",
         headingLevel: 2,
         content: [
-          "I lead an engineering team building customer-facing applications.",
-          "Outside of work, I’m a professional drummer. I’ve spent the last three decades touring, recording, and playing live, and today I run a custom hybrid drum studio in Pennsylvania."
+          "I build and lead frontend engineering work across product teams and platforms.",
+          "Outside of engineering, I’ve spent more than three decades playing in live, touring, and studio settings, and today I record from a hybrid drum rig in my home studio in Pennsylvania."
         ]
       },
       {
@@ -31,7 +31,7 @@ export default {
         heading: "Engineering",
         headingLevel: 4,
         content: [
-          "I build frontend applications using frameworks like Vue and Angular, and I still like working close to the browser when a lighter solution makes more sense. My work has ranged from high-traffic marketing experiences and payment flows to fintech integrations, design systems, and specialized interfaces for scientific hardware. A lot of that work has involved modernizing legacy frontend architecture so teams can build and ship without creating problems elsewhere.",
+          "I build frontend applications using frameworks like Vue and Angular, and I still like working close to the browser when a lighter solution makes more sense. My work has ranged from high-traffic marketing experiences and payment flows to fintech integrations, design systems, and specialized interfaces for scientific hardware. Much of that work has involved modernizing legacy frontend systems so teams can ship more safely and maintain them more easily.",
           "<a href='/resume'>View my full resume →</a>"
         ]
       },
@@ -40,7 +40,7 @@ export default {
         heading: "Music",
         headingLevel: 4,
         content: [
-          "I’ve played drums professionally for over three decades, with a background in touring, studio recording, and live event work. These days I spend less time on the road and more time recording in my home studio, where I’ve built a hybrid setup around real cymbals and shell sounds that can be shaped to the track."
+          "I’ve played drums professionally for more than three decades, with a background in touring, studio recording, and live event work. These days I spend less time on the road and more time recording in my home studio, where I use a hybrid setup that records real cymbals live and captures shell performance separately."
         ]
       },
       {
@@ -48,22 +48,24 @@ export default {
         heading: "Beyond work",
         headingLevel: 3,
         content: [
-          "When I’m not writing code or tracking drums, I’m usually riding one of my bikes, doing something with my kids, or working on something around the house. I’m based in southeastern Pennsylvania and spend a lot of time outdoors when I can."
+          "When I’m not writing code or tracking drums, I’m usually on a bike, hanging out with my kids, listening to records, or cooking outside. Most of life outside work revolves around family, music, and finding time to be outdoors."
         ]
       }
     ],
     homePage: {
       hero: {
-        eyebrow: "Engineering Leader"
+        eyebrow: "Frontend Engineering"
       },
       engineering: {
         competenciesLabel: "Competencies",
         competencies: [
           { icon: "layers", label: "Frontend Architecture", url: "/resume#best-egg" },
           { icon: "grid", label: "Design Systems", url: "/resume#vanguard" },
-          { icon: "shield", label: "Identity & Security", url: "/resume#best-egg" },
-          { icon: "credit-card", label: "Payment Platforms", url: "/resume#best-egg" },
-          { icon: "code", label: "Fintech Integration", url: "/resume#best-egg" }
+          { icon: "package", label: "NPM Library Management", url: "/resume#vanguard" },
+          { icon: "refresh", label: "Frontend Modernization", url: "/resume#best-egg" },
+          { icon: "plug", label: "Fintech Integration", url: "/resume#best-egg" },
+          { icon: "file-text", label: "Documentation Systems", url: "/resume#technical-writers-inc" }
+
         ],
         clientsLabel: "Featured Work",
         clients: [
@@ -74,21 +76,46 @@ export default {
         cta: "View my full resume"
       },
       music: {
-        studioLabel: "Hybrid Drum Tracking Setup",
+        studioLabel: "Current Drum Setup",
         studio: {
-          text: "I built a hybrid drum tracking setup to solve a practical problem: I wanted the sound and feel of real cymbals without the bleed, volume, and phase problems that come with recording a full acoustic kit in a home studio. The cymbals are recorded live through a dedicated analog chain, while the shells are captured as performance data that can drive whatever drum sound the track needs. It gives me a natural performance with a lot more control after the take. If you want the full signal chain and studio breakdown, that lives on my drum site.",
+          text: "I use a hybrid drum setup that records live cymbals through a dedicated analog chain while capturing shell performance separately. It came out of a practical home-studio constraint: keeping the feel and response of real cymbals without taking on the bleed and volume of a full acoustic kit. The result is a real performance with more control later in the process. The full signal chain and studio breakdown live on my drum site.",
           url: "https://tyleringersolldrums.com",
           external: true,
-          ctaText: "See the full studio setup, gear list, and remote session workflow at tyleringersolldrums.com →"
+          ctaText: "See the full studio setup, selected work, and remote session details at tyleringersolldrums.com →"
         },
         cta: "Learn more about my music"
       },
       beyond: {
         cards: [
-          { icon: "bicycle", label: "Cycling", sub: "Road, Gravel, MTB", detail: "I ride year-round on road, gravel, and mountain bikes around Chester County and beyond.", url: "https://www.strava.com/athletes/3303002", external: true },
-          { icon: "users", label: "Family", sub: "Dad of Two", detail: "Most weekends revolve around my two kids, whether that means sports, bike rides, or building something in the yard.", url: null },
-          { icon: "beer", label: "Outside Work", sub: "Family, Riding, Cooking", detail: "Outside work I spend a lot of time with my kids, on a bike, or making something around the house.", url: null },
-          { icon: "map-pin", label: "Home Base", sub: "Kennett Square, PA", detail: "I’m based in southeastern Pennsylvania, close to good trails, open space, and a lot of family life.", url: null }
+          {
+            icon: "bicycle",
+            label: "Cycling",
+            sub: "Road, Gravel, MTB",
+            detail: "Cycling is my main sport now. I ride year-round on road, gravel, and mountain bikes around Chester County and beyond.",
+            url: "https://www.strava.com/athletes/3303002",
+            external: true
+          },
+          {
+            icon: "family-play",
+            label: "Family",
+            sub: "Dad Life",
+            detail: "A lot of my free time is with my two young kids, whether that means sports, movies, games, bike rides, or jumping into Fortnite together.",
+            url: null
+          },
+          {
+            icon: "vinyl",
+            label: "Hi-Fi",
+            sub: "Vinyl & Audio",
+            detail: "I’m an audiophile and record collector, always tweaking my gear setup, hunting for vinyl pressings, and making time to really listen to music.",
+            url: null
+          },
+          {
+            icon: "grill",
+            label: "Cooking",
+            sub: "Griddle & Smoker",
+            detail: "I love cooking outside on the griddle and smoker. That usually means making a big meal, putting on music, and enjoying time with family and friends.",
+            url: null
+          }
         ]
       },
       connect: {
@@ -103,7 +130,7 @@ export default {
         heading: "Architecture",
         headingLevel: 2,
         content: [
-          "This site is both a personal website and a working frontend project. Since most of my professional code lives inside private enterprise systems, I use this as a public place to show how I structure a Vue and Nuxt application, manage content, and think about performance and accessibility.",
+          "This site is a personal website built with Vue and Nuxt. Since most of my professional work lives in private enterprise systems, I use this project to show how I structure a frontend application, manage content, and handle performance and accessibility.",
           "• <strong>Nuxt 3 & Static Pre-rendering:</strong> Every page is pre-rendered to static HTML at build time, which keeps the site fast, simple to host, and easy for search engines to crawl.",
           "• <strong>Vue 3 Composition API:</strong> I use the Composition API and script setup to keep component logic easier to follow.",
           "• <strong>Pinia State Management:</strong> A Pinia store wraps the static content file, and a separate store manages theme state, so components can access both without prop drilling.",
@@ -117,7 +144,7 @@ export default {
         heading: "Performance & Lighthouse",
         headingLevel: 2,
         content: [
-          "Performance matters to me because it affects the actual experience of using a site. I approached this one the same way I approach production frontend work: keep the output lean, render as much as possible ahead of time, and avoid adding JavaScript unless it is doing something useful."
+          "This site is pre-rendered, keeps JavaScript light, and avoids extra dependencies where native browser behavior is sufficient."
         ],
         scores: [
           { label: "Performance", value: 100 },
@@ -127,7 +154,7 @@ export default {
         ],
         optimizations: [
           "• <strong>Pre-rendered HTML:</strong> Nuxt generates fully-formed HTML at build time, so browsers render content immediately without waiting for client-side JavaScript.",
-          "• <strong>Inline SVGs:</strong> The hero illustration is built with clean, hand-coded SVG markup directly in the template, eliminating external image requests and preventing layout shifts.",
+          "• <strong>Inline SVG Icons, No Icon Library:</strong> Every icon on the site, competencies, social links, resume download, theme toggle, and navigation, is hand-authored SVG inlined directly into the component. The page ships zero icon-font or icon-library requests.",
           "• <strong>Minimal JavaScript:</strong> No heavy UI libraries or animation frameworks. The bundle stays light by leaning on native browser APIs and Vite's default tree-shaking."
         ]
       },
@@ -165,7 +192,7 @@ export default {
         heading: "CI/CD & Edge Delivery",
         headingLevel: 2,
         content: [
-          "Deployment is part of the frontend architecture, not something separate from it. This repository is connected to an automated CI/CD pipeline, so every push triggers a build that generates pre-rendered static assets and deploys them through Netlify’s CDN."
+          "This repository is connected to an automated CI/CD pipeline, so every push triggers a build that generates pre-rendered static assets and deploys them through Netlify’s CDN."
         ]
       },
       {
@@ -173,13 +200,13 @@ export default {
         heading: "Accessibility (A11Y)",
         headingLevel: 2,
         content: [
-          "Building for large user bases at work reinforced something simple: digital quality includes accessibility. I built this site with that in mind from the start.",
+          "Accessibility was part of the build from the start.",
           "• <strong>Skip Navigation:</strong> A skip-to-content link lets keyboard and screen reader users bypass the header and jump straight to the page content.",
           "• <strong>Semantic HTML:</strong> Proper heading hierarchy, landmark elements, and native interactive controls throughout.",
           "• <strong>Keyboard Navigation:</strong> Every interactive element, including the expanding resume timeline and mobile navigation, is fully operable via keyboard with visible focus indicators. The mobile menu traps focus while open and closes on Escape.",
           "• <strong>Inert on Collapsed Panels:</strong> The timeline uses the <code>inert</code> attribute on collapsed content panels rather than just <code>aria-hidden</code>. <code>inert</code> removes keyboard focus, pointer events, and accessibility tree presence in one attribute, which is what this pattern actually needs.",
           "• <strong>Reduced Motion:</strong> A global <code>prefers-reduced-motion</code> media query disables animations and transitions for users who request it.",
-          "• <strong>ARIA Where It Counts:</strong> Custom components like the timeline toggle, theme switch, and mobile menu use appropriate roles, labels, and state attributes for assistive technologies.",
+          "• <strong>ARIA and State Attributes:</strong> Custom components like the timeline toggle, theme switch, and mobile menu use appropriate roles, labels, and state attributes for assistive technologies.",
           "• <strong>Dual-Theme Contrast:</strong> Both the dark and light themes use color pairings chosen to maintain readable contrast ratios."
         ]
       },
@@ -194,11 +221,6 @@ export default {
         ]
       },
       {
-        heading: "Engineering Leadership & Development",
-        headingLevel: 2,
-        content: []
-      },
-      {
         heading: "Best Egg",
         headingLevel: 3,
         years: "2022 - Present",
@@ -207,9 +229,9 @@ export default {
           {
             subheading: "Director II, Software Engineering · 2026 - Present",
             content: [
-              "Hands-on engineering leader for a customer-facing cross-functional team. I split my time between active frontend development, team leadership, architectural decision-making, and cross-functional planning.",
+              "Hands-on engineering leader for a customer-facing team. My work spans frontend implementation, technical direction, team management, and delivery planning.",
               "• Partner with product managers and stakeholders to define priorities, shape delivery plans, and allocate work across frontend and backend efforts.",
-              "• Manage the engineering lifecycle and growth of a dedicated team supporting customer-facing verification, servicing, and authentication platforms.",
+              "• Manage a team supporting customer-facing verification, servicing, and authentication platforms, including delivery, staffing, and engineer development.",
               "• Guide technical direction for core customer platforms while continuing to contribute directly to frontend implementation work.",
               "<strong>Tech:</strong> Angular, TypeScript, DataDog, Figma, Miro, Jira, Confluence, FullStory, Cursor AI, GitHub Copilot, Claude Code"
             ]
@@ -217,9 +239,9 @@ export default {
           {
             subheading: "Senior Lead Software Engineer II · 2024 - 2026",
             content: [
-              "Owned frontend architecture and roadmap planning while partnering closely with product and UX and mentoring engineers across the organization.",
+              "Led frontend architecture for the team and partnered with product and UX on roadmap decisions.",
               "• Led the frontend side of third-party fintech integrations including MX and Method Financial, from architecture through implementation and rollout.",
-              "• Implemented a Level 3 Content Security Policy using dynamic nonces and set up DataDog reporting and alerting so CSP violations were visible in production.",
+              "• Mentored engineers beyond the immediate team and helped guide frontend direction across adjacent work.",
               "<strong>Tech:</strong> Angular, TypeScript, Node.js, Python, Django, Cursor AI, GitHub Copilot"
             ]
           },
@@ -243,10 +265,10 @@ export default {
           {
             subheading: "Senior Frontend Developer · 2019 - 2022",
             content: [
-              "As a senior frontend developer for Vanguard’s Financial Advisor Services marketing group, I worked on a four-person team building a design system and shared frontend foundation used across applications serving advisors and large user bases.",
+              "Worked on a four-person team building a design system and shared frontend foundation for Vanguard Financial Advisor Services applications.",
               "• Built a web component library with custom element wrappers so the system could be used across Vue, Angular, and Adobe Experience Manager without separate framework-specific implementations.",
               "• Partnered with leadership and development teams during a division-wide rebrand to drive adoption of the design system and improve UI consistency across products.",
-              "• Designed and built a Vue.js/NestJS exemplar application with CI, content structure, environment setup, and third-party integrations already in place, giving teams a clean starting point for FAS single-page applications.",
+              "• Designed and built a Vue.js/NestJS exemplar application with CI, content structure, environment setup, and third-party integrations already in place, so teams could start from a working baseline rather than assemble that stack themselves.",
               "• Set up AWS-based CI/CD pipelines for Storybook documentation deployments so teams had a shared place to reference components and usage patterns.",
               "<strong>Tech:</strong> Vue.js, NestJS, Web Components, Storybook, Angular, Custom Elements, AWS, CI/CD"
             ]
@@ -346,7 +368,7 @@ export default {
         heading: "Additional Experience",
         headingLevel: 2,
         content: [
-          "Before moving fully into engineering, I built a long career as a professional touring and session drummer. That included national touring, major label support, sync placements in television and sports, and years of live event work. See the full discography and music timeline at <a href='/music'>/music</a>."
+          "Before moving fully into engineering, I spent many years working as a touring and session drummer. That included national touring, label-supported work, sync placements, and live event work. A broader music timeline and selected recording credits are at <a href='/music'>/music</a>."
         ]
       },
       {
@@ -363,7 +385,7 @@ export default {
           languages: ["JavaScript", "TypeScript", "HTML5", "CSS/SCSS", "Python", "SQL"],
           frameworks: ["Angular", "Vue.js", "Nuxt 3", "NestJS", "Django", "Tailwind CSS", "Angular Material"],
           infrastructure: ["Node.js", "Nginx", "Docker", "AWS", "GitHub Actions", "Netlify", "DataDog", "Figma", "Cursor AI", "GitHub Copilot", "Claude Code"],
-          concepts: ["Web Components", "Design Systems", "SSR", "Accessibility (WCAG)", "CI/CD", "State Management", "Content Security Policy"]
+          concepts: ["Web Components", "Design Systems", "SSR", "Accessibility (WCAG)", "CI/CD", "State Management"]
         }
       }
     ],
@@ -373,22 +395,22 @@ export default {
         type: "hero",
         heading: "Music & Production",
         content: [
-          "My playing comes out of decades of live shows, touring, and studio work. These days I’m focused on recording remote sessions from my home studio."
+          "I’ve spent more than three decades playing in live, touring, and studio settings. These days I’m focused on recording remote sessions from my home studio."
         ],
         src: "/images/studio_kit.jpeg",
         cta: {
-          label: "Explore my studio & session work",
+          label: "View studio setup and selected work",
           url: "https://tyleringersolldrums.com",
           external: true
         }
       },
       {
         headingLevel: 2,
-        heading: "Selected Discography",
+        heading: "Selected Recording Credits",
         albums: [
           { title: "Veteran Avenue — Nothing Left to Burn", format: "Single", year: "2020", label: "Independent", image: "/images/veteranavenue_nothinglefttoburn.webp", alt: "Veteran Avenue – Nothing Left to Burn", url: "https://youtu.be/BG3R93Kc3H4?si=IflAQRZR3b14lO6e", description: "Live drums recorded at The Deep End Studio in Baltimore for Brad Cox's Veteran Avenue project. Produced and engineered by Grammy-nominated engineer Tony Correlli." },
           { title: "Skitzo Calypso — Ghosts", format: "LP", year: "2013", label: "Independent", image: "/images/skitzocalypso_ghosts.webp", alt: "Skitzo Calypso – Ghosts", url: "https://music.youtube.com/watch?v=WB3pswtUK1g&si=8fKmI7BTeQIMzdQt", description: "Stepped off the drum kit and jumped on bass for the track \"A Night in Hell & A Sunday Morning\". Produced and engineered by Tony Correlli at The Deep End Studio." },
-          { title: "Ian Walsh — Please Remember", format: "LP", year: "2008", label: "Independent", image: "/images/ianwalsh_pleaseremember.png", alt: "Ian Walsh – Please Remember", url: "https://youtu.be/orm9pNytYxo?si=DRjpFhRNhJQjZI88&t=1297", description: "Cut live drums for two tracks on this record. The sessions were engineered by legendary producer Nick DiDia, known for his work with Pearl Jam, Rage Against the Machine, and Bruce Springsteen." },
+          // { title: "Ian Walsh — Please Remember", format: "LP", year: "2008", label: "Independent", image: "/images/ianwalsh_pleaseremember.png", alt: "Ian Walsh – Please Remember", url: "https://youtu.be/orm9pNytYxo?si=DRjpFhRNhJQjZI88&t=1297", description: "Cut live drums for two tracks on this record. The sessions were engineered by legendary producer Nick DiDia, known for his work with Pearl Jam, Rage Against the Machine, and Bruce Springsteen." },
           { title: "The Crash Motive — Consequence", format: "LP", year: "2007", label: "Wind-up Records", image: "/images/thecrashmotive_consequence.webp", alt: "The Crash Motive – Consequence", url: "https://youtube.com/playlist?list=OLAK5uy_lOh9gG0GIkTXg2aFo5j4g97_C2AysYEpE&si=rPypzHo8Ptd-fLdb", description: "Produced by Don Gilmore and Gregg Wattenberg. Tracked at Avatar Studios, New York City and The Pass Recording Studio, Los Angeles. Mixed by Bob Clearmountain and Mark Endert. Mastered by Ted Jensen at Sterling Sound. Drum! magazine: \"demonstrates the sort of pop-with-power sensibility that career dreams are made of.\"" },
           { title: "Fantastic Four: The Album", format: "Soundtrack", year: "2005", label: "Wind-up Records", image: "/images/fantastic4_thealbum.webp", alt: "Fantastic Four: The Album", url: "https://youtu.be/WvEj9uWOo04?si=7XOafsoygKkG2uF6", description: "Omnisoul's \"Waiting (Save Your Life)\" appeared on this Wind-up Records release alongside a full major-label roster. Drums tracked at Avatar Studios, New York City." },
           { title: "Omnisoul — Happy Outside", format: "LP", year: "2004", label: "Independent", image: "/images/omnisoul_happyoutside.webp", alt: "Omnisoul – Happy Outside", url: "https://youtube.com/playlist?list=OLAK5uy_kyIVrwfzRWBveu2Tq6yNvsb8rYzj5fqVE&si=yAKZ_yXK7p4jgEj6", description: "Self-produced and recorded between touring stints in 2003 and 2004. Mixed by Grammy-winning engineer Phil Nicolo at Studio 4, Conshohocken, PA. Nicolo also stepped in to track the standout single, \"Waiting (Save Your Life).\"" },
@@ -413,9 +435,9 @@ export default {
           {
             subheading: "Custom Hybrid Drum Studio · 2025 - Present",
             content: [
-              "Built a remote tracking studio around a hybrid workflow that combines live cymbal recordings with flexible shell sounds.",
-              "• Record real Zildjian cymbals through a dedicated analog chain while capturing the shell performance as detailed MIDI.",
-              "• Deliver organized cymbal audio, shell tracks, and MIDI that can be mixed, swapped, or layered as needed."
+              "Built a remote tracking studio around a hybrid workflow that records live cymbals and captures shell performance separately.",
+              "• Record real cymbals through a dedicated analog chain while capturing shell performance separately.",
+              "• Deliver cymbal audio, shell tracks, and MIDI for use in mixing, replacement, or layering."
             ]
           }
         ]
@@ -444,7 +466,7 @@ export default {
           {
             subheading: "Drummer, Studio Musician & Founding Member · 2002 - 2008",
             content: [
-              "Helped take an independent college band into national touring, label support, and larger studio opportunities after signing with Wind-up Records in 2005 and rebranding as The Crash Motive.",
+              "Was part of the band’s move from the regional college circuit into national touring, label support, and larger studio projects after signing with Wind-up Records in 2005.",
               "• Built a strong regional following early on, including a 31-day #1 requested song run on WSTW 93.7 and a University of Delaware Battle of the Bands win.",
               "• Played drums on studio recordings and helped shape drum arrangements for albums and singles.",
               "• Toured nationally and opened for acts including Sugar Ray, The All-American Rejects, Collective Soul, and Lifehouse.",
@@ -518,7 +540,7 @@ export default {
       ],
       legal: [
         "Copyright ©{YEAR} <a href='https://tyleringersoll.com'>Tyler Ingersoll</a>. All rights reserved.",
-        "This page is developed with <a href='https://vuejs.org/' target='_blank'>Vue.js</a> and hosted on <a href='https://www.netlify.com/' target='_blank'>Netlify</a>."
+        "Built with <a href='https://vuejs.org/' target='_blank'>Vue</a> and hosted on <a href='https://www.netlify.com/' target='_blank'>Netlify</a>."
       ]
     }
   }

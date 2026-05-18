@@ -103,11 +103,11 @@ const processedLegal = computed(() => {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   margin-bottom: 2.5rem;
 
   @include respond-below(xs) {
-    gap: 1rem;
+    gap: 0.75rem;
   }
 }
 

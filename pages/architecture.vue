@@ -226,7 +226,7 @@ const circ = 2 * Math.PI * 34;
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   max-width: 400px;
 
   &__item {
@@ -242,6 +242,7 @@ const circ = 2 * Math.PI * 34;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--color-text-secondary);
+    text-align: center;
   }
 }
 
