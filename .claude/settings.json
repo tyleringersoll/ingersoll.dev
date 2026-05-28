@@ -5,7 +5,8 @@
       "Bash(pip3 install *)",
       "Bash(python3)",
       "Bash(python3 build_resume.py)",
-      "Bash(open \"/Users/tyleringersoll/GitHub/ingersoll.dev/dist/TylerIngersoll_Resume.docx\")"
+      "Bash(open \"/Users/tyleringersoll/GitHub/ingersoll.dev/dist/TylerIngersoll_Resume.docx\")",
+      "Bash(git mv *)"
     ]
   }
 }
