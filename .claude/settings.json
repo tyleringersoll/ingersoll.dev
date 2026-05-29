@@ -6,7 +6,16 @@
       "Bash(python3)",
       "Bash(python3 build_resume.py)",
       "Bash(open \"/Users/tyleringersoll/GitHub/ingersoll.dev/dist/TylerIngersoll_Resume.docx\")",
-      "Bash(git mv *)"
+      "Bash(git mv *)",
+      "Bash(npm ls *)",
+      "Bash(awk '/<template>/,/<\\\\/template>/' layouts/default.vue)",
+      "Bash(awk '/<template>/,/<\\\\/template>/' pages/resume.vue)",
+      "Bash(awk '/<template>/,/<\\\\/template>/' pages/architecture.vue)",
+      "Bash(awk '/<template>/,/<\\\\/template>/' pages/music.vue)",
+      "Bash(sed -n '75,100p' pages/architecture.vue)",
+      "Bash(sed -n '140,210p' pages/music.vue)",
+      "Bash(sed -n '185,195p' pages/resume.vue)",
+      "Bash(sed -n '160,200p' pages/index.vue)"
     ]
   }
 }
